@@ -13,7 +13,7 @@ public class CategoryRecord {
 
     String questions;
 
-    String DifficultyOfAQuestion;
+    String difficultyOfAQuestion;
 
     String answers;
 
@@ -38,11 +38,11 @@ public class CategoryRecord {
 
     @DynamoDBAttribute(attributeName = "difficultyOfAQuestion")
     public String getDifficultyOfAQuestion() {
-        return DifficultyOfAQuestion;
+        return difficultyOfAQuestion;
     }
 
     public void setDifficultyOfAQuestion(String difficultyOfAQuestion) {
-        DifficultyOfAQuestion = difficultyOfAQuestion;
+        difficultyOfAQuestion = difficultyOfAQuestion;
     }
 
     @DynamoDBAttribute(attributeName = "answers")
