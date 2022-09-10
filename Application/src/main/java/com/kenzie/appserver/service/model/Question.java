@@ -1,4 +1,4 @@
 package com.kenzie.appserver.service.model;
 
-public class CategoryService {
+public class Question {
 }
