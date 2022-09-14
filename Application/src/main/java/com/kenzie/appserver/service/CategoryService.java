@@ -1,7 +1,7 @@
 package com.kenzie.appserver.service;
 
 import com.kenzie.appserver.repositories.CategoryRepository;
-import com.kenzie.appserver.service.model.Question;
+import com.kenzie.appserver.service.model.Category;
 import org.springframework.stereotype.Service;
 
 @Service
