@@ -13,6 +13,14 @@ public class CategoryService {
     }
 
     public Question getQuestionById(String questionId){
+        // Example getting data from the local repository
+        Question questionFromDynamo = categoryRepository
+                .findById(questionId)
+                .map(question -> new Question(question.getId(),
+                        question.getName()))
+                .orElse(null);
+
+        return questionFromDynamo;
 
 
     }
