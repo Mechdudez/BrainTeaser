@@ -2,6 +2,7 @@ package com.kenzie.appserver.repositories.model;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 import java.util.Objects;
@@ -27,7 +28,7 @@ public class CategoryRecord {
     public void setQuestionId(String questionId) {
         this.questionId = questionId;
     }
-    @DynamoDBAttribute(attributeName = "questions")
+    @DynamoDBRangeKey(attributeName = "questions")
     public String getQuestions() {
         return questions;
     }
