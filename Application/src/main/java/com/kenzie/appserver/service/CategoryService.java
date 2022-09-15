@@ -13,11 +13,12 @@ public class CategoryService {
     }
 
     public Category getQuestionById(String questionId){
-        // Example getting data from the local repository
+        // getting data from the local repository
         Category questionFromDynamo = categoryRepository
                 .findById(questionId)
-                .map(c -> new Category(c.getId(),
-                        c.getName()))
+                .map(c -> new Category(c.getQuestionId(),
+                        c.getQuestions(),
+                        c.getDifficultyOfAQuestion(), c.getAnswers()))
                 .orElse(null);
 
         return questionFromDynamo;
