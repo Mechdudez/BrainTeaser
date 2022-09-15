@@ -12,12 +12,12 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    public Question getQuestionById(String questionId){
+    public Category getQuestionById(String questionId){
         // Example getting data from the local repository
-        Question questionFromDynamo = categoryRepository
+        Category questionFromDynamo = categoryRepository
                 .findById(questionId)
-                .map(question -> new Question(question.getId(),
-                        question.getName()))
+                .map(c -> new Category(c.getId(),
+                        c.getName()))
                 .orElse(null);
 
         return questionFromDynamo;
