@@ -17,7 +17,7 @@ public class CategoryRecord {
 
     String answers;
 
-    String categories;
+
 
     @DynamoDBHashKey(attributeName = "questionId")
     public String getQuestionId() {
@@ -53,14 +53,7 @@ public class CategoryRecord {
     public void setAnswers(String answers) {
         this.answers = answers;
     }
-    @DynamoDBAttribute(attributeName = "categories")
-    public String getCategories() {
-        return categories;
-    }
 
-    public void setCategories(String categories) {
-        this.categories = categories;
-    }
 
     @Override
     public boolean equals(Object o) {
