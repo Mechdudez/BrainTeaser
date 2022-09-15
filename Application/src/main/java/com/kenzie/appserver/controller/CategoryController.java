@@ -1,5 +1,6 @@
 package com.kenzie.appserver.controller;
 
+import com.kenzie.appserver.repositories.model.CategoryRecord;
 import com.kenzie.appserver.service.CategoryService;
 import com.kenzie.appserver.controller.model.CategoryResponse;
 import com.kenzie.appserver.service.model.Category;
@@ -19,18 +20,18 @@ public class CategoryController {
 
     @GetMapping("/{questionId}")
     public ResponseEntity<CategoryResponse> getQuestionById(@PathVariable("questionId") String questionId) {
-        Category category =
+        CategoryRecord record =
                 categoryService.getQuestionById(questionId); //
         // needs implementation
-        if (category == null) {
+        if (record == null) {
             return ResponseEntity.noContent().build();
         }
 
         CategoryResponse categoryResponse = new CategoryResponse();
         categoryResponse.setQuestionId(questionId);
-        categoryResponse.setQuestions(category.getQuestions());
-        categoryResponse.setAnswers(category.getAnswers());
-        categoryResponse.setDifficultyOfQuestion(category.getDifficultyOfAQuestion());
+        categoryResponse.setQuestions(record.getQuestions());
+        categoryResponse.setAnswers(record.getAnswers());
+        categoryResponse.setDifficultyOfQuestion(record.getDifficultyOfAQuestion());
 
         return ResponseEntity.ok(categoryResponse);
     }
