@@ -42,16 +42,17 @@ public class UserService {
         return userRecord.get();
     }
 
-    public UserRecord addNewUser(UserCreateRequest userCreateRequest){
-
-
+    public User addNewUser(User user){
+        if(user == null){
+            throw new UserNotFoundException("Sorry this user was not found");
+        }
         UserRecord userRecord = new UserRecord();
-        userRecord.setUserId(UUID.randomUUID().toString());
-        userRecord.setUsername(userCreateRequest.getUserName());
+        userRecord.setUserId(String.valueOf(user.getUserId()));
+        userRecord.setUsername(user.getUserName());
         userRecord.setPoints(0);
 
         userRepository.save(userRecord);
-        return userRecord;
+        return user;
 
     }
 

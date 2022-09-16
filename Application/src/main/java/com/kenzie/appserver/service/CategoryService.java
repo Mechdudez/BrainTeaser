@@ -5,6 +5,7 @@ import com.kenzie.appserver.repositories.model.CategoryRecord;
 import com.kenzie.appserver.service.model.Category;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -31,9 +32,33 @@ public class CategoryService {
 
     }
 
-    public List<Category> getAllQuestions(){
 
-        return null;
+    // Will need to find a way to random choose one of the questions in the list.
+    public Category getRandomQuestion(){
+        List<Category> categoryList = getAllQuestions();
+        Random random = new Random();
+        if(categoryList.isEmpty()){
+            throw new CategoryNotFoundException("Sorry there seems to be no questions");
+        }else{
+            // need to return a single question
+            return categoryList.get(random.nextInt(categoryList.size()));
+        }
+
+    }
+
+    // will be user to generate all the questions
+    public List<Category> getAllQuestions(){
+        List<Category> categoryList = new ArrayList<>();
+
+        List<CategoryRecord> recordList = new ArrayList<>();
+        categoryRepository.findAll()
+                .forEach(recordList::add);
+
+        for(CategoryRecord categoryRecord : recordList){
+            categoryList.add(new Category(categoryRecord.getQuestionId(), categoryRecord.getQuestions(), categoryRecord.getAnswers(), categoryRecord.getDifficultyOfAQuestion()));
+        }
+
+        return categoryList;
     }
     public Category getAnswer(String questionId, String answer){
 

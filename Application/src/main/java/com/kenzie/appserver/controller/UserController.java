@@ -6,6 +6,7 @@ import com.kenzie.appserver.controller.model.UserResponse;
 import com.kenzie.appserver.repositories.model.CategoryRecord;
 import com.kenzie.appserver.repositories.model.UserRecord;
 import com.kenzie.appserver.service.UserService;
+import com.kenzie.appserver.service.model.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,13 +21,13 @@ public class UserController {
 
     private UserService userService;
 
-    UserController(UserService userService){
+    UserController(UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping("/scores/{userId}")
     public ResponseEntity<UserResponse> getTotalPointsbyUserId(@PathVariable("userId") String userId) {
-        UserRecord userRecord=
+        UserRecord userRecord =
                 userService.getUserById(userId); //
 
 
@@ -43,19 +44,28 @@ public class UserController {
         if (userCreateRequest.getUserName() == null || userCreateRequest.getUserName().length() == 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid UserName");
         }
+        User user = new User(userCreateRequest.getUserName(),
+                userCreateRequest.getUserId(),
+                userCreateRequest.getPoints());
+        userService.addNewUser(user);
+
+        UserResponse userResponse = createUserResponse(user);
 
 
-        UserRecord newUserRecord =
-                userService.addNewUser(userCreateRequest);
-
-        UserResponse newUserResponse = new UserResponse();
-        newUserResponse.setUserId(UUID.fromString(newUserRecord.getUserId()));
-        newUserResponse.setUsername(newUserRecord.getUsername());
-        newUserResponse.setPoints(newUserResponse.getPoints());
-
-        return ResponseEntity.created(URI.create("/users/" + newUserResponse.getUserId())).body(newUserResponse);
+        return ResponseEntity.created(URI.create("/users/" + userResponse.getUserId())).body(userResponse);
     }
 
 
+    // Helper methods
+    private UserResponse createUserResponse(User user) {
+
+        UserResponse newUserResponse = new UserResponse();
+        newUserResponse.setUserId(user.getUserId());
+        newUserResponse.setUsername(user.getUserName());
+        newUserResponse.setPoints(user.getPoints());
+
+        return newUserResponse;
+
+    }
 
 }
