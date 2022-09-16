@@ -10,7 +10,11 @@ import java.util.Objects;
 public class UserRecord {
     String userId;
 
+    String userName;
+
     int points;
+
+
 
     @DynamoDBHashKey(attributeName = "userId")
     public String getUserId() {
@@ -27,6 +31,15 @@ public class UserRecord {
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    @DynamoDBAttribute(attributeName = "userName")
+    public String getUsername() {
+        return userName;
+    }
+
+    public void setUsername(String Username) {
+        this.userName = userName;
     }
 
     @Override
