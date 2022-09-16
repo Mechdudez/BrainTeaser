@@ -5,6 +5,7 @@ import com.kenzie.appserver.repositories.model.CategoryRecord;
 import com.kenzie.appserver.service.model.Category;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -29,6 +30,16 @@ public class CategoryService {
         return null;
 
     }
+
+    public List<Category> getAllQuestions(){
+
+        return null;
+    }
+    public Category getAnswer(String questionId, String answer){
+
+        return null;
+    }
+
     // user answers question and gets feedback on answer.
     // if the user answers correctly move difficulty up and give user 1 point.
     // if user answers incorrectly show user correct answer then move the difficulty down a level.

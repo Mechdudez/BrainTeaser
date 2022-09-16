@@ -15,6 +15,17 @@ public class UserCreateRequest {
     @JsonProperty("userId")
     private UUID userId;
 
+    @JsonProperty
+    private int points;
+
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
 
     public UUID getUserId() {
         return userId;

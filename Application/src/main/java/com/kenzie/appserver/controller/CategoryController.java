@@ -35,5 +35,10 @@ public class CategoryController {
 
         return ResponseEntity.ok(categoryResponse);
     }
+@GetMapping("within/{questionId}/{answers}")
+    public ResponseEntity<CategoryResponse> getAnswer(@PathVariable("questionId") String questionId, @PathVariable("answers") String answers){
+
+return null;
+}
 
 }

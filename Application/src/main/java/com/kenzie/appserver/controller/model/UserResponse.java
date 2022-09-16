@@ -17,6 +17,7 @@ public class UserResponse {
 
     @JsonProperty("userName")
     String username;
+
     @JsonProperty("points")
     int points;
 

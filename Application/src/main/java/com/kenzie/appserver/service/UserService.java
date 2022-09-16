@@ -43,6 +43,8 @@ public class UserService {
     }
 
     public UserRecord addNewUser(UserCreateRequest userCreateRequest){
+
+
         UserRecord userRecord = new UserRecord();
         userRecord.setUserId(UUID.randomUUID().toString());
         userRecord.setUsername(userCreateRequest.getUserName());
