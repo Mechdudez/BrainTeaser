@@ -1,16 +1,17 @@
 package com.kenzie.appserver.controller;
 
 import com.kenzie.appserver.controller.model.CategoryResponse;
+import com.kenzie.appserver.controller.model.UserCreateRequest;
 import com.kenzie.appserver.controller.model.UserResponse;
 import com.kenzie.appserver.repositories.model.CategoryRecord;
 import com.kenzie.appserver.repositories.model.UserRecord;
 import com.kenzie.appserver.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.net.URI;
 import java.util.UUID;
 
 @RestController
@@ -36,9 +37,24 @@ public class UserController {
         return ResponseEntity.ok(userResponse);
     }
 
+    @PostMapping
+    public ResponseEntity<UserResponse> addNewUser(@RequestBody UserCreateRequest userCreateRequest) {
+
+        if (userCreateRequest.getUserName() == null || userCreateRequest.getUserName().length() == 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid UserName");
+        }
 
 
+        UserRecord newUserRecord =
+                userService.addNewUser(userCreateRequest);
 
+        UserResponse newUserResponse = new UserResponse();
+        newUserResponse.setUserId(UUID.fromString(newUserRecord.getUserId()));
+        newUserResponse.setUsername(newUserRecord.getUsername());
+        newUserResponse.setPoints(newUserResponse.getPoints());
+
+        return ResponseEntity.created(URI.create("/users/" + newUserResponse.getUserId())).body(newUserResponse);
+    }
 
 
 
