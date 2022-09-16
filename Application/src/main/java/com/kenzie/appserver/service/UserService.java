@@ -45,5 +45,10 @@ public class UserService {
 
     }
 
+    public UserRecord getUserWithTopScore(){
+        // Need to think hard on this
+
+    }
+
 
 }
