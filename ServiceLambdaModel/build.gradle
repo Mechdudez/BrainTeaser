@@ -31,6 +31,16 @@ dependencies {
     testImplementation 'net.andreinc:mockneat:0.4.7'
 }
 
+// FuzzyWuzzy
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'me.xdrop:fuzzywuzzy:1.4.0'
+}
+
+
 task buildZip(type: Zip) {
     from compileJava
     from processResources

@@ -1,4 +1,9 @@
 package com.kenzie.capstone.service.model;
+// package me.xdrop.fuzzywuzzy;
+
+//import FuzzyWuzzy
+// not workig yest
+//import me.xdrop.fuzzywuzzy.FuzzySearch;
 
 import java.util.Date;
 import java.util.Objects;
@@ -10,13 +15,17 @@ public class UserAnswer {
     private String answerKey;
     private Date answerDate;
 
+    private Boolean result;
+
     public UserAnswer(String userId, String questionId,
-                      String userAnswer, String answerKey, Date answerDate){
+                      String userAnswer, String answerKey,
+                      Date answerDate, Boolean result){
         this.userId = userId;
         this.questionId = questionId;
         this.userAnswer = userAnswer;
         this.answerKey = answerKey;
         this.answerDate = answerDate;
+        this.result = result;
     }
 
     public UserAnswer() {}
@@ -28,6 +37,49 @@ public class UserAnswer {
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
+    public String getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionrId(String questionId) {
+        this.questionId = questionId;
+    }
+
+    public String getUserAnswer(String userAnswer){
+        return userAnswer;
+    }
+
+    public void setUserAnswer(String userAnswer){
+        this.userAnswer = userAnswer;
+    }
+
+    public String getAnswerKey(String answerKey){
+        return answerKey;
+    }
+
+    public void setAnswerKey(String answerKey){
+        this.answerKey = answerKey;
+    }
+
+    public Date getAnswerDate(Date answerDate){
+        return answerDate;
+    }
+
+    public void setAnswerDate(Date answerDate){
+        this.answerDate = answerDate;
+    }
+
+    public Boolean getResult(Boolean result){
+
+        return result;
+    }
+
+    public void setResult(Boolean result){
+        this.result = result;
+
+    }
+
 
 
     @Override
