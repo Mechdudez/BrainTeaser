@@ -1,0 +1,27 @@
+Resources:
+  UserAnswer:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      "AttributeDefinitions":
+        - "AttributeName": "UserId"
+          "AttributeType": "S"
+        - "AttributeName": "QuestionId"
+          "AttributeType": "S"
+        - "AttributeName": "UserAnswer"
+          "AttributeType": "S"
+        - "AttributeName": "AnswerKey"
+          "AttributeType": "S"
+      "KeySchema":
+        - "AttributeName": "UserId"
+          "KeyType": "HASH"
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: false
+      BillingMode: PAY_PER_REQUEST
+      TableName: "UserAnswer"
+      GlobalSecondaryIndexes:
+        - IndexName: "QuestionIdIndex"
+          KeySchema:
+            - AttributeName: "QuestionId"
+              KeyType: "HASH"
+          Projection:
+            ProjectionType: ALL
