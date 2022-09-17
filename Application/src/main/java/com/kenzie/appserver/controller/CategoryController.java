@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Category")
+@RequestMapping("/category")
 public class CategoryController {
 
     private CategoryService categoryService;
