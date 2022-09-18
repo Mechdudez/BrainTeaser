@@ -58,7 +58,7 @@ public class UserAnswerResponse {
 //            return Boolean.TRUE;
 //        }
 //        return Boolean.FALSE;
-        return this.answerKey == this.userAnswer;
+        return result;
     }
 
     public void setResult(Boolean result) {

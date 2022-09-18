@@ -50,6 +50,17 @@ public class UserAnswerRequest {
         this.answerKey = answerKey;
     }
 
+    public Boolean getResult() {
+        // change to this later
+//        int matchingScore = FuzzySearch.ratio("mysmilarstring",
+//                "mysimilarstring");
+//        if(matchingScore >= 90){
+//            return Boolean.TRUE;
+//        }
+//        return Boolean.FALSE;
+        return this.answerKey == this.userAnswer;
+    }
+
     @Override
     public String toString() {
         return "UserAnswerRequest{" +
