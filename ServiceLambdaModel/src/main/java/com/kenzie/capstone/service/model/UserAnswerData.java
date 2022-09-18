@@ -8,7 +8,7 @@ package com.kenzie.capstone.service.model;
 import java.util.Date;
 import java.util.Objects;
 
-public class UserAnswer {
+public class UserAnswerData {
     private String userId;
     private String questionId;
     private String userAnswer;
@@ -17,9 +17,9 @@ public class UserAnswer {
 
     private Boolean result;
 
-    public UserAnswer(String userId, String questionId,
-                      String userAnswer, String answerKey,
-                      Date answerDate, Boolean result){
+    public UserAnswerData(String userId, String questionId,
+                          String userAnswer, String answerKey,
+                          Date answerDate, Boolean result){
         this.userId = userId;
         this.questionId = questionId;
         this.userAnswer = userAnswer;
@@ -28,7 +28,7 @@ public class UserAnswer {
         this.result = result;
     }
 
-    public UserAnswer() {}
+    public UserAnswerData() {}
 
     public String getUserId() {
         return userId;
@@ -90,7 +90,7 @@ public class UserAnswer {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        UserAnswer userAnswer = (UserAnswer) o;
+        UserAnswerData userAnswer = (UserAnswerData) o;
         return Objects.equals(userId, userAnswer.userId) &&
                 Objects.equals(questionId, userAnswer.questionId) &&
                 Objects.equals(userAnswer, userAnswer.userAnswer);

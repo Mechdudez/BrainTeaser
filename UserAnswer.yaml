@@ -17,7 +17,7 @@ Resources:
       PointInTimeRecoverySpecification:
         PointInTimeRecoveryEnabled: false
       BillingMode: PAY_PER_REQUEST
-      TableName: "UserAnswer"
+      TableName: "UserAnswerLambda"
       GlobalSecondaryIndexes:
         - IndexName: "QuestionIdIndex"
           KeySchema:
