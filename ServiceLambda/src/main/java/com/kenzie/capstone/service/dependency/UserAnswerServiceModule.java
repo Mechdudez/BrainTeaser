@@ -19,7 +19,7 @@ public class UserAnswerServiceModule {
     @Singleton
     @Provides
     @Inject
-    public CheckUserAnswerService provideLambdaService(@Named(
+    public CheckUserAnswerService provideUserAnswerLambdaService(@Named(
             "UserAnswerDao") UserAnswerDao userAnswerDao) {
         return new CheckUserAnswerService(userAnswerDao);
     }

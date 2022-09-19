@@ -13,6 +13,6 @@ import javax.inject.Singleton;
 @Singleton
 @Component(modules = {UserAnswerDaoModule.class, UserAnswerServiceModule.class})
 public interface ServiceComponent {
-    CheckUserAnswerService provideLambdaService();
+    CheckUserAnswerService provideUserAnswerLambdaService();
 
 }

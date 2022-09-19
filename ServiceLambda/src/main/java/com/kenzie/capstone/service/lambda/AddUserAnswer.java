@@ -31,7 +31,7 @@ public class AddUserAnswer implements RequestHandler<APIGatewayProxyRequestEvent
         ServiceComponent userAnswerServiceComponent =
                 DaggerServiceComponent.create();
         CheckUserAnswerService checkUserAnswerService =
-                userAnswerServiceComponent.provideLambdaService();
+                userAnswerServiceComponent.provideUserAnswerLambdaService();
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
 
