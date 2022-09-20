@@ -24,8 +24,7 @@ public class CategoryController {
     @GetMapping("/{questionId}")
     public ResponseEntity<CategoryResponse> getQuestionById(@PathVariable("questionId") String questionId) {
         CategoryRecord record =
-                categoryService.getQuestionById(questionId); //
-        // needs implementation
+                categoryService.getQuestionById(questionId);
         if (record == null) {
             return ResponseEntity.noContent().build();
         }
@@ -45,11 +44,11 @@ public class CategoryController {
         return null;
     }
 
-    @PostMapping("{userId}/{questionId}/{answers}")
-    public ResponseEntity<CategoryResponse> getUserAnswer(@PathVariable("questionId") String questionId, @PathVariable("answers") String answers) {
-
-        return null;
-    }
+//    @PostMapping("{userId}/{questionId}/{answers}")
+//    public ResponseEntity<CategoryResponse> getUserAnswer(@PathVariable("questionId") String questionId, @PathVariable("answers") String answers) {
+//
+//        return null;
+//    }
 
 
 
