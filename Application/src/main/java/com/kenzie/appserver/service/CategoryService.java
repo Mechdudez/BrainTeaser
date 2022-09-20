@@ -66,11 +66,6 @@ public class CategoryService {
 
         return categoryList;
     }
-    public Category getAnswer(String questionId, String answer){
-
-        return null;
-    }
-
     public Boolean checkAnswer(String userId, String questionId,
                                String userAnswer, String answerKey){
 
@@ -85,41 +80,25 @@ public class CategoryService {
 
     }
 
-
-
-    // user answers question and gets feedback on answer.
-    // if the user answers correctly move difficulty up and give user 1 point.
-    // if user answers incorrectly show user correct answer then move the difficulty down a level.
-    public void getUserAnswer(Category question) {
-
-        // I will need to create 5 different ways the user will be given if they are wrong or right
-        // I will need a scanner object in order to see the user answer
-        // I will need a way for the question to match up with the answer. Maybe method isn't created yet?
+    public Category getAnswer() {
+       Category categories = getRandomQuestion();
         Scanner myScanner = new Scanner(System.in);
-        String userName = myScanner.next();
-        String answer = question.getAnswers();
+        String userName = myScanner.nextLine();
+        int points = 0;
 
-        if (userName.equals(answer)) {
+        // make sure the user answer and answer are equal.
+        // if user is correct, add 1 point
+        if(userName.equals(categories.getAnswers())){
+
             helperMethodForCorrectAnswer();
-            // if the user gets the correct answer we want to make it more difficult for the user next time
-            if(question.getDifficultyOfAQuestion().equals("easy")){
-                question.setDifficultyOfAQuestion("hard");
-            } else if(question.getDifficultyOfAQuestion().equals("hard")){
-                // if use is already on hard do nothing
-            }
-        } else {
-            helperMethodForIncorrectAnswer();
-            // shows user correct answer
-            System.out.println("This is the correct answer " + answer);
-            // if they are already on an easier question, give them another easy question.
-            if (question.getDifficultyOfAQuestion().equals("easy")) {
-                // do nothing they will need an easy question again
-            } else if (question.getDifficultyOfAQuestion().equals("hard")) {
-                // if player is on a hard question, make the next question an easier question.
-                question.setDifficultyOfAQuestion("easy"); // seems wrong, will revisit
-                // may have to set whole thing
-            }
+            points++;
         }
+        // if they are incorrect, don't add anything
+        else {
+            helperMethodForIncorrectAnswer();
+        }
+
+        return ;
     }
 
     // helper method to get correct answer.

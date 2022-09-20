@@ -39,9 +39,22 @@ public class CategoryController {
     }
 
     @GetMapping("within/{questionId}/{answers}")
-    public ResponseEntity<CategoryResponse> getAnswer(@PathVariable("questionId") String questionId, @PathVariable("answers") String answers) {
+    public ResponseEntity<CategoryResponse> getAnswer(@PathVariable("questionId") String question, @PathVariable("answers") String answers) {
+               // May need to change questionId to questions.
+                Category category = categoryService.getAnswer();
 
-        return null;
+                if(category == null){
+                    return ResponseEntity.notFound().build();
+                }
+
+        CategoryResponse categoryResponse = new CategoryResponse();
+        categoryResponse.setQuestionId(category.getQuestionId());
+        categoryResponse.setQuestions(question);
+        // TODO Not sure if it is here or on the front end, but can't show answer right away.
+        categoryResponse.setAnswers(answers);
+        categoryResponse.setDifficultyOfQuestion(category.getDifficultyOfAQuestion());
+
+        return ResponseEntity.ok(categoryResponse);
     }
 
 //    @PostMapping("{userId}/{questionId}/{answers}")
@@ -49,6 +62,18 @@ public class CategoryController {
 //
 //        return null;
 //    }
+
+@GetMapping("/random")
+public ResponseEntity<CategoryResponse> getRandomQuestion(){
+        Category category = categoryService.getRandomQuestion();
+
+        if(category == null){
+            return ResponseEntity.noContent().build();
+        }
+        CategoryResponse categoryResponse = createCategoryResponse(category);
+
+        return ResponseEntity.ok(categoryResponse);
+}
 
 
 
