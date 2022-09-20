@@ -55,13 +55,13 @@ public class UserAnswerDao {
 
     public UserAnswerRecord setUserAnswerRecord(String userId,
                                               String questionId,
-                                                String answerKey,
+                                                String result,
                                                 String userAnswer) {
         UserAnswerRecord userAnswerRecord = new UserAnswerRecord();
         userAnswerRecord.setUserId(userId);
         userAnswerRecord.setQuestionId(questionId);
         userAnswerRecord.setUserAnswer(userAnswer);
-        userAnswerRecord.setAnswerKey(answerKey);
+        userAnswerRecord.setResult(result);
 
         try {
             mapper.save(userAnswerRecord, new DynamoDBSaveExpression()

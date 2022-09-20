@@ -45,6 +45,14 @@ public class CategoryController {
         return null;
     }
 
+    @PostMapping("{userId}/{questionId}/{answers}")
+    public ResponseEntity<CategoryResponse> getUserAnswer(@PathVariable("questionId") String questionId, @PathVariable("answers") String answers) {
+
+        return null;
+    }
+
+
+
     @GetMapping("all")
     public ResponseEntity<List<CategoryResponse>> getAllQuestions() {
         List<Category> categories = categoryService.getAllQuestions();

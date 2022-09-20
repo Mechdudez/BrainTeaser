@@ -13,8 +13,8 @@ import java.util.Objects;
 public class UserAnswerRecord {
     private String userId;
     private String questionId;
-    private String answerKey;
     private String userAnswer;
+    private String result;
 
 
     @DynamoDBHashKey(attributeName = "UserId")
@@ -29,9 +29,9 @@ public class UserAnswerRecord {
         return questionId;
     }
 
-    @DynamoDBAttribute(attributeName = "AnswerKey")
-    public String getAnswerKey() {
-        return answerKey;
+    @DynamoDBAttribute(attributeName = "Result")
+    public String getResult() {
+        return result;
     }
 
     @DynamoDBAttribute(attributeName = "UserAnswer")
@@ -51,8 +51,8 @@ public class UserAnswerRecord {
         this.userAnswer = userAnswer;
     }
 
-    public void setAnswerKey(String answerKey) {
-        this.answerKey= answerKey;
+    public void setResult(String result) {
+        this.result= result;
     }
 
     @Override
@@ -66,12 +66,12 @@ public class UserAnswerRecord {
         UserAnswerRecord that = (UserAnswerRecord) o;
         return Objects.equals(userId, that.userId) && Objects.equals(questionId,
                 that.questionId) && Objects.equals(userAnswer,
-                that.userAnswer) && Objects.equals(answerKey,
-                that.answerKey);
+                that.userAnswer) && Objects.equals(result,
+                that.result);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, questionId, userAnswer, answerKey);
+        return Objects.hash(userId, questionId, userAnswer, result);
     }
 }

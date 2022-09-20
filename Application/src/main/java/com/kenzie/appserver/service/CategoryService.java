@@ -5,6 +5,7 @@ import com.kenzie.appserver.repositories.CategoryRepository;
 import com.kenzie.capstone.service.client.CheckAnswerServiceClient;
 import com.kenzie.appserver.repositories.model.CategoryRecord;
 import com.kenzie.appserver.service.model.Category;
+import com.kenzie.capstone.service.model.UserAnswerRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -69,6 +70,22 @@ public class CategoryService {
 
         return null;
     }
+
+    public Boolean checkAnswer(String userId, String questionId,
+                               String userAnswer, String answerKey){
+
+            // need to implement fuzzy match later
+            Boolean result = userAnswer == answerKey;
+            UserAnswerRequest userAnswerRequest =
+                    new UserAnswerRequest(userId, questionId,
+                            userAnswer, result);
+            checkAnswerServiceClient.addUserAnswer(userAnswerRequest);
+
+            return result;
+
+    }
+
+
 
     // user answers question and gets feedback on answer.
     // if the user answers correctly move difficulty up and give user 1 point.

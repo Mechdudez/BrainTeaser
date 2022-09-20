@@ -6,14 +6,15 @@ public class UserAnswerRequest {
 
     private String userAnswer;
 
-    private String answerKey;
+    private Boolean result;
+
 
     public UserAnswerRequest(String userId, String questionId,
-                             String userAnswer, String answerKey){
+                             String userAnswer, Boolean result){
         this.userId = userId;
         this.questionId = questionId;
         this.userAnswer = userAnswer;
-        this.answerKey = answerKey;
+        this.result = result;
     }
 
     public UserAnswerRequest(){}
@@ -42,13 +43,6 @@ public class UserAnswerRequest {
         this.userAnswer = userAnswer;
     }
 
-    public String getAnswerKey() {
-        return answerKey;
-    }
-
-    public void setAnswerKey(String answerKey) {
-        this.answerKey = answerKey;
-    }
 
     public Boolean getResult() {
         // change to this later
@@ -58,7 +52,11 @@ public class UserAnswerRequest {
 //            return Boolean.TRUE;
 //        }
 //        return Boolean.FALSE;
-        return this.answerKey == this.userAnswer;
+        return result;
+    }
+
+    public void setResult(){
+        this.result = result;
     }
 
     @Override
@@ -67,7 +65,7 @@ public class UserAnswerRequest {
                 "userId='" + userId + '\'' +
                 ", questionId='" + questionId + '\'' +
                 ", userAnswer='" + userAnswer + '\'' +
-                ", answerKey='" + answerKey + '\'' +
+                ", result='" + result + '\'' +
                 '}';
     }
 

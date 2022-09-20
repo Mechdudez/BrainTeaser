@@ -13,6 +13,8 @@ import com.kenzie.appserver.repositories.UserRepository;
 import com.kenzie.appserver.repositories.model.CategoryRecord;
 import com.kenzie.appserver.repositories.model.UserRecord;
 import com.kenzie.appserver.service.model.User;
+import com.kenzie.capstone.service.client.CheckAnswerServiceClient;
+import com.kenzie.capstone.service.model.UserAnswerRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -23,10 +25,12 @@ import java.util.Map.Entry;
 @Service
 public class UserService {
     private UserRepository userRepository;
+    private CheckAnswerServiceClient checkAnswerServiceClient;
 
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, CheckAnswerServiceClient checkAnswerServiceClient) {
         this.userRepository = userRepository;
+        this.checkAnswerServiceClient = checkAnswerServiceClient;
     }
 
     public UserRecord getUserById(String userId) {

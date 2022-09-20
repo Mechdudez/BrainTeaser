@@ -26,9 +26,9 @@ public class CheckUserAnswerService {
 
         userAnswerDao.setUserAnswerRecord(userAnswerRequest.getUserId(),
                                           userAnswerRequest.getQuestionId(),
-                userAnswerRequest.getAnswerKey(), userAnswerRequest.getUserAnswer()
+                userAnswerRequest.getUserAnswer(),
+                userAnswerRequest.getResult().toString());
 
-                 );
 
         UserAnswerResponse userAnswerResponse =
                 new UserAnswerResponse();

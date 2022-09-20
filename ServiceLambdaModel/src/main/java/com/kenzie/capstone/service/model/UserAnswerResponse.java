@@ -12,8 +12,6 @@ public class UserAnswerResponse {
 
     private String userAnswer;
 
-    private String answerKey;
-
     private Boolean result;
 
     public UserAnswerResponse(String userId, String questionId,
@@ -71,7 +69,6 @@ public class UserAnswerResponse {
                 "userId='" + userId + '\'' +
                 ", questionId='" + questionId + '\'' +
                 ", userAnswer='" + userAnswer + '\'' +
-                ", answerKey='" + answerKey + '\'' +
                 ", result='" + result + '\'' +
                 '}';
     }
