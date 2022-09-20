@@ -1,6 +1,8 @@
 package com.kenzie.appserver.service;
 
+
 import com.kenzie.appserver.repositories.CategoryRepository;
+import com.kenzie.capstone.service.client.CheckAnswerServiceClient;
 import com.kenzie.appserver.repositories.model.CategoryRecord;
 import com.kenzie.appserver.service.model.Category;
 import org.springframework.stereotype.Service;
@@ -13,10 +15,13 @@ import java.util.Scanner;
 @Service
 public class CategoryService {
     private CategoryRepository categoryRepository;
+    private CheckAnswerServiceClient checkAnswerServiceClient;
 
 
-    public CategoryService(CategoryRepository categoryRepository) {
+    public CategoryService(CategoryRepository categoryRepository, CheckAnswerServiceClient checkAnswerServiceClient) {
         this.categoryRepository = categoryRepository;
+        this.checkAnswerServiceClient = checkAnswerServiceClient;
+
     }
 
     public CategoryRecord getQuestionById(String questionId) {
