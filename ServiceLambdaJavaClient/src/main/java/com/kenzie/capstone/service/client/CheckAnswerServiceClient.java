@@ -36,4 +36,9 @@ public class CheckAnswerServiceClient {
         }
         return userAnswerResponse;
     }
+
+    public int numberOfQuestionsAnswered(String userId){
+      return 0;
+
+    }
 }

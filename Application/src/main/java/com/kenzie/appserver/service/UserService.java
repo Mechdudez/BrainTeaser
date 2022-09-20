@@ -60,6 +60,7 @@ public class UserService {
 
     }
 
+
     public UserRecord getUserWithTopScore(){
         // Need to think hard on this
         DynamoDBMapperConfig mapperConfig = new DynamoDBMapperConfig.Builder()
