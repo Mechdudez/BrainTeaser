@@ -5,11 +5,11 @@ import UserClient from "../api/userClient";
 /**
  * Logic needed for the view playlist page of the website.
  */
-class UserExamplePage extends BaseClass {
+class BrainTeaser extends BaseClass {
 
     constructor() {
         super();
-        this.bindClassMethods(['onGet', 'onCreate', 'renderExample'], this);
+        this.bindClassMethods(['onGetPoints', 'renderExample'], this);
         this.dataStore = new DataStore();
     }
 
@@ -32,7 +32,7 @@ class UserExamplePage extends BaseClass {
     async renderExample() {
         let resultArea = document.getElementById("result-info");
 
-        const users = this.dataStore.get("user");
+        const user = this.dataStore.get("user");
 
         if (users) {
             resultArea.innerHTML = `
@@ -53,10 +53,10 @@ class UserExamplePage extends BaseClass {
         let userId = document.getElementById("userid-field").value;
         this.dataStore.set("user", null);
 
-        let result = await this.client.getExample(id, this.errorHandler);
-        this.dataStore.set("user", result);
+        let result = await this.client.getUserPointsById(userId, this.errorHandler);
+        //this.dataStore.set("user", result);
         if (result) {
-            this.showMessage(`Got ${user.userName}!`)
+            this.showMessage(`Got ${result}!`)
         } else {
             this.errorHandler("Error doing GET!  Try again...");
         }
@@ -67,8 +67,8 @@ class UserExamplePage extends BaseClass {
  * Main method to run when the page contents have loaded.
  */
 const main = async () => {
-    const examplePage = new ExamplePage();
-    examplePage.mount();
+    const brainTeaser = new BrainTeaser();
+    brainTeaser.mount();
 };
 
 window.addEventListener('DOMContentLoaded', main);
