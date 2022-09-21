@@ -98,7 +98,7 @@ public class CategoryService {
             helperMethodForIncorrectAnswer();
         }
 
-        return ;
+        return null;
     }
 
     // helper method to get correct answer.

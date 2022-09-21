@@ -77,7 +77,7 @@ public ResponseEntity<CategoryResponse> getRandomQuestion(){
 
 
 
-    @GetMapping("all")
+    @GetMapping("/all")
     public ResponseEntity<List<CategoryResponse>> getAllQuestions() {
         List<Category> categories = categoryService.getAllQuestions();
 
