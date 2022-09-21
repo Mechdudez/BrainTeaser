@@ -28,7 +28,7 @@ public class CategoryRecord {
     public void setQuestionId(String questionId) {
         this.questionId = questionId;
     }
-    @DynamoDBRangeKey(attributeName = "questions")
+    @DynamoDBAttribute(attributeName = "questions")
     public String getQuestions() {
         return questions;
     }
