@@ -8,7 +8,7 @@ module.exports = {
     usedExports: true
   },
   entry: {
-    examplePage: path.resolve(__dirname, 'src', 'pages', 'examplePage.js'),
+    brainTeaser: path.resolve(__dirname, 'src', 'pages', 'brainTeaser.js'),
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
