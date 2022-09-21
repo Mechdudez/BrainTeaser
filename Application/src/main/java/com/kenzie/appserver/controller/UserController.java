@@ -26,16 +26,20 @@ public class UserController {
     }
 
     @GetMapping("/scores/{userId}")
-    public ResponseEntity<UserResponse> getTotalPointsbyUserId(@PathVariable("userId") String userId) {
+    public ResponseEntity<Integer> getTotalPointsbyUserId(@PathVariable(
+            "userId") String userId) {
         UserRecord userRecord =
                 userService.getUserById(userId); //
 
+        Integer userPoints = userRecord.getPoints();
 
-        UserResponse userResponse = new UserResponse();
-        userResponse.setUserId(UUID.fromString(userRecord.getUserId()));
-        userResponse.setUsername(userRecord.getUsername());
 
-        return ResponseEntity.ok(userResponse);
+//        UserResponse userResponse = new UserResponse();
+////        userResponse.setUserId(UUID.fromString(userRecord.getUserId()));
+////        userResponse.setUsername(userRecord.getUsername());
+//        userResponse.setPoints(userRecord.getPoints());
+
+        return ResponseEntity.ok(userPoints);
     }
 
     @PostMapping
