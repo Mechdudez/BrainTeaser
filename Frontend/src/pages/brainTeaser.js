@@ -9,7 +9,7 @@ class BrainTeaser extends BaseClass {
 
     constructor() {
         super();
-        this.bindClassMethods(['onGetPoints', 'renderExample'], this);
+        this.bindClassMethods(['onGetPoints', 'renderExample', 'onGetQuestions'], this);
         this.dataStore = new DataStore();
     }
 
@@ -21,6 +21,7 @@ class BrainTeaser extends BaseClass {
         // document.getElementById('create-form').addEventListener('submit', this.onCreate);
         // Renee testing
         document.getElementById('get-user-points-by-username-form').addEventListener('submit', this.onGetPoints);
+        document.getElementById('get-all-questions-form').addEventListener('submit', this.onGetAllQuestions);
 
         this.client = new UserClient();
 
@@ -45,6 +46,15 @@ class BrainTeaser extends BaseClass {
     }
 
     // Event Handlers --------------------------------------------------------------------------------------------------
+
+async onGetAllQuestions(event){
+        event.preventDefault();
+
+        let result = await this.client.getAllQuestions(this.errorHandler);
+        this.dataStore.set("question", result);
+
+}
+
 
     async onGetPoints(event) {
         // Prevent the page from refreshing on form submit
