@@ -20,6 +20,7 @@ class BrainTeaser extends BaseClass {
         // document.getElementById('get-by-id-form').addEventListener('submit', this.onGet);
         // document.getElementById('create-form').addEventListener('submit', this.onCreate);
         // Renee testing
+        document.getElementById('create-user-form').addEventListener('submit', this.createUser);
         document.getElementById('get-user-points-by-username-form').addEventListener('submit', this.onGetPoints);
         document.getElementById('get-all-questions-form').addEventListener('submit', this.onGetAllQuestions);
 
@@ -54,6 +55,22 @@ async onGetAllQuestions(event){
         this.dataStore.set("question", result);
 
 }
+
+    async createUser(userId, userName){
+        try {
+            const response = await this.client.post(`users`, {
+                "userName": userName,
+                "userId": userId,
+
+            });
+
+            return response.data;
+        } catch (error) {
+            this.handleError("createUser", error, errorCallback);
+        }
+
+
+    }
 
 
     async onGetPoints(event) {
