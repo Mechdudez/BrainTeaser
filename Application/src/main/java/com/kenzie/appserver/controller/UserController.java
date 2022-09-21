@@ -26,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<UserResponse> getTotalPointsbyUserId(@PathVariable(
+    public ResponseEntity<UserResponse> getUserById(@PathVariable(
             "userId") String userId) {
         UserRecord userRecord =
                 userService.getUserById(userId); //
