@@ -22,6 +22,7 @@ public class UserController {
     private UserService userService;
 
     UserController(UserService userService) {
+
         this.userService = userService;
     }
 
