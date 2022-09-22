@@ -16,7 +16,7 @@ import java.net.URI;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 
     private UserService userService;
@@ -56,7 +56,7 @@ public class UserController {
         UserResponse userResponse = createUserResponse(user);
 
 
-        return ResponseEntity.created(URI.create("/users/" + userResponse.getUserId())).body(userResponse);
+        return ResponseEntity.created(URI.create("/user/" + userResponse.getUserId())).body(userResponse);
     }
 
 
