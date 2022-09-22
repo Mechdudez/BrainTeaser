@@ -9,6 +9,7 @@ module.exports = {
   },
   entry: {
     brainTeaser: path.resolve(__dirname, 'src', 'pages', 'brainTeaser.js'),
+    loginPage: path.resolve(__dirname, 'src', 'pages', 'loginPage.js')
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -29,6 +30,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
       filename: 'index.html',
+      inject: false
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/login.html',
+      filename: 'login.html',
       inject: false
     }),
     new CopyPlugin({
