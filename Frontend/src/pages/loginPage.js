@@ -28,7 +28,7 @@ class LoginPage extends BaseClass {
 
         if (sessionStorage.getItem("userName") != null) {
             this.showMessage(`Welcome ${sessionStorage.getItem("userName")}!`)
-            window.location.href = "Index.html";
+            window.location.href = "index.html";
         } else {
             this.errorHandler("Error logging in!  Try again...");
         }
@@ -42,7 +42,7 @@ const main = async () => {
     const loginPage = new LoginPage();
 
     if (sessionStorage.getItem("userName") != null){
-        window.location.href = "Index.html";
+        window.location.href = "index.html";
     }
 
     loginPage.mount();
