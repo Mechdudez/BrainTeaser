@@ -78,7 +78,7 @@ async onGetAllQuestions(event){
         event.preventDefault();
 
         let userId = document.getElementById("userid-field").value;
-        this.dataStore.set("user", null);
+        this.dataStore.set("user", userId);
 
         let result = await this.client.getUserPointsById(userId, this.errorHandler);
         //this.dataStore.set("user", result);
