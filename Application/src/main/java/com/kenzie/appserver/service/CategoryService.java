@@ -6,6 +6,7 @@ import com.kenzie.capstone.service.client.CheckAnswerServiceClient;
 import com.kenzie.appserver.repositories.model.CategoryRecord;
 import com.kenzie.appserver.service.model.Category;
 import com.kenzie.capstone.service.model.UserAnswerRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class CategoryService {
     private CheckAnswerServiceClient checkAnswerServiceClient;
 
 
+    @Autowired
     public CategoryService(CategoryRepository categoryRepository, CheckAnswerServiceClient checkAnswerServiceClient) {
         this.categoryRepository = categoryRepository;
         this.checkAnswerServiceClient = checkAnswerServiceClient;

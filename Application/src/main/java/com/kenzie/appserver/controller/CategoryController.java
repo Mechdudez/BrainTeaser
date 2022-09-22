@@ -94,6 +94,7 @@ public class CategoryController {
     }
 
 
+
     // Helper methods
     private CategoryResponse createCategoryResponse(Category category) {
         CategoryResponse categoryResponse = new CategoryResponse();
