@@ -46,13 +46,10 @@ export default class UserClient extends BaseClass {
      */
     async getUserPointsById(userId, errorCallback) {
         try {
-<<<<<<< HEAD
-            const response = await this.client.get(`/user/${userId}`);
-=======
+
             const response = await this.client.get(`/user/${userId}`, {
                 "userId": userId
             });
->>>>>>> c9d2e56 (some changes)
             console.log(response);
             return response.data; // this should return userPoints
         } catch (error) {
