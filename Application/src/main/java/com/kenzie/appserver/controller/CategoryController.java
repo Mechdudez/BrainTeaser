@@ -21,7 +21,9 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
+    // this will get the question by the Id
     @GetMapping("/{questionId}")
+    //TODO
     public ResponseEntity<CategoryResponse> getQuestionById(@PathVariable("questionId") String questionId) {
         CategoryRecord record =
                 categoryService.getQuestionById(questionId);
@@ -38,6 +40,7 @@ public class CategoryController {
         return ResponseEntity.ok(categoryResponse);
     }
 
+    // This will get the answer to the question.
     @GetMapping("within/{questionId}/{answers}")
     public ResponseEntity<CategoryResponse> getAnswer(@PathVariable("questionId") String question, @PathVariable("answers") String answers) {
         // May need to change questionId to questions.
@@ -63,6 +66,7 @@ public class CategoryController {
 //        return null;
 //    }
 
+    // this will randomly group a question
     @GetMapping("/random")
     public ResponseEntity<CategoryResponse> getRandomQuestion() {
         Category category = categoryService.getRandomQuestion();
@@ -76,6 +80,7 @@ public class CategoryController {
     }
 
 
+   // This will grab all the questions in the DB.
     @GetMapping("/all")
     public ResponseEntity<List<CategoryResponse>> getAllQuestions() {
         List<Category> categories = categoryService.getAllQuestions();

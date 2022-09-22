@@ -27,6 +27,9 @@ public class CategoryService {
 
     }
 
+    //TODO write a service for the Lambda to call
+
+    // TODO
     public CategoryRecord getQuestionById(String questionId) {
         // getting data from the local repository
         if (categoryRepository

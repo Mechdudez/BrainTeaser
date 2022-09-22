@@ -25,6 +25,13 @@ public class UserController {
         this.userService = userService;
     }
 
+
+
+    // TODO SetUserPoints
+    // TODO getAllUsers
+    // TODO make a class to keep track of user and points.
+
+
     @GetMapping("/{userId}")
     public ResponseEntity<UserResponse> getUserById(@PathVariable(
             "userId") String userId) {
