@@ -1,14 +1,23 @@
 package com.kenzie.appserver.controller;
 
+import com.kenzie.appserver.controller.model.CategoryCreateRequest;
+import com.kenzie.appserver.controller.model.UserCreateRequest;
+import com.kenzie.appserver.controller.model.UserResponse;
 import com.kenzie.appserver.repositories.model.CategoryRecord;
 import com.kenzie.appserver.service.CategoryService;
 import com.kenzie.appserver.controller.model.CategoryResponse;
 import com.kenzie.appserver.service.model.Category;
+import com.kenzie.appserver.service.model.User;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.util.UUID.randomUUID;
 
 @RestController
 @RequestMapping("/category")
@@ -96,6 +105,28 @@ public class CategoryController {
         }
 
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<CategoryResponse> createOneQuestion(@RequestBody CategoryCreateRequest catetoryCreateRequest){
+
+        if (catetoryCreateRequest.getNewQuestion() == null || catetoryCreateRequest.getNewQuestion().length() == 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid question creation request!");
+        }
+
+        Category question =
+                new Category(randomUUID().toString(),
+                        catetoryCreateRequest.getNewQuestion(),
+                                                  catetoryCreateRequest.getAnswerKey(),
+                        catetoryCreateRequest.getLevelOfDifficulty());
+
+        categoryService.createOneQuestion(question);
+
+        CategoryResponse response = createCategoryResponse(question);
+
+
+        return ResponseEntity.created(URI.create("/create" + response.getQuestionId())).body(response);
+
     }
 
 

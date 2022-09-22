@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+import static java.util.UUID.randomUUID;
+
 @Service
 public class CategoryService {
     private CategoryRepository categoryRepository;
@@ -41,6 +43,20 @@ public class CategoryService {
 
 
         return categoryId;
+
+    }
+
+    public CategoryRecord createOneQuestion(Category newQuestion){
+        // TODO convert difficultyOfQuestions to Enum class later
+        CategoryRecord newRecord = new CategoryRecord();
+        newRecord.setQuestionId(newQuestion.getQuestionId());
+        newRecord.setQuestions(newQuestion.getQuestions());
+        newRecord.setAnswers(newRecord.getAnswers());
+        newRecord.setDifficultyOfAQuestion(newQuestion.getDifficultyOfAQuestion());
+
+        categoryRepository.save(newRecord);
+
+        return newRecord;
 
     }
 
