@@ -48,13 +48,22 @@ class BrainTeaser extends BaseClass {
 
     // Event Handlers --------------------------------------------------------------------------------------------------
 
+<<<<<<< HEAD
     async onGetAllQuestions(event) {
+=======
+   async onGetAllQuestions(event){
+>>>>>>> c9d2e56 (some changes)
         event.preventDefault();
 
         let result = await this.client.getAllQuestions(this.errorHandler);
         this.dataStore.set("question", result);
 
+<<<<<<< HEAD
     }
+=======
+}
+
+>>>>>>> c9d2e56 (some changes)
 
     // async createUser(userId, userName){
     //     try {
@@ -81,7 +90,7 @@ class BrainTeaser extends BaseClass {
         this.dataStore.set("user", userId);
 
         let result = await this.client.getUserPointsById(userId, this.errorHandler);
-        //this.dataStore.set("user", result);
+        this.dataStore.set("user", result);
         if (result) {
             this.showMessage(`Got ${result}!`)
         } else {

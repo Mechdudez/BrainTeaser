@@ -42,7 +42,7 @@ public class UserService {
 
         if(!userRecord.isPresent()){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "User record Not Found");
+                    "User record Not Found, BUMMER!");
         }
 
         return userRecord.get();
