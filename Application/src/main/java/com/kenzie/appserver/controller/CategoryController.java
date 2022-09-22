@@ -25,7 +25,7 @@ public class CategoryController {
     @GetMapping("/{questionId}")
     // TODO
     public ResponseEntity<CategoryResponse> getQuestionById(@PathVariable("questionId") String questionId) {
-        CategoryRecord record =
+        Category record =
                 categoryService.getQuestionById(questionId);
         if (record == null) {
             return ResponseEntity.noContent().build();

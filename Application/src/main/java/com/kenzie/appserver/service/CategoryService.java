@@ -9,10 +9,7 @@ import com.kenzie.capstone.service.model.UserAnswerRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 @Service
 public class CategoryService {
@@ -30,16 +27,20 @@ public class CategoryService {
     //TODO write a service for the Lambda to call
 
     // TODO
-    public CategoryRecord getQuestionById(String questionId) {
+    public Category getQuestionById(String questionId) {
         // getting data from the local repository
-        if (categoryRepository
-                .findById(questionId).isPresent()) {
-            CategoryRecord questionRecord = categoryRepository
-                    .findById(questionId).get();
-            return questionRecord;
-        }
+        Category categoryId = categoryRepository.findById(questionId)
+                .map(category -> new Category(category.getQuestionId(), category.getQuestions(), category.getAnswers(), category.getDifficultyOfAQuestion()))
+                .orElse(null);
 
-        return null;
+
+
+            if(categoryId == null){
+                throw new CategoryNotFoundException("There is no such question");
+            }
+
+
+        return categoryId;
 
     }
 
