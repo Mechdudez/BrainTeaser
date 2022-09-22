@@ -40,12 +40,12 @@ public class CategoryController {
 
     @GetMapping("within/{questionId}/{answers}")
     public ResponseEntity<CategoryResponse> getAnswer(@PathVariable("questionId") String question, @PathVariable("answers") String answers) {
-               // May need to change questionId to questions.
-                Category category = categoryService.getAnswer();
+        // May need to change questionId to questions.
+        Category category = categoryService.getAnswer();
 
-                if(category == null){
-                    return ResponseEntity.notFound().build();
-                }
+        if (category == null) {
+            return ResponseEntity.notFound().build();
+        }
 
         CategoryResponse categoryResponse = new CategoryResponse();
         categoryResponse.setQuestionId(category.getQuestionId());
@@ -63,18 +63,17 @@ public class CategoryController {
 //        return null;
 //    }
 
-@GetMapping("/random")
-public ResponseEntity<CategoryResponse> getRandomQuestion(){
+    @GetMapping("/random")
+    public ResponseEntity<CategoryResponse> getRandomQuestion() {
         Category category = categoryService.getRandomQuestion();
 
-        if(category == null){
+        if (category == null) {
             return ResponseEntity.noContent().build();
         }
         CategoryResponse categoryResponse = createCategoryResponse(category);
 
         return ResponseEntity.ok(categoryResponse);
-}
-
+    }
 
 
     @GetMapping("/all")
