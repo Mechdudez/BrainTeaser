@@ -16,8 +16,8 @@ public class CategoryResponse {
     @JsonProperty("answers")
     private String answers;
 
-    @JsonProperty("difficultyOfQuestion")
-    private String difficultyOfQuestion;
+    @JsonProperty("difficultyOfAQuestion")
+    private String difficultyOfAQuestion;
 
     public int getQuestionId() {
         return questionId;
@@ -44,11 +44,11 @@ public class CategoryResponse {
     }
 
     public String getDifficultyOfQuestion() {
-        return difficultyOfQuestion;
+        return difficultyOfAQuestion;
     }
 
     public void setDifficultyOfQuestion(String difficultyOfQuestion) {
-        this.difficultyOfQuestion = difficultyOfQuestion;
+        this.difficultyOfAQuestion = difficultyOfQuestion;
     }
 
 }
