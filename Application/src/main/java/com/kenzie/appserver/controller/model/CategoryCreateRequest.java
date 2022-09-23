@@ -7,29 +7,40 @@ import java.util.Objects;
 
 public class CategoryCreateRequest {
     @NotEmpty
-    @JsonProperty("newQuestion")
-    private String newQuestion;
+    @JsonProperty("questionId")
+    private String questionId;
+    @JsonProperty("questions")
+    private String questions;
 
-    @JsonProperty("answerKey")
-    private String answerKey;
+    @JsonProperty("answers")
+    private String answers;
 
     @JsonProperty("levelOfDifficulty")
     private String levelOfDifficulty;
 
-    public String getNewQuestion() {
-        return newQuestion;
+
+    public String getQuestionId() {
+        return questionId;
     }
 
-    public void setNewQuestion(String newQuestion) {
-        this.newQuestion = newQuestion;
+    public void setQuestionId(String questionId) {
+        this.questionId = questionId;
     }
 
-    public String getAnswerKey() {
-        return answerKey;
+    public String getQuestions() {
+        return questions;
     }
 
-    public void setAnswerKey(String answerKey) {
-        this.answerKey = answerKey;
+    public void setQuestions(String newQuestion) {
+        this.questions = newQuestion;
+    }
+
+    public String getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(String answerKey) {
+        this.answers = answerKey;
     }
 
     public String getLevelOfDifficulty() {
@@ -45,11 +56,11 @@ public class CategoryCreateRequest {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CategoryCreateRequest that = (CategoryCreateRequest) o;
-        return Objects.equals(newQuestion, that.newQuestion) && Objects.equals(answerKey, that.answerKey);
+        return Objects.equals(questions, that.questions) && Objects.equals(answers, that.answers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(newQuestion, answerKey);
+        return Objects.hash(questions, answers);
     }
 }

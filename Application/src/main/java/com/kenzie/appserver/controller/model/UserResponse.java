@@ -9,9 +9,6 @@ import java.util.UUID;
 public class UserResponse {
 
 
-
-
-
     @JsonProperty("userId")
     UUID userId;
 

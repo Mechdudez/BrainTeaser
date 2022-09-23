@@ -10,7 +10,7 @@ public class CategoryResponse {
     @JsonProperty("questionId")
     private String questionId;
 
-    @JsonProperty
+    @JsonProperty ("questions")
     private String questions;
 
     @JsonProperty("answers")

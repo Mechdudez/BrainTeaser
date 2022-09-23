@@ -50,23 +50,17 @@ public class CategoryController {
     }
 
     // This will get the answer to the question.
-    @GetMapping("/{questionId}/{answers}")
-    public ResponseEntity<CategoryResponse> getAnswer(@PathVariable("questionId") String question, @PathVariable("answers") String answers) {
-        // May need to change questionId to questions.
-        Category category = categoryService.getAnswer();
+    @PostMapping
+    public ResponseEntity<CategoryResponse> getAnswer(@RequestBody CategoryCreateRequest categoryCreateRequest) {
+        Category category = new Category(categoryCreateRequest.getQuestionId(),
+                categoryCreateRequest.getQuestions(),
+                categoryCreateRequest.getAnswers(),
+                categoryCreateRequest.getLevelOfDifficulty());
+        categoryService.getAnswer(category);
 
-        if (category == null) {
-            return ResponseEntity.notFound().build();
-        }
+        CategoryResponse categoryResponse = createCategoryResponse(category);
 
-        CategoryResponse categoryResponse = new CategoryResponse();
-        categoryResponse.setQuestionId(category.getQuestionId());
-        categoryResponse.setQuestions(question);
-        // TODO Not sure if it is here or on the front end, but can't show answer right away.
-        categoryResponse.setAnswers(answers);
-        categoryResponse.setDifficultyOfQuestion(category.getDifficultyOfAQuestion());
-
-        return ResponseEntity.ok(categoryResponse);
+        return ResponseEntity.created(URI.create("/category/" + categoryResponse.getAnswers())).body(categoryResponse);
     }
 
 //    @PostMapping("{userId}/{questionId}/{answers}")
@@ -89,7 +83,7 @@ public class CategoryController {
     }
 
 
-   // This will grab all the questions in the DB.
+    // This will grab all the questions in the DB.
     @GetMapping("/all")
     public ResponseEntity<List<CategoryResponse>> getAllQuestions() {
         List<Category> categories = categoryService.getAllQuestions();
@@ -108,16 +102,16 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<CategoryResponse> createOneQuestion(@RequestBody CategoryCreateRequest categoryCreateRequest){
+    public ResponseEntity<CategoryResponse> createOneQuestion(@RequestBody CategoryCreateRequest categoryCreateRequest) {
 
-        if (categoryCreateRequest.getNewQuestion() == null || categoryCreateRequest.getNewQuestion().length() == 0) {
+        if (categoryCreateRequest.getQuestions() == null || categoryCreateRequest.getQuestions().length() == 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid question creation request!");
         }
 
         Category question =
                 new Category(randomUUID().toString(),
-                        categoryCreateRequest.getNewQuestion(),
-                                                  categoryCreateRequest.getAnswerKey(),
+                        categoryCreateRequest.getQuestions(),
+                        categoryCreateRequest.getAnswers(),
                         categoryCreateRequest.getLevelOfDifficulty());
 
         categoryService.createOneQuestion(question);
@@ -128,7 +122,6 @@ public class CategoryController {
         return ResponseEntity.created(URI.create("/create/" + response.getQuestionId())).body(response);
 
     }
-
 
 
     // Helper methods

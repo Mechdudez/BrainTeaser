@@ -15,7 +15,7 @@ public class UserCreateRequest {
     @JsonProperty("userId")
     private UUID userId;
 
-    @JsonProperty
+    @JsonProperty ("points")
     private int points;
 
 
