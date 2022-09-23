@@ -20,7 +20,7 @@ import java.util.List;
 import static java.util.UUID.randomUUID;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/Category")
 public class CategoryController {
 
     private CategoryService categoryService;
@@ -32,21 +32,20 @@ public class CategoryController {
 
     // this will get the question by the Id
     @GetMapping("/{questionId}")
-    // TODO
     public ResponseEntity<CategoryResponse> getQuestionById(@PathVariable("questionId") String questionId) {
-        Category record =
+
+       // This will grab the question by the Id
+        Category category =
                 categoryService.getQuestionById(questionId);
-        if (record == null) {
+
+        // if the category is null return nothing.
+        if (category == null) {
             return ResponseEntity.noContent().build();
         }
+        // This creates the CategoryResponse
+        CategoryResponse categoryResponse = createCategoryResponse(category);
 
-        CategoryResponse categoryResponse = new CategoryResponse();
-        categoryResponse.setQuestionId(questionId);
-        categoryResponse.setQuestions(record.getQuestions());
-        categoryResponse.setAnswers(record.getAnswers());
-        categoryResponse.setDifficultyOfQuestion(record.getDifficultyOfAQuestion());
-
-        return ResponseEntity.ok(categoryResponse);
+        return ResponseEntity.ok(categoryResponse); // response is returned
     }
 
     // This will get the answer to the question.
@@ -59,7 +58,7 @@ public class CategoryController {
 
         CategoryResponse categoryResponse = createCategoryResponse(category);
 
-        return ResponseEntity.created(URI.create("/category/" + categoryResponse.getAnswers())).body(categoryResponse);
+        return ResponseEntity.ok(categoryResponse);
     }
 
 //    @PostMapping("{userId}/{questionId}/{answers}")

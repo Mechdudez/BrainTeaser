@@ -34,18 +34,14 @@ public class UserController {
 
 
     @GetMapping("/{userId}")
-    public ResponseEntity<UserResponse> getUserById(@PathVariable(
-            "userId") String userId) {
-        UserRecord userRecord =
-                userService.getUserById(userId); //
+    public ResponseEntity<UserResponse> getUserById(@PathVariable("userId") String userId) {
+        User user = userService.getUserById(userId); //
 
         // Integer userPoints = userRecord.getPoints();
-
-
         UserResponse userResponse = new UserResponse();
-        userResponse.setUserId(UUID.fromString(userRecord.getUserId()));
-        userResponse.setUsername(userRecord.getUsername());
-        userResponse.setPoints(userRecord.getPoints());
+        userResponse.setUserId((user.getUserId()));
+        userResponse.setUsername(user.getUserName());
+        userResponse.setPoints(user.getPoints());
 
         return ResponseEntity.ok(userResponse);
     }

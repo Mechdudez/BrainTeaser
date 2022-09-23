@@ -5,10 +5,11 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 
 import java.util.Objects;
+import java.util.UUID;
 
 @DynamoDBTable(tableName = "user")
 public class UserRecord {
-    String userId;
+    UUID userId;
 
     String userName;
 
@@ -17,11 +18,11 @@ public class UserRecord {
 
 
     @DynamoDBHashKey(attributeName = "userId")
-    public String getUserId() {
+    public UUID getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(UUID userId) {
         this.userId = userId;
     }
     @DynamoDBAttribute(attributeName = "points")

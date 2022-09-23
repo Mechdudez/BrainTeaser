@@ -61,12 +61,14 @@ public class CategoryService {
 
     // Will need to find a way to random choose one of the questions in the list.
     public Category getRandomQuestion() {
+        // Grab all the questions
         List<Category> categoryList = getAllQuestions();
         Random random = new Random();
         if (categoryList.isEmpty()) {
             throw new CategoryNotFoundException("Sorry there seems to be no questions");
         } else {
             // need to return a single question
+            // will randomly grab a question based on the size of the list.
             return categoryList.get(random.nextInt(categoryList.size()));
         }
 
@@ -76,31 +78,36 @@ public class CategoryService {
     public List<Category> getAllQuestions() {
         List<Category> categoryList = new ArrayList<>();
 
+        // iterate through each question and add them to a list.
         List<CategoryRecord> recordList = new ArrayList<>();
         categoryRepository.findAll()
                 .forEach(recordList::add);
-
+        // add the list into a new category record
         for (CategoryRecord categoryRecord : recordList) {
             categoryList.add(new Category(categoryRecord.getQuestionId(), categoryRecord.getQuestions(), categoryRecord.getAnswers(), categoryRecord.getDifficultyOfAQuestion()));
         }
 
-        return categoryList;
+        return categoryList; // return that list.
     }
 
-    public Boolean checkAnswer(String userId, String questionId,
-                               String userAnswer, String answerKey) {
 
-        // need to implement fuzzy match later
-        Boolean result = userAnswer == answerKey;
-        UserAnswerRequest userAnswerRequest =
-                new UserAnswerRequest(userId, questionId,
-                        userAnswer, result);
-        checkAnswerServiceClient.addUserAnswer(userAnswerRequest);
+    // TODO if time allows do this.
+//    public Boolean checkAnswer(String userId, String questionId,
+//                               String userAnswer, String answerKey) {
+//
+//        // need to implement fuzzy match later
+//        Boolean result = userAnswer == answerKey;
+//        UserAnswerRequest userAnswerRequest =
+//                new UserAnswerRequest(userId, questionId,
+//                        userAnswer, result);
+//        checkAnswerServiceClient.addUserAnswer(userAnswerRequest);
+//
+//        return result;
+//
+//    }
 
-        return result;
 
-    }
-
+    // TODO needs to be done still
     public Category getAnswer(String answers) {
         Category categories = getRandomQuestion();
         Scanner myScanner = new Scanner(System.in);

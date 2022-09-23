@@ -12,11 +12,13 @@ import com.kenzie.appserver.repositories.CategoryRepository;
 import com.kenzie.appserver.repositories.UserRepository;
 import com.kenzie.appserver.repositories.model.CategoryRecord;
 import com.kenzie.appserver.repositories.model.UserRecord;
+import com.kenzie.appserver.service.model.Category;
 import com.kenzie.appserver.service.model.User;
 import com.kenzie.capstone.service.client.CheckAnswerServiceClient;
 import com.kenzie.capstone.service.model.UserAnswerRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -35,17 +37,17 @@ public class UserService {
         this.checkAnswerServiceClient = checkAnswerServiceClient;
     }
 
-    public UserRecord getUserById(String userId) {
+    public User getUserById(String userId) {
         // getting data from the local repository
-        Optional<UserRecord> userRecord =
-                userRepository.findById(userId);
+        User user = userRepository.findById(userId)
+                .map(user1 -> new User(user1.getUsername(), user1.getUserId(), user1.getPoints()))
+                .orElse(null);
 
-        if(!userRecord.isPresent()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                    "User record Not Found, BUMMER!");
+        if(user == null){
+            throw new UserNotFoundException("No user found by id!");
         }
 
-        return userRecord.get();
+        return user;
     }
 
     public User addNewUser(User user){
@@ -53,7 +55,7 @@ public class UserService {
             throw new UserNotFoundException("Sorry this user was not found");
         }
         UserRecord userRecord = new UserRecord();
-        userRecord.setUserId(String.valueOf(user.getUserId()));
+        userRecord.setUserId(user.getUserId());
         userRecord.setUsername(user.getUserName());
         userRecord.setPoints(user.getPoints());
 

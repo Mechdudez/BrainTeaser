@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import static java.util.UUID.randomUUID;
 import static org.mockito.Mockito.mock;
@@ -36,22 +37,22 @@ public class UserUnitTests {
         String userId = randomUUID().toString();
 
         UserRecord userRecord = new UserRecord();
-        userRecord.setUserId(userId);
+        userRecord.setUserId(UUID.fromString(userId));
         userRecord.setUsername("randoJohn");
         userRecord.setPoints(5);
 
         // WHEN
         when(userRepository.findById(userId)).thenReturn(Optional.of(userRecord));
-        UserRecord record = userService.getUserById(userId);
+        User user = userService.getUserById(userId);
 
         //Then
-        Assertions.assertNotNull(record, "The object record is " +
+        Assertions.assertNotNull(user, "The object record is " +
                 "returned");
         Assertions.assertEquals(userRecord.getUserId(),
-                record.getUserId(),
+                user.getUserId(),
                 "The id matches");
         Assertions.assertEquals(userRecord.getUsername(),
-                record.getUsername(), "The name matches");
+                user.getUserName(), "The name matches");
 
     }
 
