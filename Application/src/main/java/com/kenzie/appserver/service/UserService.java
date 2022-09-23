@@ -55,7 +55,7 @@ public class UserService {
         UserRecord userRecord = new UserRecord();
         userRecord.setUserId(String.valueOf(user.getUserId()));
         userRecord.setUsername(user.getUserName());
-        userRecord.setPoints(0);
+        userRecord.setPoints(user.getPoints());
 
         userRepository.save(userRecord);
         return user;
