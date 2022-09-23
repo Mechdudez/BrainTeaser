@@ -24,7 +24,7 @@ export default class UserClient extends BaseClass {
 
     async getOneQuestion(errorCallback){
         try{
-            const  response = await  this.client.get(`/category/${questionId}`, {
+            const  response = await this.client.get(`/category/${questionId}`, {
                 "questionId": questionId
             });
 
