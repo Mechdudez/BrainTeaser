@@ -9,7 +9,7 @@ class BrainTeaser extends BaseClass {
 
     constructor() {
         super();
-        this.bindClassMethods(['onGetUser', 'onGetQuestions',
+        this.bindClassMethods(['onGetUser', 'onGetQuestion',
         'renderExample'], this);
         // this.onGetUser = this.onGetUser.bind(this);
         // this.renderExample = this.renderExample.bind(this);
@@ -22,7 +22,7 @@ class BrainTeaser extends BaseClass {
      */
     async mount() {
         document.getElementById('get-user-points-by-id-form').addEventListener('submit', this.onGetUser);
-        document.getElementById('get-all-questions-form').addEventListener('submit', this.onGetAllQuestions);
+        document.getElementById('get-one-question-form').addEventListener('submit', this.onGetQuestion);
 
         this.client = new UserClient();
 
@@ -49,11 +49,22 @@ class BrainTeaser extends BaseClass {
     // Event Handlers --------------------------------------------------------------------------------------------------
 
 
-   async onGetQuestions(event){
+   async onGetQuestion(event){
         event.preventDefault();
+       this.dataStore.set("question", null);
 
-        let result = await this.client.getAllQuestions(this.errorHandler);
+       let questionId = document.getElementById("question-field").value;
+        let result = await this.client.getOneQuestion(questionId, this.errorHandler);
+
+
         this.dataStore.set("question", result);
+
+       if (result) {
+           this.showMessage(`Your new question is ${result}!`)
+       } else {
+           this.errorHandler("Error fetching your question!  Try" +
+               " again...");
+       }
     }
 
 
@@ -65,7 +76,7 @@ class BrainTeaser extends BaseClass {
         let userId = document.getElementById("userid-field").value;
 
 
-        let result = await this.client.getUserPointsById(userId, this.errorHandler);
+        let result = await this.client.getUserById(userId, this.errorHandler);
         this.dataStore.set("user", result);
         if (result) {
             this.showMessage(`Got ${result}!`)

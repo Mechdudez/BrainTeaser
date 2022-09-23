@@ -5,7 +5,7 @@ export default class UserClient extends BaseClass {
 
     constructor(props = {}){
         super();
-        const methodsToBind = ['clientLoaded', 'getUserPointsById', 'getAllQuestions'];
+        const methodsToBind = ['clientLoaded', 'getUserById', 'getOneQuestion'];
         this.bindClassMethods(methodsToBind, this);
         this.props = props;
         this.clientLoaded(axios);
@@ -22,14 +22,17 @@ export default class UserClient extends BaseClass {
         }
     }
 
-    async getAllQuestions(errorCallback){
+    async getOneQuestion(errorCallback){
         try{
-            const  response = await  this.client.get('/category/all');
+            const  response = await  this.client.get(`/category/${questionId}`, {
+                "questionId": questionId
+            });
 
-            return response.data;
+            console.log(response.data);
+            return response.data; // this should return user
 
         }catch (error){
-            this.handleError("getAllQuestions", error, errorCallback)
+            this.handleError("getOneQuestion", error, errorCallback)
         }
     }
 
@@ -44,16 +47,16 @@ export default class UserClient extends BaseClass {
      * test userid == 5b288a6a-355e-11ed-a261-0242ac120002
      * * *
      */
-    async getUserPointsById(userId, errorCallback) {
+    async getUserById(userId, errorCallback) {
         try {
 
             const response = await this.client.get(`/user/${userId}`, {
                 "userId": userId
             });
             console.log(response);
-            return response.data; // this should return userPoints
+            return response.data; // this should return user
         } catch (error) {
-            this.handleError("getUserPointsByID", error, errorCallback)
+            this.handleError("getUserByID", error, errorCallback)
         }
     }
 
