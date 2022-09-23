@@ -101,7 +101,7 @@ public class CategoryService {
 
     }
 
-    public Category getAnswer(Category category) {
+    public Category getAnswer(String answers) {
         Category categories = getRandomQuestion();
         Scanner myScanner = new Scanner(System.in);
         String userName = myScanner.nextLine();

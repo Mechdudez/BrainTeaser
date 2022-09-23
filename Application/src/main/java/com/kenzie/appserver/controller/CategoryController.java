@@ -50,13 +50,12 @@ public class CategoryController {
     }
 
     // This will get the answer to the question.
-    @PostMapping
-    public ResponseEntity<CategoryResponse> getAnswer(@RequestBody CategoryCreateRequest categoryCreateRequest) {
-        Category category = new Category(categoryCreateRequest.getQuestionId(),
-                categoryCreateRequest.getQuestions(),
-                categoryCreateRequest.getAnswers(),
-                categoryCreateRequest.getLevelOfDifficulty());
-        categoryService.getAnswer(category);
+    @GetMapping("/{answers}")
+    public ResponseEntity<CategoryResponse> getAnswer(@PathVariable("answers") String answers) {
+            Category category = categoryService.getAnswer(answers);
+            if(category == null){
+                return ResponseEntity.noContent().build();
+            }
 
         CategoryResponse categoryResponse = createCategoryResponse(category);
 
