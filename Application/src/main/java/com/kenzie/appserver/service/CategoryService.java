@@ -35,11 +35,9 @@ public class CategoryService {
                 .map(category -> new Category(category.getQuestionId(), category.getQuestions(), category.getAnswers(), category.getDifficultyOfAQuestion()))
                 .orElse(null);
 
-
-
-            if(categoryId == null){
-                throw new CategoryNotFoundException("There is no such question");
-            }
+        if (categoryId == null) {
+            throw new CategoryNotFoundException("There is no such question");
+        }
 
 
         return categoryId;
@@ -62,12 +60,12 @@ public class CategoryService {
 
 
     // Will need to find a way to random choose one of the questions in the list.
-    public Category getRandomQuestion(){
+    public Category getRandomQuestion() {
         List<Category> categoryList = getAllQuestions();
         Random random = new Random();
-        if(categoryList.isEmpty()){
+        if (categoryList.isEmpty()) {
             throw new CategoryNotFoundException("Sorry there seems to be no questions");
-        }else{
+        } else {
             // need to return a single question
             return categoryList.get(random.nextInt(categoryList.size()));
         }
@@ -75,42 +73,43 @@ public class CategoryService {
     }
 
     // will be user to generate all the questions
-    public List<Category> getAllQuestions(){
+    public List<Category> getAllQuestions() {
         List<Category> categoryList = new ArrayList<>();
 
         List<CategoryRecord> recordList = new ArrayList<>();
         categoryRepository.findAll()
                 .forEach(recordList::add);
 
-        for(CategoryRecord categoryRecord : recordList){
+        for (CategoryRecord categoryRecord : recordList) {
             categoryList.add(new Category(categoryRecord.getQuestionId(), categoryRecord.getQuestions(), categoryRecord.getAnswers(), categoryRecord.getDifficultyOfAQuestion()));
         }
 
         return categoryList;
     }
+
     public Boolean checkAnswer(String userId, String questionId,
-                               String userAnswer, String answerKey){
+                               String userAnswer, String answerKey) {
 
-            // need to implement fuzzy match later
-            Boolean result = userAnswer == answerKey;
-            UserAnswerRequest userAnswerRequest =
-                    new UserAnswerRequest(userId, questionId,
-                            userAnswer, result);
-            checkAnswerServiceClient.addUserAnswer(userAnswerRequest);
+        // need to implement fuzzy match later
+        Boolean result = userAnswer == answerKey;
+        UserAnswerRequest userAnswerRequest =
+                new UserAnswerRequest(userId, questionId,
+                        userAnswer, result);
+        checkAnswerServiceClient.addUserAnswer(userAnswerRequest);
 
-            return result;
+        return result;
 
     }
 
     public Category getAnswer() {
-       Category categories = getRandomQuestion();
+        Category categories = getRandomQuestion();
         Scanner myScanner = new Scanner(System.in);
         String userName = myScanner.nextLine();
         int points = 0;
 
         // make sure the user answer and answer are equal.
         // if user is correct, add 1 point
-        if(userName.equals(categories.getAnswers())){
+        if (userName.equals(categories.getAnswers())) {
 
             helperMethodForCorrectAnswer();
             points++;
