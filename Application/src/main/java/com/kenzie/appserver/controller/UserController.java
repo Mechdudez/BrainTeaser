@@ -37,11 +37,11 @@ public class UserController {
     public ResponseEntity<UserResponse> getUserById(@PathVariable("userId") String userId) {
         User user = userService.getUserById(userId); //
 
-        // Integer userPoints = userRecord.getPoints();
-        UserResponse userResponse = new UserResponse();
-        userResponse.setUserId((user.getUserId()));
-        userResponse.setUsername(user.getUserName());
-        userResponse.setPoints(user.getPoints());
+        if(user == null){
+            return ResponseEntity.noContent().build();
+        }
+
+        UserResponse userResponse = createUserResponse(user);
 
         return ResponseEntity.ok(userResponse);
     }

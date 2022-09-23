@@ -27,20 +27,18 @@ public class CategoryService {
     }
 
     //TODO write a service for the Lambda to call
-
-    // TODO
     public Category getQuestionById(String questionId) {
         // getting data from the local repository
-        Category categoryId = categoryRepository.findById(questionId)
+        Category getQuestion = categoryRepository.findById(questionId)
                 .map(category -> new Category(category.getQuestionId(), category.getQuestions(), category.getAnswers(), category.getDifficultyOfAQuestion()))
                 .orElse(null);
 
-        if (categoryId == null) {
+        if (getQuestion == null) {
             throw new CategoryNotFoundException("There is no such question");
         }
 
 
-        return categoryId;
+        return getQuestion;
 
     }
 

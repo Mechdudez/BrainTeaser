@@ -35,8 +35,7 @@ public class CategoryController {
     public ResponseEntity<CategoryResponse> getQuestionById(@PathVariable("questionId") String questionId) {
 
        // This will grab the question by the Id
-        Category category =
-                categoryService.getQuestionById(questionId);
+        Category category = categoryService.getQuestionById(questionId);
 
         // if the category is null return nothing.
         if (category == null) {
