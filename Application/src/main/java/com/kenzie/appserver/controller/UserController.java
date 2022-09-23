@@ -32,7 +32,6 @@ public class UserController {
 
 
     // TODO SetUserPoints
-    // TODO getAllUsers
     // TODO make a class to keep track of user and points.
 
     @GetMapping("/all")

@@ -30,7 +30,7 @@ public class CategoryService {
     public Category getQuestionById(String questionId) {
         // getting data from the local repository
         Category getQuestion = categoryRepository.findById(questionId)
-                .map(category -> new Category(category.getQuestionId(), category.getQuestions(), category.getAnswers(), category.getDifficultyOfAQuestion()))
+                .map(category -> new Category(category.getQuestionId(), category.getQuestions(),category.getDifficultyOfAQuestion(), category.getAnswers()))
                 .orElse(null);
 
         if (getQuestion == null) {

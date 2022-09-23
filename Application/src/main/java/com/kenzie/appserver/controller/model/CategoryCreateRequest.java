@@ -15,8 +15,8 @@ public class CategoryCreateRequest {
     @JsonProperty("answers")
     private String answers;
 
-    @JsonProperty("levelOfDifficulty")
-    private String levelOfDifficulty;
+    @JsonProperty("levelOfADifficulty")
+    private String levelOfADifficulty;
 
 
     public int getQuestionId() {
@@ -43,12 +43,12 @@ public class CategoryCreateRequest {
         this.answers = answerKey;
     }
 
-    public String getLevelOfDifficulty() {
-        return levelOfDifficulty;
+    public String getLevelOfADifficulty() {
+        return levelOfADifficulty;
     }
 
-    public void setLevelOfDifficulty(String levelOfDifficulty) {
-        this.levelOfDifficulty = levelOfDifficulty;
+    public void setLevelOfADifficulty(String levelOfDifficulty) {
+        this.levelOfADifficulty = levelOfDifficulty;
     }
 
     @Override

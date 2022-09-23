@@ -109,7 +109,7 @@ public class CategoryController {
                 new Category(categoryCreateRequest.getQuestionId(),
                         categoryCreateRequest.getQuestions(),
                         categoryCreateRequest.getAnswers(),
-                        categoryCreateRequest.getLevelOfDifficulty());
+                        categoryCreateRequest.getLevelOfADifficulty());
 
         categoryService.createOneQuestion(question);
 
