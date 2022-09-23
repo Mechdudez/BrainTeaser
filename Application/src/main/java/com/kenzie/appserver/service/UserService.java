@@ -64,6 +64,20 @@ public class UserService {
 
     }
 
+    public List<User> getAllUsers() {
+        List<User> userList = new ArrayList<>();
+
+        // iterate through each question and add them to a list.
+        List<UserRecord> recordList = new ArrayList<>();
+        userRepository.findAll()
+                .forEach(recordList::add);
+        // add the list into a new category record
+        for (UserRecord userRecord : recordList) {
+            userList.add(new User(userRecord.getUsername(), userRecord.getUserId(), userRecord.getPoints()));
+        }
+
+        return userList; // return that list.
+    }
 
     public UserRecord getUserWithTopScore(){
         // Need to think hard on this

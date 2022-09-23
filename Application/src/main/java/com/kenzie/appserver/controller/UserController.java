@@ -6,6 +6,7 @@ import com.kenzie.appserver.controller.model.UserResponse;
 import com.kenzie.appserver.repositories.model.CategoryRecord;
 import com.kenzie.appserver.repositories.model.UserRecord;
 import com.kenzie.appserver.service.UserService;
+import com.kenzie.appserver.service.model.Category;
 import com.kenzie.appserver.service.model.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -32,6 +35,22 @@ public class UserController {
     // TODO getAllUsers
     // TODO make a class to keep track of user and points.
 
+    @GetMapping("/all")
+    public ResponseEntity<List<UserResponse>> getAllUsers() {
+        List<User> user = userService.getAllUsers();
+
+        if (user == null || user.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        List<UserResponse> response = new ArrayList<>();
+
+        for (User users : user) {
+            // Need helper method
+            response.add(this.createUserResponse(users));
+        }
+
+        return ResponseEntity.ok(response);
+    }
 
     @GetMapping("/{userId}")
     public ResponseEntity<UserResponse> getUserById(@PathVariable("userId") String userId) {
