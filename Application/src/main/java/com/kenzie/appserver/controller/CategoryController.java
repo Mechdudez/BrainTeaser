@@ -108,7 +108,7 @@ public class CategoryController {
         }
 
         Category question =
-                new Category(randomUUID().toString(),
+                new Category(categoryCreateRequest.getQuestionId(),
                         categoryCreateRequest.getQuestions(),
                         categoryCreateRequest.getAnswers(),
                         categoryCreateRequest.getLevelOfDifficulty());

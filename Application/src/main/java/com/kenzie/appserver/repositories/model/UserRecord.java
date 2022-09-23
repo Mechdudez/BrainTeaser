@@ -38,7 +38,7 @@ public class UserRecord {
         return userName;
     }
 
-    public void setUsername(String Username) {
+    public void setUsername(String userName) {
         this.userName = userName;
     }
 
