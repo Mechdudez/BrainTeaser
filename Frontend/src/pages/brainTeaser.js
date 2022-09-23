@@ -54,7 +54,6 @@ class BrainTeaser extends BaseClass {
        this.dataStore.set("question", null);
 
        let questionId = document.getElementById("question-field").value;
-       console.log(questionId);
         let result = await this.client.getOneQuestion(questionId, this.errorHandler);
 
 
