@@ -8,7 +8,7 @@ import java.util.Objects;
 public class CategoryCreateRequest {
     @NotEmpty
     @JsonProperty("questionId")
-    private String questionId;
+    private int questionId;
     @JsonProperty("questions")
     private String questions;
 
@@ -19,11 +19,11 @@ public class CategoryCreateRequest {
     private String levelOfDifficulty;
 
 
-    public String getQuestionId() {
+    public int getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(String questionId) {
+    public void setQuestionId(int questionId) {
         this.questionId = questionId;
     }
 

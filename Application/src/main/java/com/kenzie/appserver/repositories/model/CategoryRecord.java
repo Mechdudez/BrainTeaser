@@ -10,7 +10,7 @@ import java.util.Objects;
 @DynamoDBTable(tableName = "Category")
 public class CategoryRecord {
 
-    String questionId;
+    int questionId;
 
     String questions;
 
@@ -21,11 +21,11 @@ public class CategoryRecord {
 
 
     @DynamoDBHashKey(attributeName = "questionId")
-    public String getQuestionId() {
+    public int getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(String questionId) {
+    public void setQuestionId(int questionId) {
         this.questionId = questionId;
     }
     @DynamoDBAttribute(attributeName = "questions")
