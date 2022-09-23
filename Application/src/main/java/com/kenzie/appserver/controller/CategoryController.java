@@ -50,7 +50,7 @@ public class CategoryController {
     }
 
     // This will get the answer to the question.
-    @GetMapping("within/{questionId}/{answers}")
+    @GetMapping("/{questionId}/{answers}")
     public ResponseEntity<CategoryResponse> getAnswer(@PathVariable("questionId") String question, @PathVariable("answers") String answers) {
         // May need to change questionId to questions.
         Category category = categoryService.getAnswer();
@@ -107,25 +107,25 @@ public class CategoryController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<CategoryResponse> createOneQuestion(@RequestBody CategoryCreateRequest catetoryCreateRequest){
+    @PostMapping
+    public ResponseEntity<CategoryResponse> createOneQuestion(@RequestBody CategoryCreateRequest categoryCreateRequest){
 
-        if (catetoryCreateRequest.getNewQuestion() == null || catetoryCreateRequest.getNewQuestion().length() == 0) {
+        if (categoryCreateRequest.getNewQuestion() == null || categoryCreateRequest.getNewQuestion().length() == 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid question creation request!");
         }
 
         Category question =
                 new Category(randomUUID().toString(),
-                        catetoryCreateRequest.getNewQuestion(),
-                                                  catetoryCreateRequest.getAnswerKey(),
-                        catetoryCreateRequest.getLevelOfDifficulty());
+                        categoryCreateRequest.getNewQuestion(),
+                                                  categoryCreateRequest.getAnswerKey(),
+                        categoryCreateRequest.getLevelOfDifficulty());
 
         categoryService.createOneQuestion(question);
 
         CategoryResponse response = createCategoryResponse(question);
 
 
-        return ResponseEntity.created(URI.create("/create" + response.getQuestionId())).body(response);
+        return ResponseEntity.created(URI.create("/create/" + response.getQuestionId())).body(response);
 
     }
 
