@@ -48,17 +48,17 @@ public class CategoryController {
     }
 
     // This will get the answer to the question.
-    @GetMapping("/{answers}")
-    public ResponseEntity<CategoryResponse> getAnswer(@PathVariable("answers") String answers) {
-            Category category = categoryService.getAnswer(answers);
-            if(category == null){
-                return ResponseEntity.noContent().build();
-            }
-
-        CategoryResponse categoryResponse = createCategoryResponse(category);
-
-        return ResponseEntity.ok(categoryResponse);
-    }
+//    @GetMapping("/{answers}")
+//    public ResponseEntity<CategoryResponse> getAnswer(@PathVariable("answers") String answers) {
+//            Category category = categoryService.getAnswer(answers);
+//            if(category == null){
+//                return ResponseEntity.noContent().build();
+//            }
+//
+//        CategoryResponse categoryResponse = createCategoryResponse(category);
+//
+//        return ResponseEntity.ok(categoryResponse);
+//    }
 
 //    @PostMapping("{userId}/{questionId}/{answers}")
 //    public ResponseEntity<CategoryResponse> getUserAnswer(@PathVariable("questionId") String questionId, @PathVariable("answers") String answers) {

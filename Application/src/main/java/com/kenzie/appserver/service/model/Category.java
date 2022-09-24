@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Category {
 
-    private int questionId;
+    private Integer questionId;
 
     private String questions;
 
@@ -12,7 +12,8 @@ public class Category {
 
     private  String answers;
 
-    public Category(int questionId, String questions, String difficultyOfAQuestion, String answers) {
+    public Category(Integer questionId, String questions,
+                    String difficultyOfAQuestion, String answers) {
         this.questionId = questionId;
         this.questions = questions;
         this.difficultyOfAQuestion = difficultyOfAQuestion;
@@ -23,7 +24,7 @@ public class Category {
         return questionId;
     }
 
-    public void setQuestionId(int questionId) {
+    public void setQuestionId(Integer questionId) {
         this.questionId = questionId;
     }
 

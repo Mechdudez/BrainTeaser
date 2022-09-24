@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class CategoryResponse {
 
     @JsonProperty("questionId")
-    private int questionId;
+    private Integer questionId;
 
     @JsonProperty ("questions")
     private String questions;
@@ -23,7 +23,7 @@ public class CategoryResponse {
         return questionId;
     }
 
-    public void setQuestionId(int questionId) {
+    public void setQuestionId(Integer questionId) {
         this.questionId = questionId;
     }
 
