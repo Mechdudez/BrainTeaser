@@ -32,7 +32,7 @@ public class CategoryController {
 
     // this will get the question by the Id
     @GetMapping("/{questionId}")
-    public ResponseEntity<CategoryResponse> getQuestionById(@PathVariable("questionId") String questionId) {
+    public ResponseEntity<CategoryResponse> getQuestionById(@PathVariable("questionId") int questionId) {
 
        // This will grab the question by the Id
         Category category = categoryService.getQuestionById(questionId);

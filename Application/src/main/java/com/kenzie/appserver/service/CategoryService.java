@@ -27,7 +27,7 @@ public class CategoryService {
     }
 
     //TODO write a service for the Lambda to call
-    public Category getQuestionById(String questionId) {
+    public Category getQuestionById(int questionId) {
         // getting data from the local repository
         Category getQuestion = categoryRepository.findById(questionId)
                 .map(category -> new Category(category.getQuestionId(), category.getQuestions(),category.getDifficultyOfAQuestion(), category.getAnswers()))

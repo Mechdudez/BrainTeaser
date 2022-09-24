@@ -37,8 +37,8 @@ public class UserService {
         this.checkAnswerServiceClient = checkAnswerServiceClient;
     }
 
-    public User getUserById(String userId) {
-        // getting data from the local repository
+    public User getUserById(UUID userId) {
+
         User user = userRepository.findById(userId)
                 .map(user1 -> new User(user1.getUsername(), user1.getUserId(), user1.getPoints()))
                 .orElse(null);
@@ -47,8 +47,10 @@ public class UserService {
             throw new UserNotFoundException("No user found by id!");
         }
 
+
         return user;
     }
+
 
     public User addNewUser(User user){
         if(user == null){

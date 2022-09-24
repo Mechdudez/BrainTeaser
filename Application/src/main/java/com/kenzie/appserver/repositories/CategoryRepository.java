@@ -5,5 +5,5 @@ import org.socialsignin.spring.data.dynamodb.repository.EnableScan;
 import org.springframework.data.repository.CrudRepository;
 
 @EnableScan
-public interface CategoryRepository extends CrudRepository<CategoryRecord, String> {
+public interface CategoryRepository extends CrudRepository<CategoryRecord, Integer> {
 }

@@ -34,10 +34,10 @@ public class UserUnitTests {
 
     @Test
     void getUserById(){
-        String userId = randomUUID().toString();
+        UUID userId = randomUUID();
 
         UserRecord userRecord = new UserRecord();
-        userRecord.setUserId(UUID.fromString(userId));
+        userRecord.setUserId(userId);
         userRecord.setUsername("randoJohn");
         userRecord.setPoints(5);
 
@@ -59,7 +59,7 @@ public class UserUnitTests {
     @Test
     void getUserById_invalid_customer() {
         // GIVEN
-        String userId = randomUUID().toString();
+        UUID userId = randomUUID();
 
         // WHEN
         when(userRepository.findById(userId)).thenReturn(Optional.empty());
