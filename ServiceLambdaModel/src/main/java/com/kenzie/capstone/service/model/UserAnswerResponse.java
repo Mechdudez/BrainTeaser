@@ -6,31 +6,20 @@ package com.kenzie.capstone.service.model;
 // not workig yest
 //import me.xdrop.fuzzywuzzy.FuzzySearch;
 
-public class UserAnswerResponse {
-    private String userId;
+public class QuestionCountsResponse {
+
     private String questionId;
+    private Integer countsPicked;
 
-    private String userAnswer;
-
-    private Boolean result;
-
-    public UserAnswerResponse(String userId, String questionId,
-                             String userAnswer, Boolean result){
-        this.userId = userId;
+    public QuestionCountsResponse(String questionId,
+                                Integer countsPicked
+    ) {
         this.questionId = questionId;
-        this.userAnswer = userAnswer;
-        this.result = result;
+        this.countsPicked = countsPicked;
     }
+
 
     public UserAnswerResponse(){}
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 
     public String getQuestionId() {
         return questionId;
@@ -40,36 +29,18 @@ public class UserAnswerResponse {
         this.questionId = questionId;
     }
 
-    public String getUserAnswer() {
-        return userAnswer;
+    public Integer getQuestionCounts() {
+        return countsPicked;
     }
 
-    public void setUserAnswer(String userAnswer) {
-        this.userAnswer = userAnswer;
+    public void setQuestionCounts(Integer countsPicked) {
+        this.countsPicked = countsPicked;
     }
-
-    public Boolean getResult() {
-        // change to this later
-//        int matchingScore = FuzzySearch.ratio("mysmilarstring",
-//                "mysimilarstring");
-//        if(matchingScore >= 90){
-//            return Boolean.TRUE;
-//        }
-//        return Boolean.FALSE;
-        return result;
-    }
-
-    public void setResult(Boolean result) {
-        this.result = result;
-    }
-
     @Override
     public String toString() {
-        return "UserAnswerRequest{" +
-                "userId='" + userId + '\'' +
+        return "UserAnswerResponse{" +
                 ", questionId='" + questionId + '\'' +
-                ", userAnswer='" + userAnswer + '\'' +
-                ", result='" + result + '\'' +
+                ", questionCounts='" + countsPicked + '\'' +
                 '}';
     }
 }

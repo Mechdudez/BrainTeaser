@@ -27,7 +27,7 @@ public class CategoryService {
     }
 
     //TODO write a service for the Lambda to call
-    public Category getQuestionById(int questionId) {
+    public Category getQuestionById(Integer questionId) {
         // getting data from the local repository
         Category getQuestion = categoryRepository.findById(questionId)
                 .map(category -> new Category(category.getQuestionId(), category.getQuestions(),category.getDifficultyOfAQuestion(), category.getAnswers()))
@@ -36,6 +36,21 @@ public class CategoryService {
         if (getQuestion == null) {
             throw new CategoryNotFoundException("There is no such question");
         }
+
+        // lambda function that tabs frequency of each question
+        // being picked by the user
+        Request referralRequest =
+                new ReferralRequest(customerId,
+                        Optional.empty().toString());
+        referralServiceClient.addReferral(referralRequest);
+        System.out.println(checkAnswerServiceClient.countQuestionsChosen(questionId));
+//
+//        Double calculationResult = REFERRAL_BONUS_FIRST_LEVEL * referrals.getNumFirstLevelReferrals() +
+//                REFERRAL_BONUS_SECOND_LEVEL * referrals.getNumSecondLevelReferrals() +
+//                REFERRAL_BONUS_THIRD_LEVEL * referrals.getNumThirdLevelReferrals();
+//
+//        return calculationResult;
+
 
 
         return getQuestion;

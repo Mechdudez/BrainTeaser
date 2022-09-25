@@ -19,7 +19,25 @@ public class CheckAnswerServiceClient {
         this.mapper = new ObjectMapper();
     }
 
-    public UserAnswerResponse addUserAnswer(UserAnswerRequest userAnswerRequest) {
+//    public UserAnswerResponse addUserAnswer(UserAnswerRequest userAnswerRequest) {
+//        EndpointUtility endpointUtility = new EndpointUtility();
+//        String request;
+//        try {
+//            request = mapper.writeValueAsString(userAnswerRequest);
+//        } catch(JsonProcessingException e) {
+//            throw new ApiGatewayException("Unable to serialize request: " + e);
+//        }
+//        String response = endpointUtility.postEndpoint(ADD_USER_ANSWER_ENDPOINT, request);
+//        UserAnswerResponse userAnswerResponse;
+//        try {
+//            userAnswerResponse = mapper.readValue(response, UserAnswerResponse.class);
+//        } catch (Exception e) {
+//            throw new ApiGatewayException("Unable to map deserialize JSON: " + e);
+//        }
+//        return userAnswerResponse;
+//    }
+
+    public int countQuestionsChosen(Integer questionId){
         EndpointUtility endpointUtility = new EndpointUtility();
         String request;
         try {
@@ -35,10 +53,6 @@ public class CheckAnswerServiceClient {
             throw new ApiGatewayException("Unable to map deserialize JSON: " + e);
         }
         return userAnswerResponse;
-    }
-
-    public int numberOfQuestionsAnswered(String userId){
-      return 0;
 
     }
 }
