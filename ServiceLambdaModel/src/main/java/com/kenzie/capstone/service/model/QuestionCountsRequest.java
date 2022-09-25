@@ -5,7 +5,7 @@ public class QuestionCountsRequest {
 
 
     public QuestionCountsRequest(String questionId){
-        this.questionId = questionId
+        this.questionId = questionId;
     }
 
     public QuestionCountsRequest(){}
