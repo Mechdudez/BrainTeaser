@@ -14,8 +14,6 @@ import com.kenzie.appserver.repositories.model.CategoryRecord;
 import com.kenzie.appserver.repositories.model.UserRecord;
 import com.kenzie.appserver.service.model.Category;
 import com.kenzie.appserver.service.model.User;
-import com.kenzie.capstone.service.client.CheckAnswerServiceClient;
-import com.kenzie.capstone.service.model.UserAnswerRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,13 +26,11 @@ import java.util.Map.Entry;
 @Service
 public class UserService {
     private UserRepository userRepository;
-    private CheckAnswerServiceClient checkAnswerServiceClient;
 
 
     @Autowired
-    public UserService(UserRepository userRepository, CheckAnswerServiceClient checkAnswerServiceClient) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.checkAnswerServiceClient = checkAnswerServiceClient;
     }
 
     public User getUserById(UUID userId) {

@@ -2,10 +2,10 @@ package com.kenzie.capstone.service.client;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kenzie.capstone.service.model.UserAnswerRequest;
-import com.kenzie.capstone.service.model.UserAnswerResponse;
+import com.kenzie.capstone.service.model.QuestionCountsRequest;
+import com.kenzie.capstone.service.model.QuestionCountsResponse;
 
-public class CheckAnswerServiceClient {
+public class CheckQuestionCountsServiceClient {
     private static final String ADD_USER_ANSWER_ENDPOINT =
             "useranswer/add";
     private static final String GET_USER_ANSWER_SUMMARY_ENDPOINT =
@@ -15,7 +15,7 @@ public class CheckAnswerServiceClient {
 
     private ObjectMapper mapper;
 
-    public CheckAnswerServiceClient() {
+    public CheckQuestionCountsServiceClient() {
         this.mapper = new ObjectMapper();
     }
 
@@ -37,22 +37,22 @@ public class CheckAnswerServiceClient {
 //        return userAnswerResponse;
 //    }
 
-    public int countQuestionsChosen(Integer questionId){
+    public QuestionCountsResponse countQuestionsChosen(QuestionCountsRequest questionIdRequest){
         EndpointUtility endpointUtility = new EndpointUtility();
         String request;
         try {
-            request = mapper.writeValueAsString(userAnswerRequest);
+            request = mapper.writeValueAsString(questionIdRequest);
         } catch(JsonProcessingException e) {
             throw new ApiGatewayException("Unable to serialize request: " + e);
         }
         String response = endpointUtility.postEndpoint(ADD_USER_ANSWER_ENDPOINT, request);
-        UserAnswerResponse userAnswerResponse;
+        QuestionCountsResponse questionCountsResponse;
         try {
-            userAnswerResponse = mapper.readValue(response, UserAnswerResponse.class);
+            questionCountsResponse = mapper.readValue(response,QuestionCountsResponse.class);
         } catch (Exception e) {
             throw new ApiGatewayException("Unable to map deserialize JSON: " + e);
         }
-        return userAnswerResponse;
+        return questionCountsResponse;
 
     }
 }

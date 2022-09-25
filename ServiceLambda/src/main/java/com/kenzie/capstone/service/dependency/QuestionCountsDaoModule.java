@@ -1,8 +1,7 @@
 package com.kenzie.capstone.service.dependency;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.kenzie.capstone.service.dao.ExampleDao;
-import com.kenzie.capstone.service.dao.UserAnswerDao;
+import com.kenzie.capstone.service.dao.QuestionCountsDao;
 import com.kenzie.capstone.service.util.DynamoDbClientProvider;
 import dagger.Module;
 import dagger.Provides;
@@ -12,7 +11,7 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 @Module
-public class UserAnswerDaoModule {
+public class QuestionCountsDaoModule {
     @Singleton
     @Provides
     @Named("DynamoDBMapper")
@@ -22,10 +21,10 @@ public class UserAnswerDaoModule {
 
     @Singleton
     @Provides
-    @Named("UserAnswerDao")
+    @Named("QuestionCountsDao")
     @Inject
-    public UserAnswerDao provideUserAnswerDao(@Named(
+    public QuestionCountsDao provideQuestionCountsDao(@Named(
             "DynamoDBMapper") DynamoDBMapper mapper) {
-        return new UserAnswerDao(mapper);
+        return new QuestionCountsDao(mapper);
     }
 }

@@ -4,7 +4,7 @@ import com.kenzie.appserver.repositories.ExampleRepository;
 import com.kenzie.appserver.repositories.UserRepository;
 import com.kenzie.appserver.repositories.model.UserRecord;
 import com.kenzie.appserver.service.model.User;
-import com.kenzie.capstone.service.client.CheckAnswerServiceClient;
+import com.kenzie.capstone.service.client.CheckQuestionCountsServiceClient;
 import com.kenzie.capstone.service.client.LambdaServiceClient;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,15 +21,15 @@ import static org.mockito.Mockito.when;
 public class UserUnitTests {
     private UserRepository userRepository;
     private UserService userService;
-    private CheckAnswerServiceClient checkAnswerServiceClient;
+    private CheckQuestionCountsServiceClient checkQuestionCountsServiceClient;
 
     @BeforeEach
     void setup() {
         userRepository = mock(UserRepository.class);
-        checkAnswerServiceClient =
-                mock(CheckAnswerServiceClient.class);
-        userService = new UserService(userRepository,
-                checkAnswerServiceClient);
+        checkQuestionCountsServiceClient =
+                mock(CheckQuestionCountsServiceClient.class);
+        userService = new UserService(userRepository
+             );
     }
 
     @Test

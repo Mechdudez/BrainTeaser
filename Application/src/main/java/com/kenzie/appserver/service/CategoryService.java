@@ -2,11 +2,11 @@ package com.kenzie.appserver.service;
 
 
 import com.kenzie.appserver.repositories.CategoryRepository;
-import com.kenzie.capstone.service.client.CheckAnswerServiceClient;
+import com.kenzie.capstone.service.client.CheckQuestionCountsServiceClient;
 import com.kenzie.appserver.repositories.model.CategoryRecord;
 import com.kenzie.appserver.service.model.Category;
 import com.kenzie.capstone.service.model.QuestionCountsRequest;
-import com.kenzie.capstone.service.model.UserAnswerRequest;
+import com.kenzie.capstone.service.model.QuestionCountsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +17,13 @@ import static java.util.UUID.randomUUID;
 @Service
 public class CategoryService {
     private CategoryRepository categoryRepository;
-    private CheckAnswerServiceClient checkAnswerServiceClient;
+    private CheckQuestionCountsServiceClient questionCountsServiceClient;
 
 
     @Autowired
-    public CategoryService(CategoryRepository categoryRepository, CheckAnswerServiceClient checkAnswerServiceClient) {
+    public CategoryService(CategoryRepository categoryRepository, CheckQuestionCountsServiceClient questionCountsServiceClient) {
         this.categoryRepository = categoryRepository;
-        this.checkAnswerServiceClient = checkAnswerServiceClient;
+        this.questionCountsServiceClient = questionCountsServiceClient;
 
     }
 
@@ -40,11 +40,11 @@ public class CategoryService {
 
         // lambda function that tabs frequency of each question
         // being picked by the user
-        QuestionCountsRequest referralRequest =
+        QuestionCountsRequest chooseQuestionRequest =
                 new QuestionCountsRequest(questionId);
 
-        referralServiceClient.addReferral(referralRequest);
-        System.out.println(checkAnswerServiceClient.countQuestionsChosen(questionId));
+        questionCountsServiceClient.countQuestionsChosen(chooseQuestionRequest);
+        System.out.println(chooseQuestionRequest.getQuestionId());
 //
 //        Double calculationResult = REFERRAL_BONUS_FIRST_LEVEL * referrals.getNumFirstLevelReferrals() +
 //                REFERRAL_BONUS_SECOND_LEVEL * referrals.getNumSecondLevelReferrals() +

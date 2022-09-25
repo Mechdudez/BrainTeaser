@@ -6,18 +6,18 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.kenzie.capstone.service.CheckUserAnswerService;
-import com.kenzie.capstone.service.dependency.DaggerServiceComponent;
+import com.kenzie.capstone.service.CheckQuestionCountsService;
 import com.kenzie.capstone.service.dependency.ServiceComponent;
-import com.kenzie.capstone.service.model.UserAnswerRequest;
-import com.kenzie.capstone.service.model.UserAnswerResponse;
+import com.kenzie.capstone.service.dependency.DaggerServiceComponent;
+import com.kenzie.capstone.service.model.QuestionCountsRequest;
+import com.kenzie.capstone.service.model.QuestionCountsResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddUserAnswer implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
+public class AddQuestionCounts implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
     static final Logger log = LogManager.getLogger();
 
@@ -28,10 +28,10 @@ public class AddUserAnswer implements RequestHandler<APIGatewayProxyRequestEvent
 
         log.info(gson.toJson(input));
 
-        ServiceComponent userAnswerServiceComponent =
+        ServiceComponent checkQuestionCountsServiceComponent =
                 DaggerServiceComponent.create();
-        CheckUserAnswerService checkUserAnswerService =
-                userAnswerServiceComponent.provideUserAnswerLambdaService();
+        CheckQuestionCountsService checkQuestionCountsService =
+                checkQuestionCountsServiceComponent.provideQuestionCountsLambdaService();
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
 
@@ -47,13 +47,13 @@ public class AddUserAnswer implements RequestHandler<APIGatewayProxyRequestEvent
         }
 
         try {
-            UserAnswerRequest userAnswerRequest =
+            QuestionCountsRequest questionCountsRequest =
                     jsonStringToUserAnswerConverter(input.getBody());
-            UserAnswerResponse userAnswerResponse =
-                    checkUserAnswerService.addUserAnswer(userAnswerRequest);
+            QuestionCountsResponse questionCountsResponse =
+                    checkQuestionCountsService.addQuestion(questionCountsRequest);
             return response
                     .withStatusCode(200)
-                    .withBody(gson.toJson(userAnswerResponse));
+                    .withBody(gson.toJson(questionCountsResponse));
         } catch (RuntimeException e) {
             return response
                     .withStatusCode(400)
@@ -61,13 +61,13 @@ public class AddUserAnswer implements RequestHandler<APIGatewayProxyRequestEvent
         }
     }
 
-    public UserAnswerRequest jsonStringToUserAnswerConverter(String body) {
+    public QuestionCountsRequest jsonStringToUserAnswerConverter(String body) {
         try {
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
-            UserAnswerRequest userAnswerRequest =
-                    gson.fromJson(body, UserAnswerRequest.class);
-            return userAnswerRequest;
+            QuestionCountsRequest questionCountsRequest =
+                    gson.fromJson(body, QuestionCountsRequest.class);
+            return questionCountsRequest;
         } catch (Exception e) {
             throw new RuntimeException("UserAnswer could not be" +
                     " deserialized");
