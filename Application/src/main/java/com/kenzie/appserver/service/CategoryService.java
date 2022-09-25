@@ -5,6 +5,7 @@ import com.kenzie.appserver.repositories.CategoryRepository;
 import com.kenzie.capstone.service.client.CheckAnswerServiceClient;
 import com.kenzie.appserver.repositories.model.CategoryRecord;
 import com.kenzie.appserver.service.model.Category;
+import com.kenzie.capstone.service.model.QuestionCountsRequest;
 import com.kenzie.capstone.service.model.UserAnswerRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,9 +40,9 @@ public class CategoryService {
 
         // lambda function that tabs frequency of each question
         // being picked by the user
-        Request referralRequest =
-                new ReferralRequest(customerId,
-                        Optional.empty().toString());
+        QuestionCountsRequest referralRequest =
+                new QuestionCountsRequest(questionId);
+
         referralServiceClient.addReferral(referralRequest);
         System.out.println(checkAnswerServiceClient.countQuestionsChosen(questionId));
 //

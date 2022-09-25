@@ -1,20 +1,20 @@
 package com.kenzie.capstone.service.model;
 
 public class QuestionCountsRequest {
-    private String questionId;
+    private Integer questionId;
 
 
-    public QuestionCountsRequest(String questionId){
+    public QuestionCountsRequest(Integer questionId){
         this.questionId = questionId;
     }
 
     public QuestionCountsRequest(){}
 
-    public String getQuestionId() {
+    public Integer getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(String questionId) {
+    public void setQuestionId(Integer questionId) {
         this.questionId = questionId;
     }
 
