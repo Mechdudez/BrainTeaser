@@ -38,17 +38,18 @@ public class AddQuestionCounts implements RequestHandler<APIGatewayProxyRequestE
         APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent()
                 .withHeaders(headers);
 
-        String userId = input.getPathParameters().get("UserId");
+        String userId = input.getPathParameters().get("QuestionId");
 
         if(userId == null || userId.isEmpty()){
-            return response.withStatusCode(400).withBody("No UserId" +
+            return response.withStatusCode(400).withBody("No " +
+                    "QuestionId" +
                     " found!");
 
         }
 
         try {
             QuestionCountsRequest questionCountsRequest =
-                    jsonStringToUserAnswerConverter(input.getBody());
+                    jsonStringToQuestionCountsConverter(input.getBody());
             QuestionCountsResponse questionCountsResponse =
                     checkQuestionCountsService.addQuestion(questionCountsRequest);
             return response
@@ -61,7 +62,7 @@ public class AddQuestionCounts implements RequestHandler<APIGatewayProxyRequestE
         }
     }
 
-    public QuestionCountsRequest jsonStringToUserAnswerConverter(String body) {
+    public QuestionCountsRequest jsonStringToQuestionCountsConverter(String body) {
         try {
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();

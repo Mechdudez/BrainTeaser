@@ -58,7 +58,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ServiceLambda/build/distributions/ServiceLambda.zip
-      Handler: com.kenzie.capstone.service.lambda.AddUserAnswer
+      Handler: com.kenzie.capstone.service.lambda.AddQuestionCounts
       Runtime: java11
       Description: Add User Answer to UserAnswer table
       MemorySize: 512
