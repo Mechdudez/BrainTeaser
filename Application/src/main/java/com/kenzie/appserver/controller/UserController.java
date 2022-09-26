@@ -65,6 +65,22 @@ public class UserController {
         return ResponseEntity.ok(userResponse);
     }
 
+    @GetMapping("/points")
+    public ResponseEntity<UserResponse> getTopUsers(){
+        List<User> topScores = userService.getTopScores();
+       UserResponse userResponse = new UserResponse();
+        if(topScores == null){
+            return ResponseEntity.noContent().build();
+        }
+        for(User user : topScores){
+             userResponse = createUserResponse(user);
+        }
+
+
+        return ResponseEntity.ok(userResponse);
+
+    }
+
     @PostMapping
     public ResponseEntity<UserResponse> addNewUser(@RequestBody UserCreateRequest userCreateRequest) {
 

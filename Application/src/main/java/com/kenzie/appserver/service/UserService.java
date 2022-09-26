@@ -22,6 +22,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -39,7 +40,7 @@ public class UserService {
                 .map(user1 -> new User(user1.getUsername(), user1.getUserId(), user1.getPoints()))
                 .orElse(null);
 
-        if(user == null){
+        if (user == null) {
             throw new UserNotFoundException("No user found by id!");
         }
 
@@ -48,8 +49,8 @@ public class UserService {
     }
 
 
-    public User addNewUser(User user){
-        if(user == null){
+    public User addNewUser(User user) {
+        if (user == null) {
             throw new UserNotFoundException("Sorry this user was not found");
         }
         UserRecord userRecord = new UserRecord();
@@ -77,7 +78,18 @@ public class UserService {
         return userList; // return that list.
     }
 
-    public UserRecord getUserWithTopScore(){
+
+    public List<User> getTopScores() {
+        List<User> users = getAllUsers();
+
+        users.sort(Comparator.comparing(User::getPoints).reversed());
+
+        return users.stream().limit(5).collect(Collectors.toList());
+
+    }
+
+
+    public UserRecord getUserWithTopScore() {
         // Need to think hard on this
         DynamoDBMapperConfig mapperConfig = new DynamoDBMapperConfig.Builder()
                 .withTableNameOverride(DynamoDBMapperConfig.TableNameOverride.withTableNameReplacement("user"))
@@ -92,21 +104,21 @@ public class UserService {
         TreeMap<Integer, String> sortedPoints =
                 new TreeMap<>(Collections.reverseOrder());
 
-        for(User user:scanResult){
+        for (User user : scanResult) {
             sortedPoints.put(user.getPoints(), user.getUserName());
         }
 
         Set<Entry<Integer, String>> mappings =
                 sortedPoints.entrySet();
         List<UserRecord> sortedRecordByPoints = new ArrayList<>();
-        for(Entry<Integer, String> mapping : mappings) {
+        for (Entry<Integer, String> mapping : mappings) {
             UserRecord topPointsUserRecord = new UserRecord();
             topPointsUserRecord.setPoints(mapping.getKey());
             topPointsUserRecord.setUsername(mapping.getValue());
             sortedRecordByPoints.add(topPointsUserRecord);
         }
 
-      return sortedRecordByPoints.get(0);
+        return sortedRecordByPoints.get(0);
     }
 
 
