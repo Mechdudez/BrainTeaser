@@ -6,12 +6,8 @@ import com.kenzie.capstone.service.model.QuestionCountsRequest;
 import com.kenzie.capstone.service.model.QuestionCountsResponse;
 
 public class CheckQuestionCountsServiceClient {
-    private static final String ADD_USER_ANSWER_ENDPOINT =
-            "useranswer/add";
-    private static final String GET_USER_ANSWER_SUMMARY_ENDPOINT =
-            "useranswer/summary/{userId}";
-    private static final String GET_USER_ANSWER_RESULT_ENDPOINT =
-            "useranswer/result/{userId}";
+    private static final String ADD_QUESTION_COUNTS_ENDPOINT =
+            "questioncounts/";
 
     private ObjectMapper mapper;
 
@@ -45,7 +41,7 @@ public class CheckQuestionCountsServiceClient {
         } catch(JsonProcessingException e) {
             throw new ApiGatewayException("Unable to serialize request: " + e);
         }
-        String response = endpointUtility.postEndpoint(ADD_USER_ANSWER_ENDPOINT, request);
+        String response = endpointUtility.postEndpoint(ADD_QUESTION_COUNTS_ENDPOINT, request);
         QuestionCountsResponse questionCountsResponse;
         try {
             questionCountsResponse = mapper.readValue(response,QuestionCountsResponse.class);
