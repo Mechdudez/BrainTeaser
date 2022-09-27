@@ -20,7 +20,7 @@ import java.util.List;
 import static java.util.UUID.randomUUID;
 
 @RestController
-@RequestMapping("/Category")
+@RequestMapping("/category")
 public class CategoryController {
 
     private CategoryService categoryService;
@@ -32,7 +32,7 @@ public class CategoryController {
 
     // this will get the question by the Id
     @GetMapping("/{questionId}")
-    public ResponseEntity<CategoryResponse> getQuestionById(@PathVariable("questionId") int questionId) {
+    public ResponseEntity<CategoryResponse> getQuestionById(@PathVariable("questionId") Integer questionId) {
 
        // This will grab the question by the Id
         Category category = categoryService.getQuestionById(questionId);

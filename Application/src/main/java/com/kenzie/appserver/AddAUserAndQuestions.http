@@ -1,0 +1,359 @@
+### Question 1
+### Send POST request with json body
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "questionId":"1",
+  "questions":"Who is the voice of Woody in Toy Story?",
+  "answers": "Tom Hanks",
+  "difficultyOfAQuestion": "easy"
+}
+
+> {%
+ client.global.set("question1Id", JSON.stringify(response.body.questionId));
+ %}
+
+### Question 2
+### Send POST request with json body
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "questionId":"2",
+  "questions":"When did World War I begin?",
+  "answers": "1914",
+  "difficultyOfAQuestion": "easy"
+}
+
+> {%
+ client.global.set("question2Id", JSON.stringify(response.body.questionId));
+ %}
+### Question 3
+### Send POST request with json body
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "questionId":"3",
+  "questions":"What is Han Solo's ship called in Star Wars?",
+  "answers": "Millennium Falcon.",
+  "difficultyOfAQuestion": "easy"
+}
+
+> {%
+ client.global.set("question3Id", JSON.stringify(response.body.questionId));
+ %}
+
+### Question 4
+### Send POST request with json body
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "questionId":"4",
+  "questions":"What country hosted the first Olympics?",
+  "answers": "Athens, Greece",
+  "difficultyOfAQuestion": "easy"
+}
+
+> {%
+ client.global.set("question4Id", JSON.stringify(response.body.questionId));
+ %}
+
+### Question 5
+### Send POST request with json body
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "questionId":"5",
+  "questions":"What is the only fruit to bear seeds on the outside?",
+  "answers": "A strawberry.",
+  "difficultyOfAQuestion": "easy"
+}
+
+> {%
+ client.global.set("question5Id", JSON.stringify(response.body.questionId));
+ %}
+
+### Question 6
+### Send POST request with json body
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "questionId":"6",
+  "questions":"What color were carrots originally?",
+  "answers": "Purple.",
+  "difficultyOfAQuestion": "easy"
+}
+
+> {%
+ client.global.set("question6Id", JSON.stringify(response.body.questionId));
+ %}
+
+### Question 7
+### Send POST request with json body
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "questionId":"7",
+  "questions":"What sport did Abe Lincoln play before he was president?",
+  "answers": "Wrestling.",
+  "difficultyOfAQuestion": "easy"
+}
+
+> {%
+ client.global.set("question7Id", JSON.stringify(response.body.questionId));
+ %}
+
+### Question 8
+### Send POST request with json body
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "questionId":"8",
+  "questions":"What electric weather event can be five times hotter than the sun?",
+  "answers": "Lightning.",
+  "difficultyOfAQuestion": "easy"
+}
+
+> {%
+ client.global.set("question8Id", JSON.stringify(response.body.questionId));
+ %}
+
+### Question 9
+### Send POST request with json body
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "questionId":"9",
+  "questions":"What was the name of the first hominid chimp in space?",
+  "answers": "Ham.",
+  "difficultyOfAQuestion": "easy"
+}
+
+> {%
+ client.global.set("question9Id", JSON.stringify(response.body.questionId));
+ %}
+
+### Question 10
+### Send POST request with json body
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "questionId":"10",
+  "questions":"What two planets in our solar system have no moons?",
+  "answers": "Mercury and Venus.",
+  "difficultyOfAQuestion": "easy"
+}
+
+> {%
+ client.global.set("question10Id", JSON.stringify(response.body.questionId));
+ %}
+
+### Question 11
+### Send POST request with json body
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "questionId":"11",
+  "questions":"What is the Old English meaning of the word Earth?",
+  "answers": "Ground.",
+  "difficultyOfAQuestion": "Hard"
+}
+
+> {%
+ client.global.set("question11Id", JSON.stringify(response.body.questionId));
+ %}
+
+### Question 12
+### Send POST request with json body
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "questionId":"12",
+  "questions":"What team lost the most amount of players to WWII in the 1943 season?",
+  "answers": "Pittsburg Steelers.",
+  "difficultyOfAQuestion": "Hard"
+}
+
+> {%
+ client.global.set("question12Id", JSON.stringify(response.body.questionId));
+ %}
+
+
+### User 1
+### Send POST request with json body
+POST http://localhost:8080/user
+Content-Type: application/json
+
+{
+  "userId":"12345667",
+  "userName": "Ryan",
+  "points": "7"
+
+
+}
+> {%
+ client.global.set("user1Id", JSON.stringify(response.body.userId));
+ %}
+
+### User 2
+### Send POST request with json body
+POST http://localhost:8080/user
+Content-Type: application/json
+
+{
+  "userId":"4567567",
+  "userName": "Dan",
+  "points": "13"
+
+
+}
+> {%
+ client.global.set("user2Id", JSON.stringify(response.body.userId));
+ %}
+
+### User 3
+### Send POST request with json body
+POST http://localhost:8080/user
+Content-Type: application/json
+
+{
+  "userId":"67895678567",
+  "userName": "Renee",
+  "points": "21"
+
+
+}
+> {%
+ client.global.set("user3Id", JSON.stringify(response.body.userId));
+ %}
+
+### User 4
+### Send POST request with json body
+POST http://localhost:8080/user
+Content-Type: application/json
+
+{
+  "userId":"1242353456346",
+  "userName": "Batman",
+  "points": "35"
+
+
+}
+> {%
+ client.global.set("user4Id", JSON.stringify(response.body.userId));
+ %}
+
+
+### User 5
+### Send POST request with json body
+POST http://localhost:8080/user
+Content-Type: application/json
+
+{
+  "userId":"435645645754678568",
+  "userName": "Joker",
+  "points": "2"
+
+
+}
+> {%
+ client.global.set("user5Id", JSON.stringify(response.body.userId));
+ %}
+
+### User 6
+### Send POST request with json body
+POST http://localhost:8080/user
+Content-Type: application/json
+
+{
+  "userId":"436765867979",
+  "userName": "Bob the Tomato",
+  "points": "42"
+
+
+}
+> {%
+ client.global.set("user6Id", JSON.stringify(response.body.userId));
+ %}
+
+
+
+### User 7
+### Send POST request with json body
+POST http://localhost:8080/user
+Content-Type: application/json
+
+{
+  "userId":"12425346457457",
+  "userName": "Croc",
+  "points": "15"
+
+
+}
+> {%
+ client.global.set("user7Id", JSON.stringify(response.body.userId));
+ %}
+
+
+
+
+### User 8
+### Send POST request with json body
+POST http://localhost:8080/user
+Content-Type: application/json
+
+{
+  "userId":"14345465675678",
+  "userName": "Cameron",
+  "points": "0"
+
+
+}
+> {%
+ client.global.set("user8Id", JSON.stringify(response.body.userId));
+ %}
+
+
+
+### User 9
+### Send POST request with json body
+POST http://localhost:8080/user
+Content-Type: application/json
+
+{
+  "userId":"143245456758",
+  "userName": "Jessica",
+  "points": "70"
+
+
+}
+> {%
+ client.global.set("user9Id", JSON.stringify(response.body.userId));
+ %}
+
+### User 10
+### Send POST request with json body
+POST http://localhost:8080/user
+Content-Type: application/json
+
+{
+  "userId":"12343224534565647568",
+  "userName": "Behr",
+  "points": "80"
+
+
+}
+> {%
+ client.global.set("user10Id", JSON.stringify(response.body.userId));
+ %}

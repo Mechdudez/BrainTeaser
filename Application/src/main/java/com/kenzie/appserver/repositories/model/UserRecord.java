@@ -17,8 +17,6 @@ public class UserRecord {
 
     int points;
 
-
-
     @DynamoDBHashKey(attributeName = "userId")
     @DynamoDBTypeConverted(converter = UUIDConverter.class)
     public UUID getUserId() {

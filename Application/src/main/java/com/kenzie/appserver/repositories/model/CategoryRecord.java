@@ -17,8 +17,6 @@ public class CategoryRecord {
 
     String answers;
 
-
-
     @DynamoDBHashKey(attributeName = "questionId")
     public Integer getQuestionId() {
         return questionId;
