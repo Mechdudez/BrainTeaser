@@ -36,7 +36,7 @@ module.exports = {
 
                 ],
 
-                target: 'http://localhost:5001'
+                target: 'http://localhost:8080'
 
             }
 
