@@ -7,7 +7,7 @@ import com.kenzie.capstone.service.model.QuestionCountsResponse;
 
 public class CheckQuestionCountsServiceClient {
     private static final String ADD_QUESTION_COUNTS_ENDPOINT =
-            "questioncounts/add";
+            "questioncounts/";
 
     private ObjectMapper mapper;
 

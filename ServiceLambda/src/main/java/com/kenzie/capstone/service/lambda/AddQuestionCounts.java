@@ -38,9 +38,11 @@ public class AddQuestionCounts implements RequestHandler<APIGatewayProxyRequestE
         APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent()
                 .withHeaders(headers);
 
-        String userId = input.getPathParameters().get("QuestionId");
 
-        if(userId == null || userId.isEmpty()){
+        String question = input.getBody();
+
+        System.out.println("debugging " + input);
+        if(question == null || question.isEmpty()){
             return response.withStatusCode(400).withBody("No " +
                     "QuestionId" +
                     " found!");

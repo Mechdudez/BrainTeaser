@@ -54,13 +54,13 @@ Resources:
           Properties:
             Path: /example/
             Method: post
-  AddUserAnswerFunction:
+  AddQuestionCountsFunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ServiceLambda/build/distributions/ServiceLambda.zip
       Handler: com.kenzie.capstone.service.lambda.AddQuestionCounts
       Runtime: java11
-      Description: Add User Answer to UserAnswer table
+      Description: Add Question Counts to questionCountsLambda table
       MemorySize: 512
       Timeout: 240
       # Function's execution role
@@ -76,6 +76,6 @@ Resources:
         UpdateResource:
           Type: Api
           Properties:
-            Path: useranswer/add
+            Path: /questioncounts/
             Method: post
 
