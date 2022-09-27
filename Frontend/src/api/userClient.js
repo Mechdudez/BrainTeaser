@@ -5,7 +5,7 @@ export default class UserClient extends BaseClass {
 
     constructor(props = {}){
         super();
-        const methodsToBind = ['clientLoaded', 'getUserById', 'getByQuestionId'];
+        const methodsToBind = ['clientLoaded', 'getUserById', 'getQuestionById'];
         this.bindClassMethods(methodsToBind, this);
         this.props = props;
         this.clientLoaded(axios);
@@ -22,13 +22,13 @@ export default class UserClient extends BaseClass {
         }
     }
 
-    async getByQuestionId(questionId, errorCallback){
+    async getQuestionById(questionId, errorCallback){
         try{
             const  response = await this.client.get(`/category/${questionId}`);
             return response.data; // this should return user
 
         }catch (error){
-            this.handleError("getByQuestionId", error, errorCallback)
+            this.handleError("getQuestionById", error, errorCallback)
         }
     }
 
