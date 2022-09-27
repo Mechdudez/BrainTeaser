@@ -71,7 +71,7 @@ class BrainTeaser extends BaseClass {
        let id = document.getElementById("question-field").value;
        this.dataStore.set("question", null);
 
-       let result = await this.client.getByQuestionId(id, this.errorHandler);
+       let result = await this.client.getQuestionById(id, this.errorHandler);
        this.dataStore.set("question", result);
        if (result) {
            this.showMessage(`Got ${result.id}!`)
