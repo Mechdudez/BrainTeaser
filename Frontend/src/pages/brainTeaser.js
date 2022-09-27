@@ -10,7 +10,7 @@ class BrainTeaser extends BaseClass {
     constructor() {
         super();
         this.bindClassMethods(['onGetUser', 'onGetQuestion',
-        'renderExample'], this);
+        'renderQuestions'], this);
         // this.onGetUser = this.onGetUser.bind(this);
         // this.renderExample = this.renderExample.bind(this);
         // this.
@@ -26,45 +26,73 @@ class BrainTeaser extends BaseClass {
 
         this.client = new UserClient();
 
-        this.dataStore.addChangeListener(this.renderExample)
+        this.dataStore.addChangeListener(this.renderQuestions)
     }
 
     // Render Methods --------------------------------------------------------------------------------------------------
 
-    async renderExample() {
+    async renderQuestions(question) {
         let resultArea = document.getElementById("result-info");
 
-        const user = this.dataStore.get("user");
+        let storeHtmlQuestions = "";
 
-        if (user) {
-            resultArea.innerHTML = `
-                <div>ID: ${user.userId}</div>
-                <div>Name: ${user.points}</div>
-            `
+        if (question != null) {
+            storeHtmlQuestions += `<ul>`;
+            storeHtmlQuestions += `<p><h3 class="listName" style="color:red;">${question.questionId}</h3></p>`;
+            storeHtmlQuestions += `<p><b>Category: </b>${question.questions}</p>`;
+            resultArea.innerHTML = storeHtmlQuestions;
         } else {
             resultArea.innerHTML = "No Item";
         }
+
     }
+
+    // async renderExample() {
+    //     let resultArea = document.getElementById("result-info");
+    //
+    //     const user = this.dataStore.get("user");
+    //
+    //     if (user) {
+    //         resultArea.innerHTML = `
+    //             <div>ID: ${user.userId}</div>
+    //             <div>Name: ${user.points}</div>
+    //         `
+    //     } else {
+    //         resultArea.innerHTML = "No Item";
+    //     }
+    // }
 
     // Event Handlers --------------------------------------------------------------------------------------------------
 
 
-   async onGetQuestion(event){
-        event.preventDefault();
+   async onGetQuestion(event) {
+       event.preventDefault();
+
+       let id = document.getElementById("question-field").value;
        this.dataStore.set("question", null);
 
-       let questionId = document.getElementById("question-field").value;
-        let result = await this.client.getOneQuestion(questionId, this.errorHandler);
-
-
-        this.dataStore.set("question", result);
-
+       let result = await this.client.getByQuestionId(id, this.errorHandler);
+       this.dataStore.set("question", result);
        if (result) {
-           this.showMessage(`Your new question is ${result}!`)
+           this.showMessage(`Got ${result.id}!`)
        } else {
-           this.errorHandler("Error fetching your question!  Try" +
-               " again...");
+           this.errorHandler("Error doing GET!  Try again...");
        }
+
+
+       // this.dataStore.set("question", null);
+       //
+       // let questionId = document.getElementById("question-field").value;
+       //  let result = await this.client.getByQuestionId(questionId, this.errorHandler);
+       //
+       //
+       //  this.dataStore.set("question", result);
+       //
+       // if (result) {
+       //     this.showMessage(`Your new question is ${result}!`)
+       // } else {
+       //     this.errorHandler("Error fetching your question!  Try" +
+       //         " again...");
     }
 
 
