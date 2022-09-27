@@ -1,6 +1,6 @@
 ### Question 1
 ### Send POST request with json body
-POST http://localhost:8080/category
+POST http://localhost:5001/category
 Content-Type: application/json
 
 {
@@ -16,7 +16,7 @@ Content-Type: application/json
 
 ### Question 2
 ### Send POST request with json body
-POST http://localhost:8080/category
+POST http://localhost:5001/category
 Content-Type: application/json
 
 {
@@ -31,7 +31,7 @@ Content-Type: application/json
  %}
 ### Question 3
 ### Send POST request with json body
-POST http://localhost:8080/category
+POST http://localhost:5001/category
 Content-Type: application/json
 
 {
@@ -47,7 +47,7 @@ Content-Type: application/json
 
 ### Question 4
 ### Send POST request with json body
-POST http://localhost:8080/category
+POST http://localhost:5001/category
 Content-Type: application/json
 
 {
@@ -63,7 +63,7 @@ Content-Type: application/json
 
 ### Question 5
 ### Send POST request with json body
-POST http://localhost:8080/category
+POST http://localhost:5001/category
 Content-Type: application/json
 
 {
@@ -79,7 +79,7 @@ Content-Type: application/json
 
 ### Question 6
 ### Send POST request with json body
-POST http://localhost:8080/category
+POST http://localhost:5001/category
 Content-Type: application/json
 
 {
@@ -95,7 +95,7 @@ Content-Type: application/json
 
 ### Question 7
 ### Send POST request with json body
-POST http://localhost:8080/category
+POST http://localhost:5001/category
 Content-Type: application/json
 
 {
@@ -111,7 +111,7 @@ Content-Type: application/json
 
 ### Question 8
 ### Send POST request with json body
-POST http://localhost:8080/category
+POST http://localhost:5001/category
 Content-Type: application/json
 
 {
@@ -127,7 +127,7 @@ Content-Type: application/json
 
 ### Question 9
 ### Send POST request with json body
-POST http://localhost:8080/category
+POST http://localhost:5001/category
 Content-Type: application/json
 
 {
@@ -143,7 +143,7 @@ Content-Type: application/json
 
 ### Question 10
 ### Send POST request with json body
-POST http://localhost:8080/category
+POST http://localhost:5001/category
 Content-Type: application/json
 
 {
@@ -159,7 +159,7 @@ Content-Type: application/json
 
 ### Question 11
 ### Send POST request with json body
-POST http://localhost:8080/category
+POST http://localhost:5001/category
 Content-Type: application/json
 
 {
@@ -175,7 +175,7 @@ Content-Type: application/json
 
 ### Question 12
 ### Send POST request with json body
-POST http://localhost:8080/category
+POST http://localhost:5001/category
 Content-Type: application/json
 
 {
@@ -192,7 +192,7 @@ Content-Type: application/json
 
 ### User 1
 ### Send POST request with json body
-POST http://localhost:8080/user
+POST http://localhost:5001/user
 Content-Type: application/json
 
 {
@@ -208,7 +208,7 @@ Content-Type: application/json
 
 ### User 2
 ### Send POST request with json body
-POST http://localhost:8080/user
+POST http://localhost:5001/user
 Content-Type: application/json
 
 {
@@ -224,7 +224,7 @@ Content-Type: application/json
 
 ### User 3
 ### Send POST request with json body
-POST http://localhost:8080/user
+POST http://localhost:5001/user
 Content-Type: application/json
 
 {
@@ -240,7 +240,7 @@ Content-Type: application/json
 
 ### User 4
 ### Send POST request with json body
-POST http://localhost:8080/user
+POST http://localhost:5001/user
 Content-Type: application/json
 
 {
@@ -257,7 +257,7 @@ Content-Type: application/json
 
 ### User 5
 ### Send POST request with json body
-POST http://localhost:8080/user
+POST http://localhost:5001/user
 Content-Type: application/json
 
 {
@@ -273,7 +273,7 @@ Content-Type: application/json
 
 ### User 6
 ### Send POST request with json body
-POST http://localhost:8080/user
+POST http://localhost:5001/user
 Content-Type: application/json
 
 {
@@ -291,7 +291,7 @@ Content-Type: application/json
 
 ### User 7
 ### Send POST request with json body
-POST http://localhost:8080/user
+POST http://localhost:5001/user
 Content-Type: application/json
 
 {
@@ -305,12 +305,9 @@ Content-Type: application/json
  client.global.set("user7Id", JSON.stringify(response.body.userId));
  %}
 
-
-
-
 ### User 8
 ### Send POST request with json body
-POST http://localhost:8080/user
+POST http://localhost:5001/user
 Content-Type: application/json
 
 {
@@ -328,7 +325,7 @@ Content-Type: application/json
 
 ### User 9
 ### Send POST request with json body
-POST http://localhost:8080/user
+POST http://localhost:5001/user
 Content-Type: application/json
 
 {
@@ -344,7 +341,7 @@ Content-Type: application/json
 
 ### User 10
 ### Send POST request with json body
-POST http://localhost:8080/user
+POST http://localhost:5001/user
 Content-Type: application/json
 
 {
