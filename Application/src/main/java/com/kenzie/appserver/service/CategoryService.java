@@ -40,11 +40,11 @@ public class CategoryService {
 
         // lambda function that tabs frequency of each question
         // being picked by the user
-        QuestionCountsRequest chooseQuestionRequest =
-                new QuestionCountsRequest(questionId);
-
-        questionCountsServiceClient.countQuestionsChosen(chooseQuestionRequest);
-        System.out.println(chooseQuestionRequest.getQuestionId());
+//        QuestionCountsRequest chooseQuestionRequest =
+//                new QuestionCountsRequest(questionId);
+//
+//        questionCountsServiceClient.countQuestionsChosen(chooseQuestionRequest);
+//        System.out.println(chooseQuestionRequest.getQuestionId());
 //
 //        Double calculationResult = REFERRAL_BONUS_FIRST_LEVEL * referrals.getNumFirstLevelReferrals() +
 //                REFERRAL_BONUS_SECOND_LEVEL * referrals.getNumSecondLevelReferrals() +
