@@ -63,8 +63,8 @@ public class CategoryService {
         CategoryRecord newRecord = new CategoryRecord();
         newRecord.setQuestionId(newQuestion.getQuestionId());
         newRecord.setQuestions(newQuestion.getQuestions());
-        newRecord.setAnswers(newRecord.getAnswers());
         newRecord.setDifficultyOfAQuestion(newQuestion.getDifficultyOfAQuestion());
+        newRecord.setAnswers(newQuestion.getAnswers());
 
         categoryRepository.save(newRecord);
 
