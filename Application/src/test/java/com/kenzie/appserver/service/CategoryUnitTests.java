@@ -72,12 +72,8 @@ public class CategoryUnitTests {
         CategoryRecord record = categoryRecordCaptor.getValue();
 
         Assertions.assertNotNull(record, "The category record is returned");
-        System.out.println(record.getQuestionId());
         Assertions.assertEquals(record.getQuestionId(), newQuestion.getQuestionId(), "The question id matches");
-        System.out.println(record.getQuestions());
         Assertions.assertEquals(record.getQuestions(), newQuestion.getQuestions(), "The question matches");
-        System.out.println(record.getDifficultyOfAQuestion());
-        System.out.println(record.getAnswers());
 
         //Do I need to check for this?
         Assertions.assertEquals(record.getDifficultyOfAQuestion(), newQuestion.getDifficultyOfAQuestion(), "The difficulty matches");

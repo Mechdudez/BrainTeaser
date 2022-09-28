@@ -40,6 +40,7 @@ public class CategoryRecord {
     }
 
     public void setDifficultyOfAQuestion(String difficultyOfAQuestion) {
+        this.difficultyOfAQuestion = difficultyOfAQuestion;
     }
 
     @DynamoDBAttribute(attributeName = "answers")
