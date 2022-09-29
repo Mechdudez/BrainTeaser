@@ -63,17 +63,19 @@ public class EndpointUtility {
     public String postEndpoint(String endpoint, String data) {
         String api = getApiEndpint();
         String url = api + endpoint;
-
+        System.out.println("debugging data " + data);
         HttpClient client = HttpClient.newHttpClient();
         URI uri = URI.create(url);
+        System.out.println("debugging uri " + uri);
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(uri)
                 .header("Accept", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(data))
                 .build();
+        System.out.println("debugging http request" + request);
         try {
             HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
-
+            System.out.println("debugging http http response " + request);
             int statusCode = httpResponse.statusCode();
             if (statusCode == 200) {
                 return httpResponse.body();

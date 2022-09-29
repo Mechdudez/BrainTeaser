@@ -5,7 +5,7 @@ export default class UserClient extends BaseClass {
 
     constructor(props = {}){
         super();
-        const methodsToBind = ['clientLoaded', 'getUserById', 'getQuestionById'];
+        const methodsToBind = ['clientLoaded', 'getUserById', 'getOneQuestion', 'submitAnswer'];
         this.bindClassMethods(methodsToBind, this);
         this.props = props;
         this.clientLoaded(axios);
@@ -22,16 +22,37 @@ export default class UserClient extends BaseClass {
         }
     }
 
-    async getQuestionById(questionId, errorCallback){
+    async getOneQuestion(questionId, errorCallback){
         try{
-            const  response = await this.client.get(`/category/${questionId}`);
-            return response.data; // this should return user
+            const  response = await this.client.get(`/Category/${questionId}`, {
+                "questionId": questionId
+            });
+
+            console.log(response.data);
+            return response.data; // this should return question
 
         }catch (error){
-            this.handleError("getQuestionById", error, errorCallback)
+            this.handleError("getOneQuestion", error, errorCallback)
         }
     }
 
+    async submitAnswer(userInput, errorCallback){
+        const inputArray = userInput.split(",");
+        const questionId = inputArray[0];
+        const userAnswer = inputArray[1];
+        try{
+            const  response = await this.client.post(`/Category/submitAnswer`, {
+                "answer": userAnswer,
+                "questionId": questionId
+            });
+
+            console.log(response.data);
+            return response.data;
+
+        }catch (error){
+            this.handleError("submitAnswer", error, errorCallback)
+        }
+    }
 
 
 

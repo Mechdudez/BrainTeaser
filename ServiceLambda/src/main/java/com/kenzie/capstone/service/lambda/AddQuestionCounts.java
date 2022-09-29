@@ -34,26 +34,22 @@ public class AddQuestionCounts implements RequestHandler<APIGatewayProxyRequestE
                 checkQuestionCountsServiceComponent.provideQuestionCountsLambdaService();
         Map<String, String> headers = new HashMap<>();
         headers.put("Content-Type", "application/json");
+        log.info("debugging after headers");
 
         APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent()
                 .withHeaders(headers);
 
-
-        String question = input.getBody();
-
-        System.out.println("debugging " + input);
-        if(question == null || question.isEmpty()){
-            return response.withStatusCode(400).withBody("No " +
-                    "QuestionId" +
-                    " found!");
-
-        }
+        log.info("debugging before try catch");
 
         try {
             QuestionCountsRequest questionCountsRequest =
                     jsonStringToQuestionCountsConverter(input.getBody());
+
+            log.info("debugging input body" + input.getBody());
             QuestionCountsResponse questionCountsResponse =
                     checkQuestionCountsService.addQuestion(questionCountsRequest);
+
+            log.info("debugging before return in try catch");
             return response
                     .withStatusCode(200)
                     .withBody(gson.toJson(questionCountsResponse));

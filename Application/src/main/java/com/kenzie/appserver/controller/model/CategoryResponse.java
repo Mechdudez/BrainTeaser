@@ -43,12 +43,12 @@ public class CategoryResponse {
         this.answers = answers;
     }
 
-    public String getDifficultyOfQuestion() {
+    public String getDifficultyOfAQuestion() {
         return difficultyOfAQuestion;
     }
 
-    public void setDifficultyOfQuestion(String difficultyOfQuestion) {
-        this.difficultyOfAQuestion = difficultyOfQuestion;
+    public void setDifficultyOfAQuestion(String difficultyOfAQuestion) {
+        this.difficultyOfAQuestion = difficultyOfAQuestion;
     }
 
 }

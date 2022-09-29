@@ -31,7 +31,7 @@ public class CategoryService {
     public Category getQuestionById(Integer questionId) {
         // getting data from the local repository
         Category getQuestion = categoryRepository.findById(questionId)
-                .map(category -> new Category(category.getQuestionId(), category.getQuestions(),category.getDifficultyOfAQuestion(), category.getAnswers()))
+                .map(category -> new Category(category.getQuestionId(), category.getQuestions(), category.getDifficultyOfAQuestion(), category.getAnswers()))
                 .orElse(null);
 
         if (getQuestion == null) {
@@ -40,31 +40,24 @@ public class CategoryService {
 
         // lambda function that tabs frequency of each question
         // being picked by the user
-//        QuestionCountsRequest chooseQuestionRequest =
-//                new QuestionCountsRequest(questionId);
-//
-//        questionCountsServiceClient.countQuestionsChosen(chooseQuestionRequest);
-//        System.out.println(chooseQuestionRequest.getQuestionId());
-//
-//        Double calculationResult = REFERRAL_BONUS_FIRST_LEVEL * referrals.getNumFirstLevelReferrals() +
-//                REFERRAL_BONUS_SECOND_LEVEL * referrals.getNumSecondLevelReferrals() +
-//                REFERRAL_BONUS_THIRD_LEVEL * referrals.getNumThirdLevelReferrals();
-//
-//        return calculationResult;
-
-
+        QuestionCountsRequest chooseQuestionRequest =
+                new QuestionCountsRequest();
+        chooseQuestionRequest.setQuestionId(questionId);
+        System.out.println("Debugging in category service" + chooseQuestionRequest);
+        questionCountsServiceClient.countQuestionsChosen(chooseQuestionRequest);
 
         return getQuestion;
 
     }
+
 
     public CategoryRecord createOneQuestion(Category newQuestion){
         // TODO convert difficultyOfQuestions to Enum class later
         CategoryRecord newRecord = new CategoryRecord();
         newRecord.setQuestionId(newQuestion.getQuestionId());
         newRecord.setQuestions(newQuestion.getQuestions());
+        newRecord.setAnswers(newRecord.getAnswers());
         newRecord.setDifficultyOfAQuestion(newQuestion.getDifficultyOfAQuestion());
-        newRecord.setAnswers(newQuestion.getAnswers());
 
         categoryRepository.save(newRecord);
 

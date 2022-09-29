@@ -9,8 +9,8 @@ class BrainTeaser extends BaseClass {
 
     constructor() {
         super();
-        this.bindClassMethods(['onGetUser', 'onGetQuestion',
-        'renderQuestions'], this);
+        this.bindClassMethods(['onGetUser', 'onGetQuestion','onSubmitAnswer',
+        'renderExample'], this);
         // this.onGetUser = this.onGetUser.bind(this);
         // this.renderExample = this.renderExample.bind(this);
         // this.
@@ -23,76 +23,86 @@ class BrainTeaser extends BaseClass {
     async mount() {
         document.getElementById('get-user-points-by-id-form').addEventListener('submit', this.onGetUser);
         document.getElementById('get-one-question-form').addEventListener('submit', this.onGetQuestion);
-
+        document.getElementById('get-your-answer-form').addEventListener('submit', this.onSubmitAnswer);
         this.client = new UserClient();
 
-        this.dataStore.addChangeListener(this.renderQuestions)
+        this.dataStore.addChangeListener(this.renderExample)
     }
 
     // Render Methods --------------------------------------------------------------------------------------------------
 
-    async renderQuestions(question) {
-        let resultArea = document.getElementById("result-info");
+    async renderExample() {
+        //let resultArea = document.getElementById("result-info");
+        //const user = this.dataStore.get("user");
+        let resultArea = document.getElementById("question-pick")
 
-        let storeHtmlQuestions = "";
+        const question = this.dataStore.get("question");
 
-        if (question != null) {
-            storeHtmlQuestions += `<ul>`;
-            storeHtmlQuestions += `<p><h3 class="listName" style="color:red;">${question.questionId}</h3></p>`;
-            storeHtmlQuestions += `<p><b>Category: </b>${question.questions}</p>`;
-            resultArea.innerHTML = storeHtmlQuestions;
+        if (question) {
+            resultArea.innerHTML = `
+                <div>${question.questions}</div>
+                <div>${question.difficultyOfAQuestion}</div>
+                <div>Question ID: ${question.questionId}</div>
+                <div>Answer: ${question.answers}</div>
+            `
         } else {
-            resultArea.innerHTML = "No Item";
+            resultArea.innerHTML = "Question Not Found";
         }
 
-    }
+        let resultArea2 = document.getElementById("result-info");
+        const user = this.dataStore.get("user");
 
-    // async renderExample() {
-    //     let resultArea = document.getElementById("result-info");
-    //
-    //     const user = this.dataStore.get("user");
-    //
-    //     if (user) {
-    //         resultArea.innerHTML = `
-    //             <div>ID: ${user.userId}</div>
-    //             <div>Name: ${user.points}</div>
-    //         `
-    //     } else {
-    //         resultArea.innerHTML = "No Item";
-    //     }
-    // }
+        if (user) {
+            resultArea2.innerHTML = `
+                <div>User ID: ${user.userId}</div>
+                <div>Usernam: ${user.username}</div>
+            `
+        } else {
+            resultArea2.innerHTML = "Question Not Found";
+        }
+
+
+    }
 
     // Event Handlers --------------------------------------------------------------------------------------------------
 
 
-   async onGetQuestion(event) {
-       event.preventDefault();
-
-       let id = document.getElementById("question-field").value;
+   async onGetQuestion(event){
+        event.preventDefault();
        this.dataStore.set("question", null);
 
-       let result = await this.client.getQuestionById(id, this.errorHandler);
-       this.dataStore.set("question", result);
+       let questionId = document.getElementById("question-field").value;
+        let result = await this.client.getOneQuestion(questionId, this.errorHandler);
+
+
+        this.dataStore.set("question", result);
+
        if (result) {
-           this.showMessage(`Got ${result.id}!`)
+           this.showMessage(`Your new question is ${result}!`)
        } else {
-           this.errorHandler("Error doing GET!  Try again...");
+           this.errorHandler("Error fetching your question!  Try" +
+               " again...");
        }
+    }
+
+    async onSubmitAnswer(event){
+        event.preventDefault();
+        this.dataStore.set("answer", null);
+
+        let questionIdAndAnswer = document.getElementById("answer-field").value;
+        let result = await this.client.submitAnswer(questionIdAndAnswer, this.errorHandler);
 
 
-       // this.dataStore.set("question", null);
-       //
-       // let questionId = document.getElementById("question-field").value;
-       //  let result = await this.client.getByQuestionId(questionId, this.errorHandler);
-       //
-       //
-       //  this.dataStore.set("question", result);
-       //
-       // if (result) {
-       //     this.showMessage(`Your new question is ${result}!`)
-       // } else {
-       //     this.errorHandler("Error fetching your question!  Try" +
-       //         " again...");
+        this.dataStore.set("answer", result);
+
+        if (result) {
+            this.showMessage(`Your submission result is ${result}!`)
+        } else {
+            this.errorHandler("Error fetching your result!  Try" +
+                " again...");
+        }
+
+
     }
 
 

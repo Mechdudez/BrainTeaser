@@ -1,6 +1,7 @@
 package com.kenzie.capstone.service.dao;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapperConfig;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBSaveExpression;
 import com.amazonaws.services.dynamodbv2.model.ConditionalCheckFailedException;
@@ -24,11 +25,13 @@ public class QuestionCountsDao {
 
     public QuestionCountsRecord storeQuestionCountsData(QuestionCountsRecord questionCountsRecord) {
         try {
-            mapper.save(questionCountsRecord, new DynamoDBSaveExpression()
-                    .withExpected(ImmutableMap.of(
-                            "QuestionId",
-                            new ExpectedAttributeValue().withExists(false)
-                    )));
+//            mapper.save(questionCountsRecord, new DynamoDBSaveExpression()
+//                    .withExpected(ImmutableMap.of(
+//                            "QuestionId",
+//                            new ExpectedAttributeValue().withExists(true)
+//                    )));
+            mapper.save(questionCountsRecord,
+                    DynamoDBMapperConfig.SaveBehavior.CLOBBER.config());
         } catch (ConditionalCheckFailedException e) {
             throw new IllegalArgumentException("id has already been used");
         }

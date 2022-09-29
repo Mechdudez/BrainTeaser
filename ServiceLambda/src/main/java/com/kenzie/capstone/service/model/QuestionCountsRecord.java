@@ -12,7 +12,7 @@ import java.util.Objects;
 
 public class QuestionCountsRecord {
     private Integer questionId;
-    private Integer countsPicked;
+    private Integer questionCounts;
 
 
     @DynamoDBHashKey(attributeName = "QuestionId")
@@ -23,12 +23,12 @@ public class QuestionCountsRecord {
 
     @DynamoDBAttribute(attributeName = "PickedCounts")
     public Integer getPickedCounts() {
-        return countsPicked;
+        return questionCounts;
     }
 
 
-    public void setPickedCounts(Integer countsPicked) {
-        this.countsPicked = countsPicked;
+    public void setPickedCounts(Integer questionCounts) {
+        this.questionCounts = questionCounts;
     }
 
     public void setQuestionId(Integer questionId) {
@@ -45,12 +45,12 @@ public class QuestionCountsRecord {
             return false;
         }
         QuestionCountsRecord that = (QuestionCountsRecord) o;
-        return Objects.equals(questionId, that.questionId) && Objects.equals(countsPicked,
-                that.countsPicked);
+        return Objects.equals(questionId, that.questionId) && Objects.equals(questionCounts,
+                that.questionCounts);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(questionId, countsPicked);
+        return Objects.hash(questionId, questionCounts);
     }
 }

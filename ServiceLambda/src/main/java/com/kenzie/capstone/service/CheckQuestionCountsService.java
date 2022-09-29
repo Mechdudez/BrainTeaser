@@ -21,6 +21,9 @@ public class CheckQuestionCountsService {
                     "contain a valid question ID");
         }
 
+        // check if recordId is in the database
+
+
         QuestionCountsRecord record = new QuestionCountsRecord();
         record.setQuestionId(questionIdRequest.getQuestionId());
         // need to increment here if new record
@@ -31,7 +34,7 @@ public class CheckQuestionCountsService {
         QuestionCountsResponse response =
                 new QuestionCountsResponse();
         response.setQuestionId(record.getQuestionId());
-        response.setQuestionCounts(record.getPickedCounts());
+        response.setCountsPicked(record.getPickedCounts());
         return response;
     }
 }

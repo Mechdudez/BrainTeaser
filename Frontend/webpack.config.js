@@ -30,10 +30,8 @@ module.exports = {
             {
 
                 context: [
-
-                    '/login',
-                    '/index'
-
+                    '/Category',
+                    '/user'
                 ],
 
                 target: 'http://localhost:5001'

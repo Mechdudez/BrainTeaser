@@ -120,14 +120,22 @@ public class CategoryController {
 
     }
 
+    @RequestMapping(value = {"/submitAnswer"}, method =
+            RequestMethod.POST)
+    public Boolean submitAnswer(String answer, Integer questionId){
+        Category category = categoryService.getQuestionById(questionId);
+        String answerKey = category.getAnswers();
+        return answer.equals(answerKey);
+    }
+
 
     // Helper methods
     private CategoryResponse createCategoryResponse(Category category) {
         CategoryResponse categoryResponse = new CategoryResponse();
         categoryResponse.setQuestionId(category.getQuestionId());
         categoryResponse.setQuestions(category.getQuestions());
-        categoryResponse.setAnswers(category.getAnswers());
-        categoryResponse.setDifficultyOfQuestion(category.getDifficultyOfAQuestion());
+        categoryResponse.setDifficultyOfAQuestion(category.getDifficultyOfAQuestion());
+        categoryResponse.setAnswers("kdkdkdkkddk");
 
         return categoryResponse;
 

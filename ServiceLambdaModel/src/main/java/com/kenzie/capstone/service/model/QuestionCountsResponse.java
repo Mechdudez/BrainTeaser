@@ -23,18 +23,18 @@ public class QuestionCountsResponse {
             this.questionId = questionId;
         }
 
-        public Integer getQuestionCounts() {
+        public Integer getCountsPicked() {
             return countsPicked;
         }
 
-        public void setQuestionCounts(Integer countsPicked) {
+        public void setCountsPicked(Integer countsPicked) {
             this.countsPicked = countsPicked;
         }
         @Override
         public String toString() {
             return "UserAnswerResponse{" +
                     ", questionId='" + questionId + '\'' +
-                    ", questionCounts='" + countsPicked + '\'' +
+                    ", countsPicked='" + countsPicked + '\'' +
                     '}';
         }
 }
