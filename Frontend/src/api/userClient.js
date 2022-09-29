@@ -37,11 +37,14 @@ export default class UserClient extends BaseClass {
     }
 
     async submitAnswer(userInput, errorCallback){
-        const inputArray = userInput.split(",");
+       const inputArray = userInput.split(",");
         const questionId = inputArray[0];
         const userAnswer = inputArray[1];
+        console.log("Debugging useranswer...");
+        console.log(questionId);
+        console.log(userAnswer);
         try{
-            const  response = await this.client.post(`/Category/submitAnswer`, {
+            const  response = await this.client.post(`/Category/submitAnswer?answer=${userAnswer}&questionId=${questionId}`, {
                 "answer": userAnswer,
                 "questionId": questionId
             });
