@@ -135,7 +135,7 @@ public class CategoryController {
         categoryResponse.setQuestionId(category.getQuestionId());
         categoryResponse.setQuestions(category.getQuestions());
         categoryResponse.setDifficultyOfAQuestion(category.getDifficultyOfAQuestion());
-        categoryResponse.setAnswers("kdkdkdkkddk");
+        categoryResponse.setAnswers(category.getAnswers());
 
         return categoryResponse;
 

@@ -9,7 +9,7 @@ class BrainTeaser extends BaseClass {
 
     constructor() {
         super();
-        this.bindClassMethods(['onGetUser', 'onGetQuestion','onSubmitAnswer',
+        this.bindClassMethods(['onGetUser', 'onGetRandomQuestion','onSubmitAnswer',
         'renderExample'], this);
         // this.onGetUser = this.onGetUser.bind(this);
         // this.renderExample = this.renderExample.bind(this);
@@ -22,7 +22,7 @@ class BrainTeaser extends BaseClass {
      */
     async mount() {
         document.getElementById('get-user-points-by-id-form').addEventListener('submit', this.onGetUser);
-        document.getElementById('get-one-question-form').addEventListener('submit', this.onGetQuestion);
+        document.getElementById('get-random-question-form').addEventListener('submit', this.onGetRandomQuestion);
         document.getElementById('get-your-answer-form').addEventListener('submit', this.onSubmitAnswer);
         this.client = new UserClient();
 
@@ -67,15 +67,16 @@ class BrainTeaser extends BaseClass {
     // Event Handlers --------------------------------------------------------------------------------------------------
 
 
-   async onGetQuestion(event){
+   async onGetRandomQuestion(event){
         event.preventDefault();
-       this.dataStore.set("question", null);
+
 
        let questionId = document.getElementById("question-field").value;
-        let result = await this.client.getOneQuestion(questionId, this.errorHandler);
+        let result = await this.client.getRandomQuestion(this.errorHandler);
 
 
-        this.dataStore.set("question", result);
+       await this.dataStore.set("question", result.questions);
+
 
        if (result) {
            this.showMessage(`Your new question is ${result}!`)
