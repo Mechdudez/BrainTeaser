@@ -65,7 +65,7 @@ public class CategoryUnitTests {
 
         // WHEN
         CategoryRecord categoryRecord = categoryService.createOneQuestion(newQuestion);
-        System.out.println(categoryRecord);
+
         // THEN
         Assertions.assertNotNull(categoryRecord);
         verify(categoryRepository).save(categoryRecordCaptor.capture());
