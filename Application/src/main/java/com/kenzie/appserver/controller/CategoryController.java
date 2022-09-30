@@ -37,7 +37,6 @@ public class CategoryController {
        // This will grab the question by the Id
         Category category = categoryService.getQuestionById(questionId);
 
-        // if the category is null return nothing.
         if (category == null) {
             return ResponseEntity.noContent().build();
         }
@@ -106,11 +105,8 @@ public class CategoryController {
             RequestMethod.POST)
     public Boolean submitAnswer(String answer, Integer questionId){
         Category category = categoryService.getQuestionById(questionId);
-        System.out.println("debugging submitAnswer return " + category.toString());
         String answerKey = category.getAnswers();
-        System.out.println("debugging answer return result");
-        System.out.println(answerKey);
-        System.out.println(answer);
+
         return answer.equals(answerKey);
     }
 

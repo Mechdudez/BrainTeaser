@@ -30,7 +30,7 @@ module.exports = {
             {
 
                 context: [
-                    '/Category',
+                    '/category',
                     '/user'
                 ],
 

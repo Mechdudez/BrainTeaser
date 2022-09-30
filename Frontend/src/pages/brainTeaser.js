@@ -11,9 +11,6 @@ class BrainTeaser extends BaseClass {
         super();
         this.bindClassMethods(['onGetUser', 'onGetRandomQuestion','onSubmitAnswer',
         'renderExample'], this);
-        // this.onGetUser = this.onGetUser.bind(this);
-        // this.renderExample = this.renderExample.bind(this);
-        // this.
         this.dataStore = new DataStore();
     }
 
@@ -22,7 +19,7 @@ class BrainTeaser extends BaseClass {
      */
     async mount() {
         document.getElementById('get-user-points-by-id-form').addEventListener('submit', this.onGetUser);
-        document.getElementById('get-random-question-form').addEventListener('submit', this.onGetRandomQuestion);
+        document.getElementById('random-question-button').addEventListener('click', this.onGetRandomQuestion);
         document.getElementById('get-your-answer-form').addEventListener('submit', this.onSubmitAnswer);
         this.client = new UserClient();
 
@@ -32,18 +29,16 @@ class BrainTeaser extends BaseClass {
     // Render Methods --------------------------------------------------------------------------------------------------
 
     async renderExample() {
-        //let resultArea = document.getElementById("result-info");
-        //const user = this.dataStore.get("user");
+
         let resultArea = document.getElementById("question-pick")
 
         const question = this.dataStore.get("question");
 
         if (question) {
             resultArea.innerHTML = `
-                <div>${question.questions}</div>
-                <div>${question.difficultyOfAQuestion}</div>
+                <div>The Question: ${question.questions}</div>
+                <div>Difficulty Level: ${question.difficultyOfAQuestion}</div>
                 <div>Question ID: ${question.questionId}</div>
-                <div>Answer: ${question.answers}</div>
             `
         } else {
             resultArea.innerHTML = "Question Not Found";
@@ -61,6 +56,17 @@ class BrainTeaser extends BaseClass {
             resultArea2.innerHTML = "Question Not Found";
         }
 
+        let answerArea = document.getElementById("answer-result");
+        const answer = this.dataStore.get("answer");
+        if (answer) {
+            answerArea.innerHTML = `
+                <div>Answer Result: ${answer.toString()}</div>
+                
+            `
+        } else {
+            answerArea.innerHTML = "thinking out loud ... ";
+        }
+
 
     }
 
@@ -70,12 +76,10 @@ class BrainTeaser extends BaseClass {
    async onGetRandomQuestion(event){
         event.preventDefault();
 
-
-       let questionId = document.getElementById("question-field").value;
         let result = await this.client.getRandomQuestion(this.errorHandler);
 
 
-       await this.dataStore.set("question", result.questions);
+       await this.dataStore.set("question", result);
 
 
        if (result) {
@@ -89,14 +93,20 @@ class BrainTeaser extends BaseClass {
     async onSubmitAnswer(event){
         event.preventDefault();
         this.dataStore.set("answer", null);
-
+        let answerResult = "";
         let questionIdAndAnswer = document.getElementById("answer-field").value;
         let result = await this.client.submitAnswer(questionIdAndAnswer, this.errorHandler);
+        if (result == false) {
+            answerResult = "You got it SO Wrong, hahaha";
+        } else {
+            answerResult = "What a level of brilliance you are" +
+                " displaying so far!";
 
+        }
 
-        this.dataStore.set("answer", result);
+        this.dataStore.set("answer", answerResult);
 
-        if (result) {
+        if (answerResult) {
             this.showMessage(`Your submission result is ${result}!`)
         } else {
             this.errorHandler("Error fetching your result!  Try" +

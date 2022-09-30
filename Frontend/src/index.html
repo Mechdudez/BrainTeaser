@@ -13,13 +13,11 @@
         </div>
     </header>
     <div class="card">
-        <h2>Get Question</h2>
-        <form class="card-content" id="get-random-question-form">
-            <p class="form-field">
-                <label>Question ID</label>
-                <input type="text" required class="validated-field" id="question-field">
-            </p>
-            <button type="submit">Get your question</button>
+        <h2>Get Your Random Question</h2>
+        <form class="card-content" id="all-posts">
+            <button type="button" id="random-question-button"
+                    name="cmd"
+                    value="viewall">Get a Question</button>
         </form>
     </div>
     <div class="card" id="pick-this-question">
@@ -27,16 +25,20 @@
         <p id="question-pick"></p>
     </div>
     <div class="card">
-        <h2>Your Answer</h2>
+        <h2>Enter Your Answer</h2>
         <form class="card-content"
               id="get-your-answer-form">
             <p class="form-field">
-                <label>Your answer here with the Question ID</label>
+                <label>format: Question ID,answer</label>
                 <input type="text" required class="validated-field"
                        id="answer-field">
             </p>
             <button type="submit">Submit Answer</button>
         </form>
+    </div>
+    <div class="card" id="provide-answer-result">
+        <h2>You answer is : </h2>
+        <p id="answer-result"></p>
     </div>
     <div class="card">
         <h2>Get User</h2>
@@ -51,7 +53,7 @@
         </form>
     </div>
     <div class="card" id="result">
-        <h2>Result:</h2>
+        <h2>User Info</h2>
         <p id="result-info"></p>
     </div>
 
