@@ -24,7 +24,7 @@ export default class UserClient extends BaseClass {
 
     async getRandomQuestion(errorCallback){
         try{
-            const  response = await this.client.get(`/category/random`,);
+            const  response = await this.client.get(`/Category/random`,);
                 return response.data; // this should return question
         }catch (error){
             this.handleError("getRandomQuestion", error, errorCallback)
