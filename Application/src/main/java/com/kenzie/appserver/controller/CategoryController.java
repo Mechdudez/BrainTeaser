@@ -47,24 +47,6 @@ public class CategoryController {
         return ResponseEntity.ok(categoryResponse); // response is returned
     }
 
-    // This will get the answer to the question.
-//    @GetMapping("/{answers}")
-//    public ResponseEntity<CategoryResponse> getAnswer(@PathVariable("answers") String answers) {
-//            Category category = categoryService.getAnswer(answers);
-//            if(category == null){
-//                return ResponseEntity.noContent().build();
-//            }
-//
-//        CategoryResponse categoryResponse = createCategoryResponse(category);
-//
-//        return ResponseEntity.ok(categoryResponse);
-//    }
-
-//    @PostMapping("{userId}/{questionId}/{answers}")
-//    public ResponseEntity<CategoryResponse> getUserAnswer(@PathVariable("questionId") String questionId, @PathVariable("answers") String answers) {
-//
-//        return null;
-//    }
 
     // this will randomly group a question
     @GetMapping("/random")
@@ -124,7 +106,11 @@ public class CategoryController {
             RequestMethod.POST)
     public Boolean submitAnswer(String answer, Integer questionId){
         Category category = categoryService.getQuestionById(questionId);
+        System.out.println("debugging submitAnswer return " + category.toString());
         String answerKey = category.getAnswers();
+        System.out.println("debugging answer return result");
+        System.out.println(answerKey);
+        System.out.println(answer);
         return answer.equals(answerKey);
     }
 

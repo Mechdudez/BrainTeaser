@@ -34,15 +34,6 @@ public class CategoryRecord {
         this.questions = questions;
     }
 
-    @DynamoDBAttribute(attributeName = "difficultyOfAQuestion")
-    public String getDifficultyOfAQuestion() {
-        return difficultyOfAQuestion;
-    }
-
-    public void setDifficultyOfAQuestion(String difficultyOfAQuestion) {
-        this.difficultyOfAQuestion = difficultyOfAQuestion;
-    }
-
     @DynamoDBAttribute(attributeName = "answers")
     public String getAnswers() {
         return answers;
@@ -50,6 +41,15 @@ public class CategoryRecord {
 
     public void setAnswers(String answers) {
         this.answers = answers;
+    }
+
+    @DynamoDBAttribute(attributeName = "difficultyOfAQuestion")
+    public String getDifficultyOfAQuestion() {
+        return difficultyOfAQuestion;
+    }
+
+    public void setDifficultyOfAQuestion(String difficultyOfAQuestion) {
+        this.difficultyOfAQuestion = difficultyOfAQuestion;
     }
 
 

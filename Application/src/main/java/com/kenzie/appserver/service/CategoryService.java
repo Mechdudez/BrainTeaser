@@ -30,11 +30,13 @@ public class CategoryService {
     //TODO write a service for the Lambda to call
     public Category getQuestionById(Integer questionId) {
         // getting data from the local repository
-        Category getQuestion = categoryRepository.findById(questionId)
+
+        Category getCategory = categoryRepository.findById(questionId)
                 .map(category -> new Category(category.getQuestionId(), category.getQuestions(), category.getDifficultyOfAQuestion(), category.getAnswers()))
                 .orElse(null);
 
-        if (getQuestion == null) {
+
+        if (getCategory == null) {
             throw new CategoryNotFoundException("There is no such question");
         }
 
@@ -43,22 +45,25 @@ public class CategoryService {
         QuestionCountsRequest chooseQuestionRequest =
                 new QuestionCountsRequest();
         chooseQuestionRequest.setQuestionId(questionId);
-        System.out.println("Debugging in category service" + chooseQuestionRequest);
         questionCountsServiceClient.countQuestionsChosen(chooseQuestionRequest);
 
-        return getQuestion;
+        return getCategory;
 
     }
 
 
     public CategoryRecord createOneQuestion(Category newQuestion){
-        // TODO convert difficultyOfQuestions to Enum class later
+
+//        System.out.println("debugging new question in CreateOneQ " + newQuestion.getQuestionId());
+//        System.out.println("debugging new question in CreateOneQ " + newQuestion.getAnswers());
         CategoryRecord newRecord = new CategoryRecord();
         newRecord.setQuestionId(newQuestion.getQuestionId());
         newRecord.setQuestions(newQuestion.getQuestions());
-        newRecord.setAnswers(newRecord.getAnswers());
+        newRecord.setAnswers(newQuestion.getAnswers());
         newRecord.setDifficultyOfAQuestion(newQuestion.getDifficultyOfAQuestion());
 
+//        System.out.println("debugging record id in CreateOneQ " + newRecord.getQuestionId());
+//        System.out.println("debugging record answer  in CreateOneQ " + newRecord.getAnswers());
         categoryRepository.save(newRecord);
 
         return newRecord;

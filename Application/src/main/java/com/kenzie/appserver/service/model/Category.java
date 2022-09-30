@@ -13,11 +13,12 @@ public class Category {
     private  String answers;
 
     public Category(Integer questionId, String questions,
-                    String difficultyOfAQuestion, String answers) {
+                    String answers,
+                    String difficultyOfAQuestion) {
         this.questionId = questionId;
         this.questions = questions;
-        this.difficultyOfAQuestion = difficultyOfAQuestion;
         this.answers = answers;
+        this.difficultyOfAQuestion = difficultyOfAQuestion;
     }
 
     public int getQuestionId() {

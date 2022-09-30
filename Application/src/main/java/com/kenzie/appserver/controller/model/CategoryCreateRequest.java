@@ -39,8 +39,8 @@ public class CategoryCreateRequest {
         return answers;
     }
 
-    public void setAnswers(String answerKey) {
-        this.answers = answerKey;
+    public void setAnswers(String answers) {
+        this.answers = answers;
     }
 
     public String getLevelOfADifficulty() {

@@ -20,17 +20,14 @@ public class CheckQuestionCountsServiceClient {
 
     public QuestionCountsResponse countQuestionsChosen(QuestionCountsRequest questionIdRequest){
         EndpointUtility endpointUtility = new EndpointUtility();
-        System.out.println("debugging lambda" + questionIdRequest);
         String request;
         try {
             request = mapper.writeValueAsString(questionIdRequest);
         } catch(JsonProcessingException e) {
             throw new ApiGatewayException("Unable to serialize request: " + e);
         }
-        System.out.println("debugging request string format" + request);
         String response = endpointUtility.postEndpoint(ADD_QUESTION_COUNTS_ENDPOINT, request);
         QuestionCountsResponse questionCountsResponse;
-        System.out.println("debugging question Response" + response);
         try {
             questionCountsResponse = mapper.readValue(response,QuestionCountsResponse.class);
         } catch (Exception e) {
