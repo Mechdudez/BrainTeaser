@@ -7,9 +7,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 import com.amazonaws.services.dynamodbv2.datamodeling.QueryResultPage;
 import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 import com.kenzie.appserver.repositories.model.CategoryRecord;
-import com.kenzie.appserver.service.model.Category;
-import com.kenzie.inmemorycaching.orders.models.Order;
-import org.checkerframework.checker.units.qual.C;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
