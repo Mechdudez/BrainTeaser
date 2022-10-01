@@ -8,7 +8,9 @@ import com.kenzie.appserver.service.model.Category;
 import com.kenzie.capstone.service.model.QuestionCountsRequest;
 import com.kenzie.capstone.service.model.QuestionCountsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
+import springfox.documentation.annotations.Cacheable;
 
 import java.util.*;
 
@@ -28,6 +30,8 @@ public class CategoryService {
     }
 
     //TODO write a service for the Lambda to call
+
+    @Cacheable("questions")
     public Category getQuestionById(Integer questionId) {
         // getting data from the local repository
 
@@ -83,6 +87,7 @@ public class CategoryService {
     }
 
     // will be user to generate all the questions
+
     public List<Category> getAllQuestions() {
         List<Category> categoryList = new ArrayList<>();
 
