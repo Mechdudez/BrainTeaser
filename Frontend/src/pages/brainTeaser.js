@@ -97,7 +97,7 @@ class BrainTeaser extends BaseClass {
         let questionIdAndAnswer = document.getElementById("answer-field").value;
         let result = await this.client.submitAnswer(questionIdAndAnswer, this.errorHandler);
         if (result == false) {
-            answerResult = "You got it SO Wrong, hahaha";
+            answerResult = "You got it SO Wrong, HA HA HA";
         } else {
             answerResult = "What a level of brilliance you are" +
                 " displaying so far!";
