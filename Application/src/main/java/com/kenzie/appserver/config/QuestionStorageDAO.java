@@ -26,18 +26,18 @@ public class QuestionStorageDAO {
 
     public List<CategoryRecord> getQuestions(String questionId) {
         Map<String, AttributeValue> valueMap = new HashMap<>();
-        valueMap.put(":questionId", new AttributeValue().withS(questionId));
+        valueMap.put(":questionId", new AttributeValue().withN(questionId));
         DynamoDBQueryExpression<CategoryRecord> queryExpression = new DynamoDBQueryExpression<CategoryRecord>()
                 .withKeyConditionExpression("question_Id = :questionId")
                 .withExpressionAttributeValues(valueMap);
 
-        System.out.println("Getting orders from DynamoDB for user " + questionId);
+        System.out.println("Getting question from DynamoDB for player " + questionId);
 
         QueryResultPage<CategoryRecord> queryList = mapper.queryPage(CategoryRecord.class, queryExpression);
         List<CategoryRecord> categories = queryList.getResults();
         if (categories == null) {
             return new ArrayList<CategoryRecord>();
         }
-        return categories;
+        return categories; // Returns a list of CategoryRecord objects
     }
 }

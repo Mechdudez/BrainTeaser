@@ -8,17 +8,17 @@ import com.kenzie.appserver.repositories.model.CategoryRecord;
 
 import java.util.List;
 
-public class CachingQuestion {
+public class CachingQuestions {
     private final LoadingCache<String, List<CategoryRecord>> categoryCache;
 
 
-    public CachingQuestion(QuestionStorageDAO categoryDao) {
+    public CachingQuestions(QuestionStorageDAO categoryDao) {
         categoryCache = CacheBuilder.newBuilder()
                 .build(CacheLoader.from(categoryDao::getQuestions));
     }
 
 
-    public List<CategoryRecord> getQuestion(String questionId) {
+    public List<CategoryRecord> getQuestions(String questionId) {
 
         return categoryCache.getUnchecked(questionId);
     }
