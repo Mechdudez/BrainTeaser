@@ -31,7 +31,7 @@ public class CategoryService {
 
     //TODO write a service for the Lambda to call
 
-    @Cacheable("questions")
+    @Cacheable("questionId")
     public Category getQuestionById(Integer questionId) {
         // getting data from the local repository
 
