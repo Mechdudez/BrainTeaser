@@ -35,7 +35,7 @@ public class CheckQuestionCountsService {
         HashMap<Integer, Integer> map = new HashMap<>();
         Integer key = record.getQuestionId();
         Integer value = 0;
-        if(!map.containsValue(value)){
+        if(!map.containsKey(key)){
             value = 1;
             map.put(key, value);
         }else {
