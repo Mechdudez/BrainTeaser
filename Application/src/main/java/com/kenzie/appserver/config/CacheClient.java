@@ -25,11 +25,10 @@ public class CacheClient {
     }
     public void evict(String key){
         categoryCache.invalidate(key);
-        }
-
-        public void add(String key, Category value){
-            categoryCache.put(key, value);
-        }
-
     }
 
+    public void add(String key, Category value){
+        categoryCache.put(key, value);
+    }
+
+}
