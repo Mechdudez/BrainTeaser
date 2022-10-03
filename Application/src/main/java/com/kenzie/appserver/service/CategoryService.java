@@ -37,10 +37,15 @@ public class CategoryService {
     @Cacheable("questionId")
     public Category getQuestionById(Integer questionId) {
         // getting data from the local repository
+        Category getCategory = null;
 
-        Category getCategory = categoryRepository.findById(questionId)
-                .map(category -> new Category(category.getQuestionId(), category.getQuestions(), category.getDifficultyOfAQuestion(), category.getAnswers()))
-                .orElse(null);
+        try {
+            getCategory = categoryRepository.findById(questionId)
+                    .map(category -> new Category(category.getQuestionId(), category.getQuestions(), category.getDifficultyOfAQuestion(), category.getAnswers()))
+                    .orElse(null);
+        } catch (CategoryNotFoundException e) {
+
+        }
 
 
         if (getCategory != null) {
@@ -59,7 +64,7 @@ public class CategoryService {
     }
 
 
-    public CategoryRecord createOneQuestion(Category newQuestion){
+    public CategoryRecord createOneQuestion(Category newQuestion) {
 
         CategoryRecord newRecord = new CategoryRecord();
         newRecord.setQuestionId(newQuestion.getQuestionId());
