@@ -36,9 +36,16 @@ public class CategoryService {
 
     @Cacheable("questionId")
     public Category getQuestionById(Integer questionId) {
+
+        // Caching a question to make it faster to the user
+        Category cacheCategory = cache.get(questionId);
+        // if the object is in the cache, return it.
+        if(cacheCategory != null){
+            return cacheCategory;
+        }
+
         // getting data from the local repository
         Category getCategory = null;
-
         try {
             getCategory = categoryRepository.findById(questionId)
                     .map(category -> new Category(category.getQuestionId(), category.getQuestions(), category.getDifficultyOfAQuestion(), category.getAnswers()))
@@ -47,7 +54,7 @@ public class CategoryService {
 
         }
 
-
+        // once the question has been built, grab that question by the id and add it to the Cache.
         if (getCategory != null) {
             cache.add(getCategory.getQuestionId(), getCategory);
         }
@@ -59,7 +66,7 @@ public class CategoryService {
         chooseQuestionRequest.setQuestionId(questionId);
         questionCountsServiceClient.countQuestionsChosen(chooseQuestionRequest);
 
-        return getCategory;
+        return getCategory; // Return a category
 
     }
 

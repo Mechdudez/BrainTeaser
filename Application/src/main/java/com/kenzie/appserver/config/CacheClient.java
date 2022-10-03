@@ -1,6 +1,7 @@
 package com.kenzie.appserver.config;
 
-import com.amazonaws.cache.Cache;
+
+import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.kenzie.appserver.service.model.Category;
 
@@ -11,12 +12,12 @@ public class CacheClient {
     private Cache<Integer, Category> categoryCache;
 
     // Help from Dan Sun
-    public CacheClient(int expireTime, TimeUnit timeUnit){
+    public CacheClient(int expire, TimeUnit timeUnit) {
+        // initalize the cache
         this.categoryCache = CacheBuilder.newBuilder()
-                .expireAfterWrite(expireTime,timeUnit)
+                .expireAfterWrite(expire, timeUnit)
                 .concurrencyLevel(Runtime.getRuntime().availableProcessors())
                 .build();
-
     }
 
     public Category get(Integer key){
