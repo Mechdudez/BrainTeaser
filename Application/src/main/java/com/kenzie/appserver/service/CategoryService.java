@@ -1,6 +1,7 @@
 package com.kenzie.appserver.service;
 
 
+import com.kenzie.appserver.config.CacheClient;
 import com.kenzie.appserver.repositories.CategoryRepository;
 import com.kenzie.capstone.service.client.CheckQuestionCountsServiceClient;
 import com.kenzie.appserver.repositories.model.CategoryRecord;
@@ -21,12 +22,14 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
     private CheckQuestionCountsServiceClient questionCountsServiceClient;
 
+    private CacheClient cache;
+
 
     @Autowired
-    public CategoryService(CategoryRepository categoryRepository, CheckQuestionCountsServiceClient questionCountsServiceClient) {
+    public CategoryService(CategoryRepository categoryRepository, CheckQuestionCountsServiceClient questionCountsServiceClient, CacheClient cache) {
         this.categoryRepository = categoryRepository;
         this.questionCountsServiceClient = questionCountsServiceClient;
-
+        this.cache = cache;
     }
 
     //TODO write a service for the Lambda to call
@@ -40,8 +43,8 @@ public class CategoryService {
                 .orElse(null);
 
 
-        if (getCategory == null) {
-            throw new CategoryNotFoundException("There is no such question");
+        if (getCategory != null) {
+            cache.add(getCategory.getQuestionId(), getCategory);
         }
 
         // lambda function that tabs frequency of each question

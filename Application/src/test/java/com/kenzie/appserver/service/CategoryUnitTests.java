@@ -1,5 +1,6 @@
 package com.kenzie.appserver.service;
 
+import com.kenzie.appserver.config.CacheClient;
 import com.kenzie.appserver.repositories.CategoryRepository;
 import com.kenzie.appserver.repositories.model.CategoryRecord;
 import com.kenzie.appserver.service.model.Category;
@@ -20,10 +21,12 @@ public class CategoryUnitTests {
     private CategoryService categoryService;
     private CheckQuestionCountsServiceClient client;
 
+    private CacheClient cache;
+
     @BeforeEach
     void setup() {
         categoryRepository = mock(CategoryRepository.class);
-        categoryService = new CategoryService(categoryRepository, client);
+        categoryService = new CategoryService(categoryRepository, client, cache);
     }
     /** ------------------------------------------------------------------------
      *  categoryService.getQuestionById

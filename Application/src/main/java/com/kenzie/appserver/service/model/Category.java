@@ -21,7 +21,7 @@ public class Category {
         this.difficultyOfAQuestion = difficultyOfAQuestion;
     }
 
-    public int getQuestionId() {
+    public Integer getQuestionId() {
         return questionId;
     }
 
