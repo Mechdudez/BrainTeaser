@@ -9,6 +9,7 @@ public class CategoryCreateRequest {
     @NotEmpty
     @JsonProperty("questionId")
     private Integer questionId;
+
     @JsonProperty("questions")
     private String questions;
 

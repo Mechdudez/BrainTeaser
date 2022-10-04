@@ -12,9 +12,7 @@ public class Category {
 
     private  String answers;
 
-    public Category(Integer questionId, String questions,
-                    String answers,
-                    String difficultyOfAQuestion) {
+    public Category(Integer questionId, String questions, String difficultyOfAQuestion, String answers) {
         this.questionId = questionId;
         this.questions = questions;
         this.answers = answers;

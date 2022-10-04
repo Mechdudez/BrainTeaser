@@ -13,6 +13,7 @@ import org.mockito.ArgumentCaptor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 import static org.mockito.Mockito.*;
 
@@ -23,9 +24,12 @@ public class CategoryUnitTests {
 
     private CacheClient cache;
 
+
     @BeforeEach
     void setup() {
         categoryRepository = mock(CategoryRepository.class);
+        client = mock(CheckQuestionCountsServiceClient.class);
+        cache = mock(CacheClient.class);
         categoryService = new CategoryService(categoryRepository, client, cache);
     }
     /** ------------------------------------------------------------------------
@@ -109,6 +113,7 @@ public class CategoryUnitTests {
 
         // WHEN
         when(categoryRepository.findAll()).thenReturn(recordList);
+        categoryService.getAllQuestions();
 
         // THEN
         Assertions.assertNotNull(recordList, "All questions are returned");
@@ -129,5 +134,41 @@ public class CategoryUnitTests {
                 Assertions.assertTrue(false, "Question returned that was not in the records!");
             }
         }
+    }
+
+    /** ------------------------------------------------------------------------
+     *  categoryService.getRandomQuestion
+     *  ------------------------------------------------------------------------ **/
+
+
+    @Test
+    void getRandomQuestion() {
+        // GIVEN
+        CategoryRecord record1 = new CategoryRecord();
+        record1.setQuestionId(1);
+        record1.setQuestions("How many days are in a week?");
+        record1.setDifficultyOfAQuestion("easy");
+        record1.setAnswers("7");
+
+        CategoryRecord record2 = new CategoryRecord();
+        record2.setQuestionId(2);
+        record2.setQuestions("How many weeks are in a year?");
+        record2.setDifficultyOfAQuestion("easy");
+        record2.setAnswers("52");
+
+
+        List<CategoryRecord> recordList = new ArrayList<>();
+        recordList.add(record1);
+        recordList.add(record2);
+
+
+
+        // WHEN
+        when(categoryRepository.findAll()).thenReturn(recordList);
+        categoryService.getAllQuestions();
+        Category randomCategory = categoryService.getRandomQuestion();
+
+        // THEN
+        Assertions.assertNotNull(randomCategory);
     }
 }

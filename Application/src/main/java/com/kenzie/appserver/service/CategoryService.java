@@ -136,26 +136,26 @@ public class CategoryService {
 
 
     // TODO needs to be done still
-    public Category getAnswer(String answers) {
-        Category categories = getRandomQuestion();
-        Scanner myScanner = new Scanner(System.in);
-        String userName = myScanner.nextLine();
-        int points = 0;
-
-        // make sure the user answer and answer are equal.
-        // if user is correct, add 1 point
-        if (userName.equals(categories.getAnswers())) {
-
-            helperMethodForCorrectAnswer();
-            points++;
-        }
-        // if they are incorrect, don't add anything
-        else {
-            helperMethodForIncorrectAnswer();
-        }
-
-        return null;
-    }
+//    public Category getAnswer(String answers) {
+//        Category categories = getRandomQuestion();
+//        Scanner myScanner = new Scanner(System.in);
+//        String userName = myScanner.nextLine();
+//        int points = 0;
+//
+//        // make sure the user answer and answer are equal.
+//        // if user is correct, add 1 point
+//        if (userName.equals(categories.getAnswers())) {
+//
+//            helperMethodForCorrectAnswer();
+//            points++;
+//        }
+//        // if they are incorrect, don't add anything
+//        else {
+//            helperMethodForIncorrectAnswer();
+//        }
+//
+//        return null;
+//    }
 
     // helper method to get correct answer.
     private String helperMethodForCorrectAnswer() {
