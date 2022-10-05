@@ -1,12 +1,11 @@
 package com.kenzie.capstone.service;
 
 import com.kenzie.capstone.service.dao.QuestionCountsDao;
-import com.kenzie.capstone.service.model.QuestionCountsRecord;
-import com.kenzie.capstone.service.model.QuestionCountsRequest;
-import com.kenzie.capstone.service.model.QuestionCountsResponse;
+import com.kenzie.capstone.service.model.*;
 
 import javax.inject.Inject;
 import java.util.HashMap;
+import java.util.List;
 
 public class CheckQuestionCountsService {
     private QuestionCountsDao questionCountsDao;
@@ -14,6 +13,19 @@ public class CheckQuestionCountsService {
     @Inject
     public CheckQuestionCountsService(QuestionCountsDao questionCountsDao) {
         this.questionCountsDao = questionCountsDao;
+    }
+
+    public Integer getQuestionFreq(Integer questionId){
+        List<QuestionCountsRecord> records =
+                questionCountsDao.getQuestionCounts(questionId);
+
+        if (records.size() > 0) {
+            System.out.println("Debugging question id for picking " +
+                    "counts is " + records.get(0).getQuestionId());
+            return records.get(0).getPickedCounts();
+        }
+        return null;
+
     }
 
     public QuestionCountsResponse addQuestion(QuestionCountsRequest questionIdRequest) {
@@ -32,19 +44,17 @@ public class CheckQuestionCountsService {
         QuestionCountsRecord record = new QuestionCountsRecord();
         record.setQuestionId(questionIdRequest.getQuestionId());
         // need to increment here if new record
-        HashMap<Integer, Integer> map = new HashMap<>();
-        Integer key = record.getQuestionId();
-        Integer value = 0;
-        if(!map.containsKey(key)){
-            value = 1;
-            map.put(key, value);
-        }else {
-            value += value;
-            map.put(key, value);
-        }
-
-
-
+//        HashMap<Integer, Integer> map = new HashMap<>();
+//        Integer key = record.getQuestionId();
+//        Integer value = 0;
+//        if(!map.containsKey(key)){
+//            value = 1;
+//            map.put(key, value);
+//        }else {
+////            value += value;
+////            map.put(key, value);
+//            map.put(key, map.get(key) + 1);
+//        }
 
         questionCountsDao.storeQuestionCountsData(record);
 

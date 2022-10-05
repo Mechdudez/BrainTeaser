@@ -46,6 +46,14 @@ public class CategoryController {
         return ResponseEntity.ok(categoryResponse); // response is returned
     }
 
+    @GetMapping("/{questionId}/frequency")
+    public ResponseEntity<Integer> getQuesetionFreq(@PathVariable(
+            "questionId") int questionId) {
+        Integer questionFreq =
+                categoryService.getQuestionFreqById(questionId);
+        return ResponseEntity.ok(questionFreq);
+    }
+
 
     // this will randomly group a question
     @GetMapping("/random")

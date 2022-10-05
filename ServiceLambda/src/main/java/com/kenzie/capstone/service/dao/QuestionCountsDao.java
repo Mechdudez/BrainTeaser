@@ -30,6 +30,8 @@ public class QuestionCountsDao {
 //                            "QuestionId",
 //                            new ExpectedAttributeValue().withExists(true)
 //                    )));
+//            Product getItemToUpdate =
+//                    dynamoDBMapper.load(Product.class,01);
             mapper.save(questionCountsRecord,
                     DynamoDBMapperConfig.SaveBehavior.CLOBBER.config());
         } catch (ConditionalCheckFailedException e) {
@@ -37,6 +39,19 @@ public class QuestionCountsDao {
         }
 
         return questionCountsRecord;
+    }
+
+    public List<QuestionCountsRecord> getQuestionCounts(Integer questionId) {
+        QuestionCountsRecord questionCountsRecord = new QuestionCountsRecord();
+        questionCountsRecord.setQuestionId(questionId);
+
+        DynamoDBQueryExpression<QuestionCountsRecord> queryExpression =
+                new DynamoDBQueryExpression<QuestionCountsRecord>()
+                .withHashKeyValues(questionCountsRecord)
+                .withConsistentRead(false)
+                        .withLimit(1);
+
+        return mapper.query(QuestionCountsRecord.class, queryExpression);
     }
 
 }

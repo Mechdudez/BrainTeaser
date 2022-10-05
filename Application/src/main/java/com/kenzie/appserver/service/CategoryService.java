@@ -1,7 +1,6 @@
 package com.kenzie.appserver.service;
 
 
-import com.kenzie.appserver.config.CacheClient;
 import com.kenzie.appserver.repositories.CategoryRepository;
 import com.kenzie.capstone.service.client.CheckQuestionCountsServiceClient;
 import com.kenzie.appserver.repositories.model.CategoryRecord;
@@ -9,9 +8,9 @@ import com.kenzie.appserver.service.model.Category;
 import com.kenzie.capstone.service.model.QuestionCountsRequest;
 import com.kenzie.capstone.service.model.QuestionCountsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import springfox.documentation.annotations.Cacheable;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 
@@ -22,41 +21,25 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
     private CheckQuestionCountsServiceClient questionCountsServiceClient;
 
-    private CacheClient cache;
-
 
     @Autowired
-    public CategoryService(CategoryRepository categoryRepository, CheckQuestionCountsServiceClient questionCountsServiceClient, CacheClient cache) {
+    public CategoryService(CategoryRepository categoryRepository, CheckQuestionCountsServiceClient questionCountsServiceClient) {
         this.categoryRepository = categoryRepository;
         this.questionCountsServiceClient = questionCountsServiceClient;
-        this.cache = cache;
+
     }
 
     //TODO write a service for the Lambda to call
-
-    @Cacheable("questionId")
     public Category getQuestionById(Integer questionId) {
-
-        // Caching a question to make it faster to the user
-        Category cacheCategory = cache.get(questionId);
-        // if the object is in the cache, return it.
-        if(cacheCategory != null){
-            return cacheCategory;
-        }
-
         // getting data from the local repository
-        Category getCategory = null;
-        try {
-            getCategory = categoryRepository.findById(questionId)
-                    .map(category -> new Category(category.getQuestionId(), category.getQuestions(), category.getDifficultyOfAQuestion(), category.getAnswers()))
-                    .orElse(null);
-        } catch (CategoryNotFoundException e) {
 
-        }
+        Category getCategory = categoryRepository.findById(questionId)
+                .map(category -> new Category(category.getQuestionId(), category.getQuestions(), category.getDifficultyOfAQuestion(), category.getAnswers()))
+                .orElse(null);
 
-        // once the question has been built, grab that question by the id and add it to the Cache.
-        if (getCategory != null) {
-            cache.add(getCategory.getQuestionId(), getCategory);
+
+        if (getCategory == null) {
+            throw new CategoryNotFoundException("There is no such question");
         }
 
         // lambda function that tabs frequency of each question
@@ -66,12 +49,24 @@ public class CategoryService {
         chooseQuestionRequest.setQuestionId(questionId);
         questionCountsServiceClient.countQuestionsChosen(chooseQuestionRequest);
 
-        return getCategory; // Return a category
+        // lambda function that
+
+        return getCategory;
+
+    }
+    public Integer getQuestionFreqById(Integer questionId){
+       // return how many times a question has been picked
+        if(questionId == null){throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                "Question Id not found");}
+
+        Integer timesPicked =
+                questionCountsServiceClient.getQuestionFreq(questionId);
+
+        return timesPicked;
 
     }
 
-
-    public CategoryRecord createOneQuestion(Category newQuestion) {
+    public CategoryRecord createOneQuestion(Category newQuestion){
 
         CategoryRecord newRecord = new CategoryRecord();
         newRecord.setQuestionId(newQuestion.getQuestionId());
@@ -102,7 +97,6 @@ public class CategoryService {
     }
 
     // will be user to generate all the questions
-
     public List<Category> getAllQuestions() {
         List<Category> categoryList = new ArrayList<>();
 
@@ -136,26 +130,26 @@ public class CategoryService {
 
 
     // TODO needs to be done still
-//    public Category getAnswer(String answers) {
-//        Category categories = getRandomQuestion();
-//        Scanner myScanner = new Scanner(System.in);
-//        String userName = myScanner.nextLine();
-//        int points = 0;
-//
-//        // make sure the user answer and answer are equal.
-//        // if user is correct, add 1 point
-//        if (userName.equals(categories.getAnswers())) {
-//
-//            helperMethodForCorrectAnswer();
-//            points++;
-//        }
-//        // if they are incorrect, don't add anything
-//        else {
-//            helperMethodForIncorrectAnswer();
-//        }
-//
-//        return null;
-//    }
+    public Category getAnswer(String answers) {
+        Category categories = getRandomQuestion();
+        Scanner myScanner = new Scanner(System.in);
+        String userName = myScanner.nextLine();
+        int points = 0;
+
+        // make sure the user answer and answer are equal.
+        // if user is correct, add 1 point
+        if (userName.equals(categories.getAnswers())) {
+
+            helperMethodForCorrectAnswer();
+            points++;
+        }
+        // if they are incorrect, don't add anything
+        else {
+            helperMethodForIncorrectAnswer();
+        }
+
+        return null;
+    }
 
     // helper method to get correct answer.
     private String helperMethodForCorrectAnswer() {

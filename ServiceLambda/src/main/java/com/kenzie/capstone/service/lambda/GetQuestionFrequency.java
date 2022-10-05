@@ -1,5 +1,6 @@
 package com.kenzie.capstone.service.lambda;
 
+
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
@@ -17,8 +18,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.HashMap;
 import java.util.Map;
 
-
-public class AddQuestionCounts implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
+public class GetQuestionFrequency implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent>{
 
     static final Logger log = LogManager.getLogger();
 
@@ -40,7 +40,14 @@ public class AddQuestionCounts implements RequestHandler<APIGatewayProxyRequestE
         APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent()
                 .withHeaders(headers);
 
-        log.info("debugging before try catch");
+        String questionId = input.getPathParameters().get(
+                "questionId");
+
+        if (questionId == null || questionId.length() == 0) {
+            return response
+                    .withStatusCode(400)
+                    .withBody("Question Id is invalid");
+        }
 
         try {
             QuestionCountsRequest questionCountsRequest =
