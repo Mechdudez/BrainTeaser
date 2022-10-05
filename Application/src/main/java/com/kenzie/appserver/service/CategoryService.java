@@ -1,6 +1,7 @@
 package com.kenzie.appserver.service;
 
 
+import com.kenzie.appserver.config.CacheClient;
 import com.kenzie.appserver.repositories.CategoryRepository;
 import com.kenzie.capstone.service.client.CheckQuestionCountsServiceClient;
 import com.kenzie.appserver.repositories.model.CategoryRecord;
@@ -21,11 +22,14 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
     private CheckQuestionCountsServiceClient questionCountsServiceClient;
 
+    private CacheClient cache;
+
 
     @Autowired
-    public CategoryService(CategoryRepository categoryRepository, CheckQuestionCountsServiceClient questionCountsServiceClient) {
+    public CategoryService(CategoryRepository categoryRepository, CheckQuestionCountsServiceClient questionCountsServiceClient, CacheClient cache) {
         this.categoryRepository = categoryRepository;
         this.questionCountsServiceClient = questionCountsServiceClient;
+        this.cache = cache;
 
     }
 
@@ -33,15 +37,28 @@ public class CategoryService {
     public Category getQuestionById(Integer questionId) {
         // getting data from the local repository
 
-        Category getCategory = categoryRepository.findById(questionId)
-                .map(category -> new Category(category.getQuestionId(), category.getQuestions(), category.getDifficultyOfAQuestion(), category.getAnswers()))
-                .orElse(null);
-
-
-        if (getCategory == null) {
-            throw new CategoryNotFoundException("There is no such question");
+        // Caching a question to make it faster to the user
+        Category cacheCategory = cache.get(questionId);
+        // if the object is in the cache, return it.
+        if(cacheCategory != null){
+            return cacheCategory;
         }
 
+        // getting data from the local repository
+        Category getCategory = null;
+        try {
+            getCategory = categoryRepository.findById(questionId)
+                    .map(category -> new Category(category.getQuestionId(), category.getQuestions(), category.getDifficultyOfAQuestion(), category.getAnswers()))
+                    .orElse(null);
+        } catch (CategoryNotFoundException e) {
+
+        }
+
+
+        // once the question has been built, grab that question by the id and add it to the Cache.
+        if (getCategory != null) {
+            cache.add(getCategory.getQuestionId(), getCategory);
+        }
         // lambda function that tabs frequency of each question
         // being picked by the user
         QuestionCountsRequest chooseQuestionRequest =
