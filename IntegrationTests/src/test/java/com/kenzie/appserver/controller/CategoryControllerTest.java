@@ -3,16 +3,19 @@ package com.kenzie.appserver.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.kenzie.appserver.IntegrationTest;
+import com.kenzie.appserver.QueryUtility;
 import com.kenzie.appserver.controller.model.CategoryCreateRequest;
 import com.kenzie.appserver.repositories.model.CategoryRecord;
 import com.kenzie.appserver.service.CategoryService;
 import com.kenzie.appserver.service.model.Category;
 import net.andreinc.mockneat.MockNeat;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,32 +36,39 @@ public class CategoryControllerTest {
 
     private final MockNeat mockNeat = MockNeat.threadLocal();
 
+    private QueryUtility queryUtility;
+
     private final ObjectMapper mapper = new ObjectMapper();
 
-    @Test
-    public void getQuestionById_Exists() throws Exception {
-//        Integer questionId = 1;
-//        String question = "How many days in a week?";
-//        String difficultyOfAQuestion = "easy";
-//        String answer = "7";
-        Integer question = mockNeat.ints().get();
-     //   Category category = new Category(questionId, question, difficultyOfAQuestion, answer);
-        System.out.println(question);
-        Category persistedCategory = categoryService.getQuestionById(question);
-        // WHEN
-        mvc.perform(get("/category/{questionId}", persistedCategory.getQuestionId())
-                        .accept(MediaType.APPLICATION_JSON))
-                // THEN
-                .andExpect(jsonPath("questionId")
-                        .value(is(question)))
-                .andExpect(jsonPath("questions")
-                        .isString())
-                .andExpect(jsonPath("difficultyOfAQuestion")
-                        .isString())
-                .andExpect(jsonPath("answers")
-                        .isString())
-                .andExpect(status().is2xxSuccessful());
+    @BeforeEach
+    public void setup(){
+        queryUtility = new QueryUtility(mvc);
+
     }
+//    @Test
+//    public void getQuestionById_Exists() throws Exception {
+////        Integer questionId = 1;
+////        String question = "How many days in a week?";
+////        String difficultyOfAQuestion = "easy";
+////        String answer = "7";
+//        Integer question = mockNeat.ints().get();
+//     //   Category category = new Category(questionId, question, difficultyOfAQuestion, answer);
+//        System.out.println(question);
+//        Category persistedCategory = categoryService.createOneQuestion(question);
+//        // WHEN
+//        mvc.perform(get("/category/{questionId}", persistedCategory.getQuestionId())
+//                        .accept(MediaType.APPLICATION_JSON))
+//                // THEN
+//                .andExpect(jsonPath("questionId")
+//                        .value(is(question)))
+//                .andExpect(jsonPath("questions")
+//                        .isString())
+//                .andExpect(jsonPath("difficultyOfAQuestion")
+//                        .isString())
+//                .andExpect(jsonPath("answers")
+//                        .isString())
+//                .andExpect(status().is2xxSuccessful());
+//    }
 
     @Test
     public void getQuestion_QuestionDoesNotExist() throws Exception {
@@ -71,6 +81,22 @@ public class CategoryControllerTest {
                 .andExpect(status().isNotFound());
     }
 
+    @Test
+    public void getRandomRestaurant_returnsRestaurantItem() throws Exception {
+        //GIVEN
+        CategoryCreateRequest categoryCreateRequest = new CategoryCreateRequest();
+       categoryCreateRequest.setQuestionId(mockNeat.ints().get());
+        categoryCreateRequest.setQuestions(mockNeat.strings().get());
+        categoryCreateRequest.setLevelOfADifficulty((mockNeat.strings().get()));
+        categoryCreateRequest.setAnswers((mockNeat.strings().get()));
+
+        queryUtility.categoryControllerClient.createQuestion(categoryCreateRequest);
+        //WHEN
+        queryUtility.categoryControllerClient.getRandomQuestion()
+                //THEN
+                .andExpect(status().isOk());
+
+    }
     @Test
     public void createQuestion_CreateSuccessful() throws Exception {
         // GIVEN
