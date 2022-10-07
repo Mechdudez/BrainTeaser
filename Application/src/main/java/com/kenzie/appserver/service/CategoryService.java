@@ -48,7 +48,7 @@ public class CategoryService {
         Category getCategory = null;
         try {
             getCategory = categoryRepository.findById(questionId)
-                    .map(category -> new Category(category.getQuestionId(), category.getQuestions(), category.getDifficultyOfAQuestion(), category.getAnswers()))
+                    .map(category -> new Category(category.getQuestionId(), category.getQuestions(), category.getAnswers(), category.getDifficultyOfAQuestion()))
                     .orElse(null);
         } catch (CategoryNotFoundException e) {
 

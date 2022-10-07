@@ -124,8 +124,8 @@ public class CategoryController {
         CategoryResponse categoryResponse = new CategoryResponse();
         categoryResponse.setQuestionId(category.getQuestionId());
         categoryResponse.setQuestions(category.getQuestions());
-        categoryResponse.setDifficultyOfAQuestion(category.getDifficultyOfAQuestion());
         categoryResponse.setAnswers(category.getAnswers());
+        categoryResponse.setDifficultyOfAQuestion(category.getDifficultyOfAQuestion());
 
         return categoryResponse;
 

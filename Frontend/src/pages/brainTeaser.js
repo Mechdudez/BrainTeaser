@@ -10,7 +10,7 @@ class BrainTeaser extends BaseClass {
     constructor() {
         super();
         this.bindClassMethods(['onGetUser', 'onGetRandomQuestion','onSubmitAnswer',
-        'renderExample'], this);
+        'renderQuestion'], this);
         this.dataStore = new DataStore();
     }
 
@@ -23,12 +23,12 @@ class BrainTeaser extends BaseClass {
         document.getElementById('get-your-answer-form').addEventListener('submit', this.onSubmitAnswer);
         this.client = new UserClient();
 
-        this.dataStore.addChangeListener(this.renderExample)
+        this.dataStore.addChangeListener(this.renderQuestion())
     }
 
     // Render Methods --------------------------------------------------------------------------------------------------
 
-    async renderExample() {
+    async renderQuestion() {
 
         let resultArea = document.getElementById("question-pick")
 
