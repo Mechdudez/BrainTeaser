@@ -103,12 +103,13 @@ class BrainTeaser extends BaseClass {
         let questionIdAndAnswer = document.getElementById("answer-field").value;
         let result = await this.client.submitAnswer(questionIdAndAnswer, this.errorHandler);
         if (result == false) {
-           const wrongAnswer = wrongAnswers[Math.floor(Math.random() * wrongAnswers.length)]
+           answerResult = wrongAnswers[Math.floor(Math.random() * wrongAnswers.length)]
         } else {
-            const correctAnswer = correctAnswers[Math.floor(Math.random() * correctAnswers.length)]
+            answerResult = correctAnswers[Math.floor(Math.random() * correctAnswers.length)]
         }
 
         this.dataStore.set("answer", answerResult);
+
 
         if (answerResult) {
             this.showMessage(`Your submission result is ${result}!`)
