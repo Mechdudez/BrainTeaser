@@ -94,17 +94,18 @@ class BrainTeaser extends BaseClass {
         event.preventDefault();
         let category = this.dataStore.get("question");
         this.dataStore.set("answer", null);
-        const answers = {}
+        const correctAnswers = ['You have hit a nail on the head.', 'Yes, that’s very correct.', 'You are quite right.',
+            'Great job! You got it', 'That’s spot on.' ];
+        const wrongAnswers = ['You thought wrong!', 'Sorry that is the incorrect answer', 'oooo sorry, so close',
+            'Would you mind to think twice on what you’re saying', 'Where did you hear that?'];
         let answerResult = "";
         // will need another pojo...
         let questionIdAndAnswer = document.getElementById("answer-field").value;
         let result = await this.client.submitAnswer(questionIdAndAnswer, this.errorHandler);
         if (result == false) {
-            answerResult = "You got it SO Wrong, HA HA HA";
+           const wrongAnswer = wrongAnswers[Math.floor(Math.random() * wrongAnswers.length)]
         } else {
-            answerResult = "What a level of brilliance you are" +
-                " displaying so far!";
-
+            const correctAnswer = correctAnswers[Math.floor(Math.random() * correctAnswers.length)]
         }
 
         this.dataStore.set("answer", answerResult);
