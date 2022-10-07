@@ -94,9 +94,10 @@ class BrainTeaser extends BaseClass {
         event.preventDefault();
         let category = this.dataStore.get("question");
         this.dataStore.set("answer", null);
+        const answers = {}
         let answerResult = "";
         // will need another pojo...
-        let questionIdAndAnswer = category.getElementById() + "," + document.getElementById("answer-field").value;
+        let questionIdAndAnswer = document.getElementById("answer-field").value;
         let result = await this.client.submitAnswer(questionIdAndAnswer, this.errorHandler);
         if (result == false) {
             answerResult = "You got it SO Wrong, HA HA HA";
