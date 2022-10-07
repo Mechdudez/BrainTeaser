@@ -12,18 +12,26 @@
                 Teaser App</a>
         </div>
     </header>
+
+<div class="container">
+    <div class="flex">
     <div class="card">
-        <h2>Get Your Random Question</h2>
         <form class="card-content" id="all-posts">
             <button type="button" id="random-question-button"
                     name="cmd"
-                    value="viewall">Get a Question</button>
-        </form>
-    </div>
-    <div class="card" id="pick-this-question">
+                    value="viewall">PLAY</button>
+    <div class id="pick-this-question">
         <h2>You picked this question: </h2>
         <p id="question-pick"></p>
     </div>
+        </form>
+    </div>
+<!--    <div class="column">-->
+<!--    <div class="card" id="pick-this-question">-->
+<!--        <h2>You picked this question: </h2>-->
+<!--        <p id="question-pick"></p>-->
+<!--    </div>-->
+<!--</div>-->
     <div class="card">
         <h2>Enter Your Answer</h2>
         <form class="card-content"
@@ -34,12 +42,20 @@
                        id="answer-field">
             </p>
             <button type="submit">Submit Answer</button>
+            <div class id="provide-answer-result">
+                <h2>You answer is : </h2>
+                <p id="answer-result"></p>
+            </div>
         </form>
     </div>
-    <div class="card" id="provide-answer-result">
-        <h2>You answer is : </h2>
-        <p id="answer-result"></p>
     </div>
+<!--    <div class="column">-->
+<!--    <div class="card" id="provide-answer-result">-->
+<!--        <h2>You answer is : </h2>-->
+<!--        <p id="answer-result"></p>-->
+<!--    </div>-->
+<!--    </div>-->
+<!--</div>-->
     <div class="card">
         <h2>Get User</h2>
         <form class="card-content"
@@ -56,6 +72,7 @@
         <h2>User Info</h2>
         <p id="result-info"></p>
     </div>
+</div>
 
 </body>
 </html>
