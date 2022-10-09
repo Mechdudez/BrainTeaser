@@ -147,42 +147,42 @@ public class CategoryService {
 
 
     // TODO needs to be done still
-    public Category getAnswer(String answers) {
-        Category categories = getRandomQuestion();
-        Scanner myScanner = new Scanner(System.in);
-        String userName = myScanner.nextLine();
-        int points = 0;
-
-        // make sure the user answer and answer are equal.
-        // if user is correct, add 1 point
-        if (userName.equals(categories.getAnswers())) {
-
-            helperMethodForCorrectAnswer();
-            points++;
-        }
-        // if they are incorrect, don't add anything
-        else {
-            helperMethodForIncorrectAnswer();
-        }
-
-        return null;
-    }
+//    public Category getAnswer(String answers) {
+//        Category categories = getRandomQuestion();
+//        Scanner myScanner = new Scanner(System.in);
+//        String userName = myScanner.nextLine();
+//        int points = 0;
+//
+//        // make sure the user answer and answer are equal.
+//        // if user is correct, add 1 point
+//        if (userName.equals(categories.getAnswers())) {
+//
+//            helperMethodForCorrectAnswer();
+//            points++;
+//        }
+//        // if they are incorrect, don't add anything
+//        else {
+//            helperMethodForIncorrectAnswer();
+//        }
+//
+//        return null;
+//    }
 
     // helper method to get correct answer.
-    private String helperMethodForCorrectAnswer() {
-
-        String[] arrayRightAnswers = new String[]{"You have hit a nail on the head.", "Yes, that’s very correct.", "You are quite right.",
-                "Great job! You got it", "That’s spot on."};
-
-        return arrayRightAnswers[(int) (Math.random() * arrayRightAnswers.length)];
-    }
-
-    // helper method to get incorrect answer
-    private String helperMethodForIncorrectAnswer() {
-        String[] arrayWrongAnswers = new String[]{"You thought wrong!", "Sorry that is the incorrect answer", "oooo sorry, so close",
-                "Would you mind to think twice on what you’re saying", "Where did you hear that?"};
-
-        return arrayWrongAnswers[(int) (Math.random() * arrayWrongAnswers.length)];
-    }
+//    private String helperMethodForCorrectAnswer() {
+//
+//        String[] arrayRightAnswers = new String[]{"You have hit a nail on the head.", "Yes, that’s very correct.", "You are quite right.",
+//                "Great job! You got it", "That’s spot on."};
+//
+//        return arrayRightAnswers[(int) (Math.random() * arrayRightAnswers.length)];
+//    }
+//
+//    // helper method to get incorrect answer
+//    private String helperMethodForIncorrectAnswer() {
+//        String[] arrayWrongAnswers = new String[]{"You thought wrong!", "Sorry that is the incorrect answer", "oooo sorry, so close",
+//                "Would you mind to think twice on what you’re saying", "Where did you hear that?"};
+//
+//        return arrayWrongAnswers[(int) (Math.random() * arrayWrongAnswers.length)];
+//    }
 
 }
