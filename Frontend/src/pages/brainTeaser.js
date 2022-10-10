@@ -79,7 +79,7 @@ class BrainTeaser extends BaseClass {
         let result = await this.client.getRandomQuestion(this.errorHandler);
 
 
-       await this.dataStore.set("question", result);
+       this.dataStore.set("question", result);
 
 
        if (result) {
