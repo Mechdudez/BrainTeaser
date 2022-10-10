@@ -76,7 +76,7 @@ class BrainTeaser extends BaseClass {
     async onGetRandomQuestion(event) {
         event.preventDefault();
 
-        let result = await this.client.getRandomQuestion(id, this.errorHandler);
+        let result = await this.client.getRandomQuestion(this.errorHandler);
         this.dataStore.set("question", result);
 
         if (result) {
