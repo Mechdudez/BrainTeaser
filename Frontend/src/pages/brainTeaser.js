@@ -9,8 +9,8 @@ class BrainTeaser extends BaseClass {
 
     constructor() {
         super();
-        this.bindClassMethods(['onGetUser', 'onGetRandomQuestion','onSubmitAnswer',
-        'renderQuestion'], this);
+        this.bindClassMethods(['onGetUser', 'onGetRandomQuestion', 'onSubmitAnswer',
+            'renderQuestion'], this);
         this.dataStore = new DataStore();
     }
 
@@ -73,29 +73,26 @@ class BrainTeaser extends BaseClass {
     // Event Handlers --------------------------------------------------------------------------------------------------
 
 
-   async onGetRandomQuestion(event){
+    async onGetRandomQuestion(event) {
         event.preventDefault();
 
-        let result = await this.client.getRandomQuestion(this.errorHandler);
+        let result = await this.client.getRandomQuestion(id, this.errorHandler);
+        this.dataStore.set("question", result);
 
-
-       await this.dataStore.set("question", result);
-
-
-       if (result) {
-           this.showMessage(`Your new question is ${result}!`)
-       } else {
-           this.errorHandler("Error fetching your question!  Try" +
-               " again...");
-       }
+        if (result) {
+            this.showMessage(`Your new question is ${result}!`)
+        } else {
+            this.errorHandler("Error fetching your question!  Try" +
+                " again...");
+        }
     }
 
-    async onSubmitAnswer(event){
+    async onSubmitAnswer(event) {
         event.preventDefault();
         let category = this.dataStore.get("question");
         this.dataStore.set("answer", null);
         const correctAnswers = ['You have hit a nail on the head.', 'Yes, that’s very correct.', 'You are quite right.',
-            'Great job! You got it', 'That’s spot on.' ];
+            'Great job! You got it', 'That’s spot on.'];
         const wrongAnswers = ['You thought wrong!', 'Sorry that is the incorrect answer', 'oooo sorry, so close',
             'Would you mind to think twice on what you’re saying', 'Where did you hear that?'];
         let answerResult = "";
@@ -103,7 +100,7 @@ class BrainTeaser extends BaseClass {
         let questionIdAndAnswer = document.getElementById("answer-field").value;
         let result = await this.client.submitAnswer(questionIdAndAnswer, this.errorHandler);
         if (result == false) {
-           answerResult = wrongAnswers[Math.floor(Math.random() * wrongAnswers.length)]
+            answerResult = wrongAnswers[Math.floor(Math.random() * wrongAnswers.length)]
         } else {
             answerResult = correctAnswers[Math.floor(Math.random() * correctAnswers.length)]
         }
@@ -120,7 +117,6 @@ class BrainTeaser extends BaseClass {
 
 
     }
-
 
 
     async onGetUser(event) {
@@ -146,7 +142,7 @@ class BrainTeaser extends BaseClass {
 const main = async () => {
     const brainTeaser = new BrainTeaser();
 
-    if (sessionStorage.getItem("userName") == null){
+    if (sessionStorage.getItem("userName") == null) {
         window.location.href = "login.html";
     }
 
