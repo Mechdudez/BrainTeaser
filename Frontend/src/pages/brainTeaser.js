@@ -23,7 +23,7 @@ class BrainTeaser extends BaseClass {
         document.getElementById('get-your-answer-form').addEventListener('submit', this.onSubmitAnswer);
         this.client = new UserClient();
 
-        this.dataStore.addChangeListener(this.renderQuestion())
+        this.dataStore.addChangeListener(this.renderQuestion)
     }
 
     // Render Methods --------------------------------------------------------------------------------------------------
