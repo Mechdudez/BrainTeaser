@@ -2,7 +2,9 @@ package com.kenzie.appserver.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.google.gson.Gson;
 import com.kenzie.appserver.IntegrationTest;
+import com.kenzie.appserver.QueryUtility;
 import com.kenzie.appserver.controller.model.CategoryCreateRequest;
 import com.kenzie.appserver.controller.model.UserCreateRequest;
 import com.kenzie.appserver.repositories.model.CategoryRecord;
@@ -11,10 +13,12 @@ import com.kenzie.appserver.service.UserService;
 import com.kenzie.appserver.service.model.Category;
 import com.kenzie.appserver.service.model.User;
 import net.andreinc.mockneat.MockNeat;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,27 +39,32 @@ public class UserControllerTest {
 
     private final MockNeat mockNeat = MockNeat.threadLocal();
 
+    private QueryUtility queryUtility;
+
     private final ObjectMapper mapper = new ObjectMapper();
+
+    @BeforeEach
+    public void setup(){
+        queryUtility = new QueryUtility(mvc);
+
+    }
 
     @Test
     public void getUserById_Exists() throws Exception {
-        String userName = "Tom";
-        UUID userId = UUID.randomUUID();
-        Integer points = 0;
+        UserCreateRequest userCreateRequest = new UserCreateRequest();
+        userCreateRequest.setUserId(UUID.randomUUID());
+        userCreateRequest.setUserName(mockNeat.strings().get());
+        userCreateRequest.setPoints(mockNeat.ints().get());
 
-        User user = new User(userName, userId, points);
-
-        User persistedUser = userService.addNewUser(user);
         // WHEN
-        mvc.perform(get("/category/{questionId}", persistedUser.getUserId())
-                        .accept(MediaType.APPLICATION_JSON))
+        queryUtility.userControllerClient.getUser(userCreateRequest.getUserId())
                 // THEN
                 .andExpect(jsonPath("userID")
-                        .value(is(userId)))
+                        .value(is(userCreateRequest.getUserId())))
                 .andExpect(jsonPath("points")
-                        .value(is(points)))
+                        .value(is(userCreateRequest.getPoints())))
                 .andExpect(jsonPath("userName")
-                        .value(is(userName)))
+                        .value(is(userCreateRequest.getUserName())))
                 .andExpect(status().isOk());
     }
 
@@ -64,8 +73,7 @@ public class UserControllerTest {
         // GIVEN
         UUID userId = UUID.randomUUID();
         // WHEN
-        mvc.perform(get("user/{userId}",userId)
-                        .accept(MediaType.APPLICATION_JSON))
+        queryUtility.userControllerClient.getUser(userId)
                 // THEN
                 .andExpect(status().isNotFound());
     }
@@ -73,29 +81,20 @@ public class UserControllerTest {
     @Test
     public void createUser_CreateSuccessful() throws Exception {
         // GIVEN
-        String userName = "Tom";
-        UUID userId = UUID.randomUUID();
-        Integer points = 0;
-
         UserCreateRequest userCreateRequest = new UserCreateRequest();
-        userCreateRequest.setUserName(userName);
-        userCreateRequest.setUserId(userId);
-        userCreateRequest.setPoints(points);
-
-        mapper.registerModule(new JavaTimeModule());
+        userCreateRequest.setUserId(UUID.randomUUID());
+        userCreateRequest.setUserName(mockNeat.strings().get());
+        userCreateRequest.setPoints(mockNeat.ints().get());
 
         // WHEN
-        mvc.perform(post("/user")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(mapper.writeValueAsString(userCreateRequest)))
+        queryUtility.userControllerClient.createUser(userCreateRequest)
                 // THEN
                 .andExpect(jsonPath("userID")
-                        .value(is(userId)))
+                        .value(is(userCreateRequest.getUserId())))
                 .andExpect(jsonPath("points")
-                        .value(is(points)))
+                        .value(is(userCreateRequest.getPoints())))
                 .andExpect(jsonPath("userName")
-                        .value(is(userName)))
+                        .value(is(userCreateRequest.getUserName())))
                 .andExpect(status().isCreated());
     }
 

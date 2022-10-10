@@ -45,47 +45,44 @@ public class CategoryControllerTest {
         queryUtility = new QueryUtility(mvc);
 
     }
-//    @Test
-//    public void getQuestionById_Exists() throws Exception {
-////        Integer questionId = 1;
-////        String question = "How many days in a week?";
-////        String difficultyOfAQuestion = "easy";
-////        String answer = "7";
-//        Integer question = mockNeat.ints().get();
-//     //   Category category = new Category(questionId, question, difficultyOfAQuestion, answer);
-//        System.out.println(question);
-//        Category persistedCategory = categoryService.createOneQuestion(question);
-//        // WHEN
-//        mvc.perform(get("/category/{questionId}", persistedCategory.getQuestionId())
-//                        .accept(MediaType.APPLICATION_JSON))
-//                // THEN
-//                .andExpect(jsonPath("questionId")
-//                        .value(is(question)))
-//                .andExpect(jsonPath("questions")
-//                        .isString())
-//                .andExpect(jsonPath("difficultyOfAQuestion")
-//                        .isString())
-//                .andExpect(jsonPath("answers")
-//                        .isString())
-//                .andExpect(status().is2xxSuccessful());
-//    }
+    @Test
+    public void getQuestionById_Exists() throws Exception {
+        CategoryCreateRequest categoryCreateRequest = new CategoryCreateRequest();
+        categoryCreateRequest.setQuestionId(mockNeat.ints().get());
+        categoryCreateRequest.setQuestions(mockNeat.strings().get());
+        categoryCreateRequest.setLevelOfADifficulty(mockNeat.strings().get());
+        categoryCreateRequest.setAnswers(mockNeat.strings().get());
+
+        queryUtility.categoryControllerClient.createQuestion(categoryCreateRequest);
+        // WHEN
+        queryUtility.categoryControllerClient.getQuestion(categoryCreateRequest.getQuestionId())
+                // THEN
+                .andExpect(jsonPath("questionId")
+                        .value(is(categoryCreateRequest.getQuestionId())))
+                .andExpect(jsonPath("questions")
+                        .value(is(categoryCreateRequest.getQuestions())))
+                .andExpect(jsonPath("difficultyOfAQuestion")
+                        .value(is(categoryCreateRequest.getLevelOfADifficulty())))
+                .andExpect(jsonPath("answers")
+                        .value(is(categoryCreateRequest.getAnswers())))
+                .andExpect(status().isOk());
+    }
 
     @Test
     public void getQuestion_QuestionDoesNotExist() throws Exception {
         // GIVEN
-        Integer questionId = 1;
+        Integer questionId = mockNeat.ints().get();
         // WHEN
-        mvc.perform(get("/category/{questionId}",questionId)
-                        .accept(MediaType.APPLICATION_JSON))
+        queryUtility.categoryControllerClient.getQuestion(questionId)
                 // THEN
                 .andExpect(status().isNotFound());
     }
 
     @Test
-    public void getRandomRestaurant_returnsRestaurantItem() throws Exception {
+    public void getRandomQuestion_returnsRandomQuestion() throws Exception {
         //GIVEN
         CategoryCreateRequest categoryCreateRequest = new CategoryCreateRequest();
-       categoryCreateRequest.setQuestionId(mockNeat.ints().get());
+        categoryCreateRequest.setQuestionId(mockNeat.ints().get());
         categoryCreateRequest.setQuestions(mockNeat.strings().get());
         categoryCreateRequest.setLevelOfADifficulty((mockNeat.strings().get()));
         categoryCreateRequest.setAnswers((mockNeat.strings().get()));
@@ -100,33 +97,23 @@ public class CategoryControllerTest {
     @Test
     public void createQuestion_CreateSuccessful() throws Exception {
         // GIVEN
-        Integer questionId = 1;
-        String question = "How many days in a week?";
-        String difficultyOfAQuestion = "easy";
-        String answer = "7";
-
         CategoryCreateRequest categoryCreateRequest = new CategoryCreateRequest();
-        categoryCreateRequest.setQuestionId(questionId);
-        categoryCreateRequest.setQuestions(question);
-        categoryCreateRequest.setLevelOfADifficulty(difficultyOfAQuestion);
-        categoryCreateRequest.setAnswers(answer);
-
-        mapper.registerModule(new JavaTimeModule());
+        categoryCreateRequest.setQuestionId(mockNeat.ints().get());
+        categoryCreateRequest.setQuestions(mockNeat.strings().get());
+        categoryCreateRequest.setLevelOfADifficulty(mockNeat.strings().get());
+        categoryCreateRequest.setAnswers(mockNeat.strings().get());
 
         // WHEN
-        mvc.perform(post("/category")
-                        .accept(MediaType.APPLICATION_JSON)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(mapper.writeValueAsString(categoryCreateRequest)))
+        queryUtility.categoryControllerClient.createQuestion(categoryCreateRequest)
                 // THEN
                 .andExpect(jsonPath("questionId")
-                        .value(is(questionId)))
+                        .value(is(categoryCreateRequest.getQuestionId())))
                 .andExpect(jsonPath("questions")
-                        .value(is(question)))
+                        .value(is(categoryCreateRequest.getQuestions())))
                 .andExpect(jsonPath("difficultyOfAQuestion")
-                        .value(is(difficultyOfAQuestion)))
+                        .value(is(categoryCreateRequest.getLevelOfADifficulty())))
                 .andExpect(jsonPath("answers")
-                        .value(is(answer)))
+                        .value(is(categoryCreateRequest.getAnswers())))
                 .andExpect(status().isCreated());
     }
 

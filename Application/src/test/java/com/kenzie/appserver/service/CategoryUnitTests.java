@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -171,4 +172,33 @@ public class CategoryUnitTests {
         // THEN
         Assertions.assertNotNull(randomCategory);
     }
+
+    /** ------------------------------------------------------------------------
+     *  categoryService.getQuestionFreqById
+     *  ------------------------------------------------------------------------ **/
+    @Test
+    void getQuestionFreqById() {
+        // GIVEN
+        Integer questionId = 1;
+
+        // WHEN
+        when(client.getQuestionFreq(questionId)).thenReturn(3);
+        Integer actual = categoryService.getQuestionFreqById(questionId);
+
+        // THEN
+        Assertions.assertEquals(3, actual);
+    }
+
+
+    @Test
+    void getQuestionFreqById_nullQuestionId() {
+        // GIVEN
+        Integer questionId = null;
+
+        // WHEN
+        // THEN
+        Assertions.assertThrows(ResponseStatusException.class, () -> categoryService.getQuestionFreqById(questionId));
+    }
+
+
 }
