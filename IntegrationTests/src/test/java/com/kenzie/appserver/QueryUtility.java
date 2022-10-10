@@ -32,7 +32,7 @@ public class QueryUtility {
     }
     public class CategoryControllerClient {
         public ResultActions createQuestion(CategoryCreateRequest categoryCreateRequest) throws Exception {
-            return mvc.perform(post("/category")
+            return mvc.perform(post("/category/")
                     .accept(MediaType.APPLICATION_JSON)
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(mapper.writeValueAsString(categoryCreateRequest)));
@@ -49,7 +49,7 @@ public class QueryUtility {
 
     public class UserControllerClient {
         public ResultActions createUser(UserCreateRequest userCreateRequest) throws Exception {
-            return mvc.perform(post("/user")
+            return mvc.perform(post("/user/")
                     .accept(MediaType.APPLICATION_JSON)
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(mapper.writeValueAsString(userCreateRequest)));
