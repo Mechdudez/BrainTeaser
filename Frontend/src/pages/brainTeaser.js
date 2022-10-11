@@ -36,7 +36,7 @@ class BrainTeaser extends BaseClass {
 
         if (question) {
             resultArea.innerHTML = `
-                <div>The Question: ${question.questions}</div>
+                <div>Question: ${question.questions}</div>
                 <div>Difficulty Level: ${question.difficultyOfAQuestion}</div>
                 <div>Question ID: ${question.questionId}</div>
             `
@@ -50,10 +50,10 @@ class BrainTeaser extends BaseClass {
         if (user) {
             resultArea2.innerHTML = `
                 <div>User ID: ${user.userId}</div>
-                <div>Usernam: ${user.username}</div>
+                <div>Username: ${user.username}</div>
             `
         } else {
-            resultArea2.innerHTML = "Question Not Found";
+            resultArea2.innerHTML = "User Not Found";
         }
 
         let answerArea = document.getElementById("answer-result");

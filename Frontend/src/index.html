@@ -6,26 +6,67 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 <body class="background">
+
+<iframe width="0" height="0" src="https://www.youtube.com/embed/DykZEOV5wD4?autoplay=1"
+        title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+
     <header class="header" id="header">
         <div class="site-title">
-            <a class="header_home" href="index.html">Brain
-                Teaser App</a>
+            <h1>Brain Teaser App</h1>
+            <a class="header_home" href="login.html">Login</a>
+            <br>
+            <a class="header_home" href="index.html">Restart Game</a>
+            <br>
+            <a class="header_home" href="">Hint</a>
+            <br>
+            <label id="minutes">00</label>
+            <label id="colon">:</label>
+            <label id="seconds">00</label>
+            <script type="text/javascript">
+        var minutesLabel = document.getElementById("minutes");
+        var secondsLabel = document.getElementById("seconds");
+        var totalSeconds = 0;
+        setInterval(setTime, 1000);
+
+        function setTime()
+        {
+            ++totalSeconds;
+            secondsLabel.innerHTML = pad(totalSeconds%60);
+            minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
+        }
+
+        function pad(val)
+        {
+            var valString = val + "";
+            if(valString.length < 2)
+            {
+                return "0" + valString;
+            }
+            else
+            {
+                return valString;
+            }
+        }
+    </script>
         </div>
     </header>
 
 <div class="container">
     <div class="flex">
     <div class="card">
+
         <form class="card-content" id="all-posts">
             <button type="button" id="random-question-button"
                     name="cmd"
                     value="viewall">PLAY</button>
     <div class id="pick-this-question">
-        <h2>You picked this question: </h2>
+        <h5>You picked this question: </h5>
         <p id="question-pick"></p>
     </div>
         </form>
     </div>
+
 <!--    <div class="column">-->
 <!--    <div class="card" id="pick-this-question">-->
 <!--        <h2>You picked this question: </h2>-->
@@ -43,7 +84,7 @@
             </p>
             <button type="submit">Submit Answer</button>
             <div class id="provide-answer-result">
-                <h2>You answer is : </h2>
+                <h2></h2>
                 <p id="answer-result"></p>
             </div>
         </form>
