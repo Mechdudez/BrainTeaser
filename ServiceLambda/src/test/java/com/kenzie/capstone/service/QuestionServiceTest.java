@@ -4,6 +4,7 @@ import com.kenzie.capstone.service.dao.QuestionCountsDao;
 import com.kenzie.capstone.service.model.QuestionCountsRecord;
 import com.kenzie.capstone.service.model.QuestionCountsRequest;
 import com.kenzie.capstone.service.model.QuestionCountsResponse;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -31,7 +32,7 @@ public class QuestionServiceTest {
     }
 
     @Test
-    void storeQuestionCountsDataTest(){
+    void addQuestionTest(){
         ArgumentCaptor<QuestionCountsRecord> questionCountsRecordArgumentCaptor = ArgumentCaptor.forClass(QuestionCountsRecord.class);
 
         //GIVEN
@@ -52,16 +53,12 @@ public class QuestionServiceTest {
         //THEN
         verify(questionCountsDao, times(1)).storeQuestionCountsData(questionCountsRecordArgumentCaptor.capture());
 
-      //  assertEquals(questionCountsRequest.getQuestionId(), questionCountsRecordArgumentCaptor.getValue(), "The correct id is used");
+
 
         assertNotNull(response, "A response is returned");
         assertEquals(questionCountsRequest.getQuestionId(), response.getQuestionId(), "The response id should match");
 
 
     }
-    @Test
-    void getQuestionCountTest(){
 
-
-    }
 }

@@ -30,11 +30,6 @@ public class CheckQuestionCountsService {
 
     public QuestionCountsResponse addQuestion(QuestionCountsRequest questionIdRequest) {
 
-        if (questionIdRequest == null) {
-            throw new IllegalArgumentException("Request must " +
-                    "contain a valid question ID");
-        }
-
         QuestionCountsRecord record = new QuestionCountsRecord();
         record.setQuestionId(questionIdRequest.getQuestionId());
 
