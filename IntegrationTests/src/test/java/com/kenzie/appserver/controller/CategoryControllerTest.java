@@ -9,11 +9,13 @@ import com.kenzie.appserver.repositories.model.CategoryRecord;
 import com.kenzie.appserver.service.CategoryService;
 import com.kenzie.appserver.service.model.Category;
 import net.andreinc.mockneat.MockNeat;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.util.NestedServletException;
 
 import java.util.Collections;
 import java.util.List;
@@ -45,39 +47,6 @@ public class CategoryControllerTest {
         queryUtility = new QueryUtility(mvc);
 
     }
-    @Test
-    public void getQuestionById_Exists() throws Exception {
-        CategoryCreateRequest categoryCreateRequest = new CategoryCreateRequest();
-        categoryCreateRequest.setQuestionId(mockNeat.ints().get());
-        categoryCreateRequest.setQuestions(mockNeat.strings().get());
-        categoryCreateRequest.setLevelOfADifficulty(mockNeat.strings().get());
-        categoryCreateRequest.setAnswers(mockNeat.strings().get());
-
-        queryUtility.categoryControllerClient.createQuestion(categoryCreateRequest);
-        // WHEN
-        queryUtility.categoryControllerClient.getQuestion(categoryCreateRequest.getQuestionId())
-                // THEN
-//                .andExpect(jsonPath("questionId")
-//                        .value(is(categoryCreateRequest.getQuestionId())))
-//                .andExpect(jsonPath("questions")
-//                        .value(is(categoryCreateRequest.getQuestions())))
-//                .andExpect(jsonPath("difficultyOfAQuestion")
-//                        .value(is(categoryCreateRequest.getLevelOfADifficulty())))
-//                .andExpect(jsonPath("answers")
-//                        .value(is(categoryCreateRequest.getAnswers())))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    public void getQuestion_QuestionDoesNotExist() throws Exception {
-        // GIVEN
-        Integer questionId = mockNeat.ints().get();
-        // WHEN
-        queryUtility.categoryControllerClient.getQuestion(questionId)
-                // THEN
-                .andExpect(status().isNotFound());
-    }
-
     @Test
     public void getRandomQuestion_returnsRandomQuestion() throws Exception {
         //GIVEN

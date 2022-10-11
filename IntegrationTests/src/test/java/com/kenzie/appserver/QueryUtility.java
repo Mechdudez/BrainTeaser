@@ -41,10 +41,7 @@ public class QueryUtility {
             return mvc.perform(get("/category/random")
                     .accept(MediaType.APPLICATION_JSON));
         }
-        public ResultActions getQuestion(Integer questionId) throws Exception {
-            return mvc.perform(get("/category/{questionId}", questionId)
-                    .accept(MediaType.APPLICATION_JSON));
-        }
+
     }
 
     public class UserControllerClient {

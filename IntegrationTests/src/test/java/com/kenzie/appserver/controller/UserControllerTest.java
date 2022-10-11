@@ -13,12 +13,14 @@ import com.kenzie.appserver.service.UserService;
 import com.kenzie.appserver.service.model.Category;
 import com.kenzie.appserver.service.model.User;
 import net.andreinc.mockneat.MockNeat;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.web.util.NestedServletException;
 
 import java.util.List;
 import java.util.UUID;
@@ -70,13 +72,16 @@ public class UserControllerTest {
     }
 
     @Test
-    public void getUser_UserDoesNotExist() throws Exception {
+    public void createUser_NullUserId() throws Exception {
         // GIVEN
-        UUID userId = UUID.randomUUID();
+        UserCreateRequest userCreateRequest = new UserCreateRequest();
+        userCreateRequest.setUserId(null);
+        userCreateRequest.setUserName(mockNeat.strings().get());
+        userCreateRequest.setPoints(mockNeat.ints().get());
+
         // WHEN
-        queryUtility.userControllerClient.getUser(userId)
-                // THEN
-                .andExpect(status().isNotFound());
+
+        Assertions.assertThrows(NestedServletException.class, () ->  queryUtility.userControllerClient.createUser(userCreateRequest));
     }
 
     @Test
