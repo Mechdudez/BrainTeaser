@@ -25,7 +25,6 @@ export default class UserClient extends BaseClass {
     async getRandomQuestion(errorCallback){
         try{
             const  response = await this.client.get(`/category/random`);
-            console.log(response);
                 return response.data; // this should return question
         }catch (error){
             this.handleError("getRandomQuestion", error, errorCallback)
@@ -34,17 +33,14 @@ export default class UserClient extends BaseClass {
 
     async submitAnswer(userInput, errorCallback){
        const inputArray = userInput.split(",");
-        console.log(userInput);
         const questionId = inputArray[0];
         const userAnswer = inputArray[1];
-        console.log(questionId);
         try{
             const  response = await this.client.post(`/category/submitAnswer?answer=${userAnswer}&questionId=${questionId}`, {
                 "answer": userAnswer,
                 "questionId": questionId
             });
 
-            console.log(response.data);
             return response.data;
 
         }catch (error){

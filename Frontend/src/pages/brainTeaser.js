@@ -80,7 +80,7 @@ class BrainTeaser extends BaseClass {
         this.dataStore.set("question", result);
 
         if (result) {
-            this.showMessage(`Your new question is ${result}!`)
+            this.showMessage(`Your new question is ${JSON.stringify(result.questions)}!`)
         } else {
             this.errorHandler("Error fetching your question!  Try" +
                 " again...");
